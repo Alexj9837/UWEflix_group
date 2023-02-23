@@ -55,7 +55,7 @@ ROOT_URLCONF = 'UWEflix_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['UWEflix/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
