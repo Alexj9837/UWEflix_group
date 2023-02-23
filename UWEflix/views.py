@@ -7,5 +7,6 @@ from django.http import HttpResponse
 from django.template import loader
 
 # Create your views here.
+
 def home(request):
     return render(request, "UWEflix/customer/home.html",{"footer_base":"UWEflix/footers/footer_base.html","header_content":"UWEflix/headers/header_customer.html"})
