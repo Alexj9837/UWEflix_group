@@ -1,9 +1,9 @@
 from django import forms
-from . import models
+from .models import Booking,Club,Film,Screen,Show
 
 class bookingForm(forms.ModelForm):
     class Meta:
-        model = models.booking
+        model = Booking
         fields = [
             "seat_number",
             "ticket_type",
@@ -14,7 +14,7 @@ class bookingForm(forms.ModelForm):
 
 class ClubForm(forms.ModelForm):
     class Meta:
-        model = models.Club
+        model = Club
         fields = [
             "club_name",
             "street_number",
@@ -32,7 +32,7 @@ class ClubForm(forms.ModelForm):
 
 class filmForm(forms.ModelForm):
     class Meta:
-        model = models.film
+        model = Film
         fields = [
             "film_title",
             "age_rating",
@@ -42,7 +42,7 @@ class filmForm(forms.ModelForm):
 
 class screenForm(forms.ModelForm):
     class Meta:
-        model = models.screen
+        model = Screen
         fields = [
             "screen_number",
         ]
@@ -50,7 +50,7 @@ class screenForm(forms.ModelForm):
 
 class showForm(forms.ModelForm):
     class Meta:
-        model = models.show
+        model = Show
         fields = [
             "date",
             "time",
