@@ -13,24 +13,38 @@
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+       <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-      </a>
+      </a> 
 
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Booking</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Showings</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Contact us</a></li>
+<div class="super_container">
+	<header class="header">
+		<div class="container">
+			<div class="row" >
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start">
+						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+							<div class="logo"><a style="color: #9fcdff; font-size: 20px" href="/home/">UWEFlix - Cinema Booking System</a></div>
+							<nav class="main_nav">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li class="active"><a href="#">Home</a></li>									
+									<li><a href="#">Movie Shows</a></li>
+									<li><a href="#">Upcoming Movies</a></li>
+                   <li><a href="#">Login</a></li>
+                  <li><a href="#">Signup</a></li> 
+								</ul>
+							</nav>
+							<div class="hamburger ml-auto">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</header>
+	
 
-
-      </ul>
-
-      <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
-      </div>
-    </header>
     {% block content %}
 
     {% endblock %}
