@@ -16,5 +16,8 @@ class Club(models.Model):
     last_name = models.CharField(max_length=50)
     dob = models.DateField()
 
+    class Meta:
+        pass
+
     def __str__(self):
         return self.club_name

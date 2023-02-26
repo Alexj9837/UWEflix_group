@@ -44,3 +44,7 @@ input[name=message] {
 .dropdown-toggle {
   outline: 0;
 }
+li 
+{
+    list-style-type: none;
+}
