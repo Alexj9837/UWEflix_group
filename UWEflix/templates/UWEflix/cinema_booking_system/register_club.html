@@ -1,0 +1,53 @@
+{% extends 'base.html' %} 
+{% block title %}Register Club{% endblock %} 
+{% block content %}
+<h2>Registration Page</h2>
+<form method="post" action="{% url 'register_club' %}">
+	{% csrf_token %}
+	<div class="form-group">
+		<div class="form-group">
+			<h4>Please enter the Club Information below:</h4>
+			<label for="name">Club Name: </label>
+			<input type="text" name="name" id="name" />
+
+			<h5>Address:</h5>
+			<label for="street">Street: </label>
+			<input type="text" name="street" id="street" />
+
+			<label for="city">City: </label>
+			<input type="text" name="city" id="city" />
+
+			<label for="postcode">PostCode: </label>
+			<input type="number" name="postcode" id="postcode" />
+		</div>
+
+        <div class="form-group">
+            <h5>Contact details:</h5>
+            <label for="landline">Landline No. : </label>
+            <input type="text" name="landline" id="landline" />
+
+            <label for="mobile">Mobile number: </label>
+            <input type="text" name="mobile" id="mobile" />
+
+            <label for="email">Email: </label>
+            <input type="email" name="email" id="email" />
+        </div>
+
+        <div class="form-group">
+
+            <h5>Club Representative Information:</h5>
+
+            <label for="first_name">First name: </label>
+            <input type="text" name="first_name" id="first_name" />
+
+            <label for="last_name">Last Name: </label>
+            <input type="text" name="last_name" id="last_name" />
+
+            <label for="dob">Date of Birth: </label>
+            <input type="date" name="dob" id="dob" />
+        </div>
+
+		<button type="submit" class="btn btn-danger">Submit</button>
+	</div>
+</form>
+{% endblock %}
