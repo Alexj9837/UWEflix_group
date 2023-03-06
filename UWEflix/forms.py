@@ -57,4 +57,8 @@ class showForm(forms.ModelForm):
         fields = [
             "date",
             "time",
+            "screen",
+            
         ]
+        
+        
