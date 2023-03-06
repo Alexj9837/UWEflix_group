@@ -1,6 +1,9 @@
 from django import forms
 from .models import Booking,Club,Film,Screen,Show
 
+# forms page has the fields that we will be using for each of our models, 
+# this allows us to take in information from the webpage i.e "seat_number"
+
 class bookingForm(forms.ModelForm):
     class Meta:
         model = Booking
