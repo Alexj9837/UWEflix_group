@@ -43,4 +43,9 @@ def delete_club(request, pk):
     club = ClubForm.objects.get(pk=pk)
 
     club.delete()
-    return render(request, "UWEflix/customer/home.html",{"footer_content":"UWEflix/footers/footer_base.html","header_content":"header_cinema_manager.html"})
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
+
+def Club_list_view(request):
+
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})

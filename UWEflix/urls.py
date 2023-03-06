@@ -7,4 +7,6 @@ urlpatterns = [
     path("create_club",views.create_club,name="create_club"),
     path("update_club",views.update_club,name="update_club"),
     path("delete_club",views.delete_club,name="delete_club"),
+    path("view_club",views.Club_list_view,name="view_club"),
+
 ]
