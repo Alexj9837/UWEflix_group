@@ -1,0 +1,47 @@
+{%  extends 'UWEflix/base/home.html'%}
+
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'UWEflix_booking_list' %}">
+    booking Listing
+    </a>
+</p>
+    
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.errors}}
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="quantity">quantity: </label>
+      <input class="form-control col-sm-10"'
+         id="quantity" type="number"
+         name="quantity" value="{{ object.quantity }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="booking_id">booking_id: </label>
+      <input class="form-control col-sm-10"'
+         id="booking_id" type="text"
+         name="booking_id" value="{{ object.booking_id }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="ticket_type">ticket_type: </label>
+      <input class="form-control col-sm-10"'
+         id="ticket_type" type="text"
+         name="ticket_type" value="{{ object.ticket_type }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="card_number">card_number: </label>
+      <input class="form-control col-sm-10"'
+         id="card_number" type="text"
+         name="card_number" value="{{ object.card_number }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="seat_number">seat_number: </label>
+      <input class="form-control col-sm-10"'
+         id="seat_number" type="number"
+         name="seat_number" value="{{ object.seat_number }}">
+  </div>
+  <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+{% endblock %}

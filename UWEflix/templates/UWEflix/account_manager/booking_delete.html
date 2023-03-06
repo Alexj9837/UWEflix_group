@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'UWEflix_booking_list' %}">
+    booking Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>quantity</td><td>{{ object.quantity }}</td></tr>
+    <tr><td>booking_id</td><td>{{ object.booking_id }}</td></tr>
+    <tr><td>ticket_type</td><td>{{ object.ticket_type }}</td></tr>
+    <tr><td>card_number</td><td>{{ object.card_number }}</td></tr>
+    <tr><td>seat_number</td><td>{{ object.seat_number }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}
