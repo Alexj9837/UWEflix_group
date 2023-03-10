@@ -10,7 +10,7 @@ from UWEflix.forms import ClubForm
 # Create your views here.
 
 def home(request):
-    return render(request, "UWEflix/customer/home.html",{"footer_base":"UWEflix/footers/footer_base.html","header_content":"UWEflix/headers/header_customer.html"})
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html"})
 
 
 def create_club(request):
@@ -22,5 +22,30 @@ def create_club(request):
             club.save()
             return redirect("home")
     else:
-        return render(request, "UWEflix/cinema_manager/create_club.html",{"footer_base":"UWEflix/footers/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
+        return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
 
+
+def update_club(request, pk):
+    club = ClubForm.objects.get(pk=pk)
+    form = ClubForm(request.POST or None, instance=club)
+
+    if request.method == "POST":
+        if form.is_valid():
+            club = form.save(commit=False)
+
+            club.save()
+            return redirect("View_clubs")
+    else:
+        return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
+
+def delete_club(request, pk):
+    club = ClubForm.objects.get(pk=pk)
+
+    club.delete()
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
+
+def Club_list_view(request):
+
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
