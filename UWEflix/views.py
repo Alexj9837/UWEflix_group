@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.views.generic import ListView
 from django.http import HttpResponse
 from django.template import loader
-from UWEflix.forms import ClubForm
+from UWEflix.forms import ClubForm, TicketPurchaseForm
 
 # Create your views here.
 
@@ -49,3 +49,26 @@ def delete_club(request, pk):
 def Club_list_view(request):
 
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
+
+def book_show_view(request):
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/book_show.html"})
+
+def list_shows_view(request):
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/shows.html"})
+
+def purchase_ticket(request):
+    form = TicketPurchaseForm(request.POST)
+
+    if (form.is_valid()):
+        ticket = form.save(commit=False)
+        ticket.save()
+        return redirect("home")
+
+def book_ticket(request):
+    form = TicketPurchaseForm(request.POST)
+
+    if (form.is_valid()):
+        ticket = form.save(commit=False)
+        ticket.save()
+        return redirect("home")
