@@ -1,12 +1,12 @@
-{% extends 'base.html' %} 
+{% extends 'UWEflix/base/base.html' %} 
 {% block title %}Home{% endblock %} 
 {% block content %}
 <h1>Welcome to the Cinema Booking System</h1>
 {% if user.is_authenticated %}
-<a href="logout">Logout</a>
+<a href="#">Logout</a>
 {% endif %}
 <p>
-	Here you can <a href="{% url 'get_shows' %}">purchase tickets</a> for
+	Here you can <a href="{% url 'purchase_tickets' %}">purchase tickets</a> for
 	movies, <a href="{% url 'register_club' %}">register a club</a>, and
 	<a href="{% url 'manage_account' %}">manage your account</a>.
 </p>

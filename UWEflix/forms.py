@@ -77,25 +77,11 @@ class ClubRegistrationForm(forms.Form):
             raise forms.ValidationError('You have to write something!')
 
 class TicketPurchaseForm(forms.Form):
-    showing = forms.ModelChoiceField(queryset=Showing.objects.all())
+    show = forms.ModelChoiceField(queryset=Show.objects.all())
     payment_details = forms.CharField(label='Payment details', max_length=255)
     def clean(self):
         cleaned_data = super().clean()
-        showing = cleaned_data.get('showing')
+        show = cleaned_data.get('show')
         payment_details = cleaned_data.get('payment_details')
-        if not showing and not payment_details:
-            raise forms.ValidationError('You have to write something!')
-
-
-class ClubAccountForm(forms.ModelForm):
-    class Meta:
-        model = Club
-        fields = ['name', 'address', 'contact_details']
-
-    def clean(self):
-        cleaned_data = super().clean()
-        name = cleaned_data.get('name')
-        address = cleaned_data.get('address')
-        contact_details = cleaned_data.get('contact_details')
-        if not name and not address and not contact_details:
+        if not show and not payment_details:
             raise forms.ValidationError('You have to write something!')

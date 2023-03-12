@@ -1,8 +1,8 @@
-{% extends 'base.html' %} 
-{% block title %} Showings {% endblock %} 
+{% extends 'UWEflix/base/base.html' %} 
+{% block title %} Shows {% endblock %} 
 {% block content %}
 <div class="p-2">
-	<h2>Available Showings:</h2>
+	<h2>Available Shows:</h2>
 	<form action="{% url 'get_shows' %}" method="post">
 		{% csrf_token %}
 		<label for="date">Enter date for filtering: </label>
@@ -11,7 +11,7 @@
 	</form>
 
 	<div class="mt-2 p-2 d-flex">
-		{% for s in showings %}
+		{% for s in shows %}
 		<div class="card m-2" style="width: 18rem">
 			<div class="card-body">
 				<h5 class="card-title"><a href="{% url 'select_tickets' s.id %}">{{s.film.title}}</a></h5>
