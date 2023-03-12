@@ -1,5 +1,5 @@
 from django import forms
-from UWEflix.models import Booking,Club,Film,Screen,Show
+from UWEflix.models import Booking, Club, Film, Screen, Show
 
 class bookingForm(forms.ModelForm):
     class Meta:
