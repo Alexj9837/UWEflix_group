@@ -1,5 +1,5 @@
 from django.db import models
-from UWEflix.models.film import Film
+from UWEflix.models.film import films
 from UWEflix.models.show import Show
 
 class Booking(models.Model):
