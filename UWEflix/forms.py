@@ -27,6 +27,7 @@ class ClubForm(forms.ModelForm):
             "first_name",
             "last_name",
             "dob",
+            "clubID",
         ]
 
 
@@ -37,6 +38,8 @@ class filmForm(forms.ModelForm):
             "film_title",
             "age_rating",
             "description",
+            "duration",
+
         ]
 
 
@@ -45,6 +48,7 @@ class screenForm(forms.ModelForm):
         model = Screen
         fields = [
             "screen_number",
+            "capacity",
         ]
 
 
@@ -54,4 +58,5 @@ class showForm(forms.ModelForm):
         fields = [
             "date",
             "time",
+            "film"
         ]
