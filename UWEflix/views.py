@@ -12,6 +12,10 @@ from UWEflix.forms import ClubForm
 def home(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html"})
 
+#####################################################
+######### CLUBS #####################################
+#####################################################
+
 
 def create_club(request):
     form = ClubForm(request.POST or None)
@@ -49,3 +53,23 @@ def delete_club(request, pk):
 def Club_list_view(request):
 
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
+#####################################################
+######### FILMS/SHOWINGS ############################
+#####################################################
+
+def create_showing(request):
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
+def Showing_list_view(request):
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
+def Update_showing(request):
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
+def Delete_showing(request):
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
+def Film_list_veiew(request):
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
