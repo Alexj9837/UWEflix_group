@@ -6,13 +6,15 @@ from django.views.generic import ListView
 from django.http import HttpResponse
 from django.template import loader
 from UWEflix.forms import ClubForm
-from .models.film import upfilm , films , reg
-from .forms import regForm
+from .models.film import  films 
+from .models.upcoming import  upcomings 
+from .models.booking import Booking
+from .forms import bookingForm
 
 # Create your views here.
 
 def home(request):
-    movie = upfilm.objects.all()
+    movie = upcomings.objects.all()
     return render(request, "UWEflix/customer/home.html",{"movie" : movie})
 
 def upcoming(request):
@@ -20,13 +22,13 @@ def upcoming(request):
     return render(request,"UWEflix/customer/upcoming.html",{"movie":upcome})
 
 def details(request, id):
-    d = upfilm.objects.get(id=id)
-    return render(request, 'UWEflix/customer/details.html' , {'d': d})
+    d = upcomings.objects.get(id=id)
+    return render(request, 'UWEflix/customer/film_details.html' , {'d': d})
 
 
 def updetails(request, id):
     d = films.objects.get(id=id)
-    return render(request, 'UWEflix/customer/updetails.html', {'d': d})
+    return render(request, 'UWEflix/customer/upcoming_details.html', {'d': d})
 
 def create_club(request):
     form = ClubForm(request.POST or None)
@@ -65,17 +67,17 @@ def Club_list_view(request):
 
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
-def signup(request):
+def booking(request):
     if request.method == "POST":
-        form = regForm(request.POST)
+        form = bookingForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("/booked")
     else:
-        form = regForm()
-        return render(request, 'UWEflix/customer/signup.html', {'form': form})
+        form = bookingForm()
+        return render(request, 'UWEflix/customer/booking.html', {'form': form})
 
 
 def booked(request):
-    ob = reg.objects.all()
+    ob = Booking.objects.all()
     return render(request, 'UWEflix/customer/booked.html', {'ob': ob})
