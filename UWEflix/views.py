@@ -11,6 +11,7 @@ from .models.upcoming import  upcomings
 from .models.booking import Booking
 from .forms import bookingForm
 
+
 # Create your views here.
 
 def home(request):
