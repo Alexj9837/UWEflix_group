@@ -21,12 +21,12 @@ def upcoming(request):
     upcome = films.objects.all()
     return render(request,"UWEflix/customer/upcoming.html",{"movie":upcome})
 
-def details(request, id):
+def film_details(request, id):
     d = upcomings.objects.get(id=id)
     return render(request, 'UWEflix/customer/film_details.html' , {'d': d})
 
 
-def updetails(request, id):
+def upcoming_details(request, id):
     d = films.objects.get(id=id)
     return render(request, 'UWEflix/customer/upcoming_details.html', {'d': d})
 
@@ -72,12 +72,12 @@ def booking(request):
         form = bookingForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/booking_complete")
+            return redirect("/booking_confirm")
     else:
         form = bookingForm()
         return render(request, 'UWEflix/customer/booking.html', {'form': form})
 
 
-def booking_complete(request):
+def booking_confirm(request):
     ob = Booking.objects.all()
-    return render(request, 'UWEflix/customer/booking_complete.html', {'ob': ob})
+    return render(request, 'UWEflix/customer/booking_confirm.html', {'ob': ob})
