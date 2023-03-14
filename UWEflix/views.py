@@ -72,12 +72,12 @@ def booking(request):
         form = bookingForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/booked")
+            return redirect("/booking_complete")
     else:
         form = bookingForm()
         return render(request, 'UWEflix/customer/booking.html', {'form': form})
 
 
-def booked(request):
+def booking_complete(request):
     ob = Booking.objects.all()
-    return render(request, 'UWEflix/customer/booked.html', {'ob': ob})
+    return render(request, 'UWEflix/customer/booking_complete.html', {'ob': ob})
