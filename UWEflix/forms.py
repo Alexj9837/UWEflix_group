@@ -58,7 +58,7 @@ class showForm(forms.ModelForm):
             "date",
             "time",
             "screen",
-            
+            1
         ]
         
         

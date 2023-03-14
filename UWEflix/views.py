@@ -20,7 +20,7 @@ from UWEflix.forms import showForm
 def home(request):
     return render(request, "UWEflix/customer/home.html",{"footer_base":"UWEflix/footers/footer_base.html","header_base":"UWEflix/headers/header_base.html"})
 
-def home(request):
+def cin_man_home(request):
     return render(request, "UWEflix/customer/cin_man_home.html",{"footer_base":"UWEflix/footers/footer_base.html","header_base":"UWEflix/headers/header_cinema_manager.html"})
 
 # create 
@@ -35,14 +35,14 @@ def create_club(request):
     else:
         return render(request, "UWEflix/cinema_manager/create_club.html",{"footer_base":"UWEflix/footers/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
     
-def create_shwoing(request):
-    form = showForm(request.POST or None)
+# def create_showing(request):
+#     form = showForm(request.POST or None)
     
-    if request.method == "POST": 
-        if form.is_valid():
-            showing = form.save(commit=False)
-            showing.save()
-            return redirect("showings")
+#     if request.method == "POST": 
+#         if form.is_valid():
+#             showing = form.save(commit=False)
+#             showing.save()
+#             return redirect("showings")
             
             
 

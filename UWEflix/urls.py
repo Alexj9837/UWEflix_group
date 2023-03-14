@@ -5,5 +5,6 @@ from UWEflix import views
 
 urlpatterns = [
     path("", views.home, name="home"),
+    path("cin_man_home", views.cin_man_home, name="cin_man_home")
     path("create_club",views.create_club,name="create_club")
 ]
