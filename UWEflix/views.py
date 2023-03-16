@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.views.generic import ListView
 from django.http import HttpResponse
 from django.template import loader
-from UWEflix.forms import ClubForm
+from UWEflix.forms import *
 
 # Create your views here.
 
@@ -24,9 +24,9 @@ def create_club(request):
         if form.is_valid():
             club = form.save(commit=False)
             club.save()
-            return redirect("home")
+            return redirect("view_clubs")
     else:
-        return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
+        return render(request, "UWEflix/cinema_manager/create_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
 
 
 def update_club(request, pk):
@@ -38,7 +38,7 @@ def update_club(request, pk):
             club = form.save(commit=False)
 
             club.save()
-            return redirect("View_clubs")
+            return redirect("view_clubs")
     else:
         return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
@@ -51,38 +51,46 @@ def delete_club(request, pk):
 
 
 def view_club(request):
-
-    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+        
+        return render(request, "UWEflix/cinema_manager/view_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html",})
 
 #####################################################
 ######### FILMS/SHOWINGS/SCREENS ####################
 #####################################################
 
-def Create_showing(request):
+def create_showing(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
-def Create_film(request):
+def create_film(request):
+    form = filmForm(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            club = form.save(commit=False)
+            club.save()
+            return redirect("home")
+    else:
+        return render(request, "UWEflix/cinema_manager/create_film.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+
+def create_screen(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
-def Create_screen(request):
+def update_showing(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
-def Update_showing(request):
+def update_film(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
-def Update_film(request):
+def update_screen(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
-def Update_screen(request):
+def delete_showing(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
-def Delete_showing(request):
+def delete_film(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
-def Delete_film(request):
-    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
-
-def Delete_screen(request):
+def delete_screen(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
 def view_film(request):

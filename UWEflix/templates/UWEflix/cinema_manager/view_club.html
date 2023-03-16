@@ -8,7 +8,7 @@
   <div class="m-2">
     <a href="{{object.get_absolute_url}}">{{object}}</a>
     <small class="ml-5">
-      <a href="{% url 'UWEflix_Club_delete' object.pk %}">
+      <a href="{% url 'delete_club' object.pk %}">
         (Delete)
       </a>
     </small>
@@ -16,7 +16,7 @@
 {% endfor %}
 <div>
   <a class="btn btn-primary"
-    href="{% url 'UWEflix_Club_create' %}">
+    href="{% url 'create_club' %}">
   Create a new Club
   </a>
 </div>
