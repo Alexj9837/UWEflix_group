@@ -26,7 +26,7 @@ def create_club(request):
             club.save()
             return redirect("view_clubs")
     else:
-        return render(request, "UWEflix/cinema_manager/create_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
+        return render(request, "UWEflix/cinema_manager/clubs/create_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
 
 
 def update_club(request, pk):
@@ -52,7 +52,7 @@ def delete_club(request, pk):
 
 def view_club(request):
         
-        return render(request, "UWEflix/cinema_manager/view_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html",})
+        return render(request, "UWEflix/cinema_manager/clubs/view_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html",})
 
 #####################################################
 ######### FILMS/SHOWINGS/SCREENS ####################
