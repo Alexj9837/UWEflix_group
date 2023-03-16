@@ -25,8 +25,9 @@ urlpatterns = [
     path("Delete_Showing",views.Delete_showing,name="Delete_Showing"),
     path("Delete_screen",views.Delete_screen,name="Delete_screen"),
 
-    path("Film_list_view",views.Film_list_view,name="Film_list_view"),
-    path("Showing_list_view",views.Showing_list_view,name="Showing_list_view"),
-    path("Screen_list_view",views.Screen_list_view,name="Screen_list_view"), 
+    path("view_film",views.view_film,name="view_film"),
+    path("view_shooing",views.view_showing,name="view_showing"),
+    path("view_screen",views.view_screen,name="view_screen"), 
+    path("view_club",views.view_club,name="view_club"),
 
 ]
