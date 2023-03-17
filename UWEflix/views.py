@@ -16,20 +16,20 @@ from .forms import bookingForm
 
 def home(request):
     movie = upcomings.objects.all()
-    return render(request, "UWEflix/customer/home.html",{"movie" : movie})
+    return render(request, "UWEflix/customer/home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", "movie" : movie})
 
 def upcoming(request):
     upcome = films.objects.all()
-    return render(request,"UWEflix/customer/upcoming.html",{"movie":upcome})
+    return render(request,"UWEflix/customer/upcoming.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html","movie":upcome})
 
 def film_details(request, id):
-    d = upcomings.objects.get(id=id)
-    return render(request, 'UWEflix/customer/film_details.html' , {'d': d})
+    filmdetails = upcomings.objects.get(id=id)
+    return render(request, 'UWEflix/customer/film_details.html' , {"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", 'd':filmdetails})
 
 
 def upcoming_details(request, id):
-    d = films.objects.get(id=id)
-    return render(request, 'UWEflix/customer/upcoming_details.html', {'d': d})
+    upcomedetails = films.objects.get(id=id)
+    return render(request, "UWEflix/customer/upcoming_details.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html",'d': upcomedetails})
 
 def create_club(request):
     form = ClubForm(request.POST or None)
@@ -76,9 +76,9 @@ def booking(request):
             return redirect("/booking_confirm")
     else:
         form = bookingForm()
-        return render(request, 'UWEflix/customer/booking.html', {'form': form})
+        return render(request, 'UWEflix/customer/booking.html', {"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html",'form': form})
 
 
 def booking_confirm(request):
     ob = Booking.objects.all()
-    return render(request, 'UWEflix/customer/booking_confirm.html', {'ob': ob})
+    return render(request, 'UWEflix/customer/booking_confirm.html',{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", 'ob': ob})
