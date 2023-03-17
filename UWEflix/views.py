@@ -68,9 +68,9 @@ def create_film(request):
         if form.is_valid():
             club = form.save(commit=False)
             club.save()
-            return redirect("home")
+            return redirect("view_film")
     else:
-        return render(request, "UWEflix/cinema_manager/create_film.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+        return render(request, "UWEflix/cinema_manager/films/create_film.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
 def create_screen(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
