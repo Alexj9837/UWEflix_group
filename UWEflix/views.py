@@ -6,6 +6,7 @@ from django.views.generic import ListView
 from django.http import HttpResponse
 from django.template import loader
 from UWEflix.forms import *
+from UWEflix.models import *
 
 # Create your views here.
 
@@ -24,13 +25,14 @@ def create_club(request):
         if form.is_valid():
             club = form.save(commit=False)
             club.save()
-            return redirect("view_clubs")
+            return redirect("view_club")
     else:
-        return render(request, "UWEflix/cinema_manager/clubs/create_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
+            form = ClubForm()
+    return render(request, "UWEflix/cinema_manager/clubs/create_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
 
 
 def update_club(request, pk):
-    club = ClubForm.objects.get(pk=pk)
+    club = club.objects.get(pk=pk)
     form = ClubForm(request.POST or None, instance=club)
 
     if request.method == "POST":
@@ -38,21 +40,24 @@ def update_club(request, pk):
             club = form.save(commit=False)
 
             club.save()
-            return redirect("view_clubs")
+            return redirect("view_club")
     else:
         return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
 
-def delete_club(request, pk):
-    club = ClubForm.objects.get(pk=pk)
-
-    club.delete()
-    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
-
+def delete_club(request):
+    if request.method == 'POST':
+        pk = request.POST.get('pk')
+        club = Club.objects.get(pk=pk)
+        club.delete()
+        return redirect('view_club')
+    else:
+        return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
 def view_club(request):
-        
-        return render(request, "UWEflix/cinema_manager/clubs/view_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html",})
+    clubs = Club.objects.all()
+    print(clubs)  # add this line to check if clubs is not empty
+    return render(request, "UWEflix/cinema_manager/clubs/view_club.html", {"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html", "view_club_data": clubs})
 
 #####################################################
 ######### FILMS/SHOWINGS/SCREENS ####################
