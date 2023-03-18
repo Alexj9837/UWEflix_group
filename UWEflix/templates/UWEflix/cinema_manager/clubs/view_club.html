@@ -35,19 +35,20 @@
           <td>{{ club.last_name }}</td>
           <td>{{ club.dob }}</td>
           <td>
+            <form method="POST" action="{% url 'update_club' club.clubID %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value="{{ club.pk }}">
+            <button type="submit" class="btn btn-primary">Update Club</button>
+          </form>
+          </td>
+          <td>
             <form method="POST" action="{% url 'delete_club'%}">
               {% csrf_token %}
               <input type="hidden" name="pk" value="{{ club.pk }}">
               <button type="submit" class="btn btn-danger">Delete Club</button>
             </form>
           </td>
-          <td>
-            <form method="POST" action="{% url 'update_club'%}">
-              {% csrf_token %}
-              <input type="hidden" name="pk" value="{{ club.pk }}">
-              <button type="submit" class="btn btn-outline-primary">Update Club</button>
-            </form>
-          </td>  
+          
         </tr>
       {% endfor %}
     </tbody>

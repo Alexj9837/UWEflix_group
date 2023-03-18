@@ -15,7 +15,7 @@ urlpatterns = [
     path("create_showing",views.create_showing,name="create_showing"),
     path("create_screen",views.create_screen,name="create_screen"),
     
-    path("update_club",views.update_club,name="update_club"),
+    path("update_club /<str:pk>/",views.update_club,name="update_club"),
     path("update_film",views.update_film,name="update_film"),
     path("update_showing",views.update_showing,name="update_showing"),
     path("update_screen",views.update_screen,name="update_screen"),
