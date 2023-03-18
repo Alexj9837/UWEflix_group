@@ -31,8 +31,8 @@ def create_club(request):
     return render(request, "UWEflix/cinema_manager/clubs/create_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
 
 def update_club(request, pk):
+    club = Club.objects.get(pk=pk)
     if request.method == "POST":
-        club = Club.objects.get(pk=pk)
         form = ClubForm(request.POST, instance=club)
         if form.is_valid():
             club = form.save(commit=False)
