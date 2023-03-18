@@ -40,6 +40,13 @@
               <input type="hidden" name="pk" value="{{ club.pk }}">
               <button type="submit" class="btn btn-danger">Delete Club</button>
             </form>
+          </td>
+          <td>
+            <form method="POST" action="{% url 'update_club'%}">
+              {% csrf_token %}
+              <input type="hidden" name="pk" value="{{ club.pk }}">
+              <button type="submit" class="btn btn-outline-primary">Update Club</button>
+            </form>
           </td>  
         </tr>
       {% endfor %}
