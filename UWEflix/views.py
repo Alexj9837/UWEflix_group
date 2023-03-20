@@ -40,9 +40,8 @@ def update_club(request, pk):
 
     return render(request, 'UWEflix/cinema_manager/clubs/update_club.html',{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html", "form": form})
 
-def delete_club(request):
+def delete_club(request, pk):
     if request.method == 'POST':
-        pk = request.POST.get('pk')
         club = Club.objects.get(pk=pk)
         club.delete()
         return redirect('view_club')

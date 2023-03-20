@@ -20,7 +20,7 @@ urlpatterns = [
     path("update_showing",views.update_showing,name="update_showing"),
     path("update_screen",views.update_screen,name="update_screen"),
 
-    path("delete_club",views.delete_club,name="delete_club"),
+    path("delete_club /<str:pk>",views.delete_club,name="delete_club"),
     path("delete_film",views.delete_film,name="delete_film"),
     path("delete_Showing",views.delete_showing,name="delete_Showing"),
     path("delete_screen",views.delete_screen,name="delete_screen"),
