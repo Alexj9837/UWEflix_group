@@ -1,4 +1,5 @@
 from django.db import models
+#from UWEflix.models.film import films
 from UWEflix.models.show import Show
 
 class Booking(models.Model):
@@ -9,6 +10,12 @@ class Booking(models.Model):
     ticket_type = models.CharField(max_length=50)
     quantity = models.IntegerField()
     card_number = models.CharField(max_length=20)
+
+    email = models.EmailField()
+    name = models.CharField(max_length=100)
+    mobile = models.IntegerField()
+    age = models.IntegerField()
+    seats = models.IntegerField()
 
     class Meta:
         pass

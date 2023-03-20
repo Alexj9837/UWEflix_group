@@ -1,10 +1,19 @@
-{% include header_content %}
+
+<body>
+
+    <nav>
+        {% include header_content %}
+    </nav>
+
+    
+    {% block content %}
+
+    
+    {% endblock content %}
 
 
+    {% include footer_content %}
 
-{% block content %}
+</body>
 
-{% endblock %}
-
-
-{% include footer_content %}
+</html>

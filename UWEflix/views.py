@@ -5,13 +5,26 @@ from django.shortcuts import redirect
 from django.views.generic import ListView
 from django.http import HttpResponse
 from django.template import loader
-from UWEflix.forms import ClubForm, TicketPurchaseForm
+from UWEflix.forms import ClubForm
 
 # Create your views here.
 
 def home(request):
-    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html"})
+    movie = upcomings.objects.all()
+    return render(request, "UWEflix/customer/home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", "movie" : movie})
 
+def upcoming(request):
+    upcome = films.objects.all()
+    return render(request,"UWEflix/customer/upcoming.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html","movie":upcome})
+
+def film_details(request, id):
+    filmdetails = upcomings.objects.get(id=id)
+    return render(request, 'UWEflix/customer/film_details.html' , {"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", 'd':filmdetails})
+
+
+def upcoming_details(request, id):
+    upcomedetails = films.objects.get(id=id)
+    return render(request, "UWEflix/customer/upcoming_details.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html",'d': upcomedetails})
 
 def create_club(request):
     form = ClubForm(request.POST or None)
@@ -49,34 +62,3 @@ def delete_club(request, pk):
 def Club_list_view(request):
 
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
-
-def get_shows(request):
-    
-    if request.method == "POST":
-        #filtered shows
-        return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/show.html"})
-    else:
-        return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html"})
-
-def purchase_ticket(request):
-    form = TicketPurchaseForm(request.POST or None)
-
-    if request.method == "POST":
-        if (form.is_valid()):
-            ticket = form.save(commit=False)
-            ticket.save()
-            return redirect("home")
-    else:
-        return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/purchase_ticket.html"})
-    
-
-def book_show(request):
-    form = TicketPurchaseForm(request.POST)
-
-    if form.is_valid():
-        ticket = form.save(commit=False)
-        ticket.save()
-        return redirect("home")
-
-def manage_account(request):
-    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html"})

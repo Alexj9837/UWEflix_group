@@ -1,0 +1,57 @@
+.film-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+
+.destination_list {
+    margin-top: 41px;
+}
+
+.destination_list ul li {
+    position: relative;
+    font-size: 15px;
+    font-weight: 600;
+    color: #72728c;
+    padding-left: 36px;
+}
+
+.destination_list ul li:not(:last-child) {
+    margin-bottom: 14px;
+}
+
+.destination_list ul li::before {
+    display: block;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+    width: 7px;
+    height: 7px;
+    background: #181818;
+    border-radius: 50%;
+    content: '';
+}
+
+
+.spec_offer {
+    position: absolute;
+    top: 15px;
+    left: 16px;
+    width: 118px;
+    height: 36px;
+    background: #181818;
+}
+
+.destination_image {
+    width: 100%;
+}
+
+.destination_image img {
+    max-width: 100%;
+}

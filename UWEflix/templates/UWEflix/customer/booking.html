@@ -1,0 +1,28 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block content %}
+
+
+<div class="d-flex justify-content-center" style="margin-bottom:15px; margin-top: 125px;font-weight: bolder;">
+    <span class="fs-1">Enter your details to continue booking your movie ticket</span>
+</div>
+
+
+<div style="margin: 20px 350px 20px 350px;">
+
+    <form action="/booking" method="post"> {% csrf_token %}
+
+
+        {{form}}
+
+        <div class="d-flex justify-content-center " style="padding-bottom: 15px;">
+        
+            <button type="submit" class="btn" style="background-color: lightblue; margin: 15px;"><span>&nbsp; Pay & BOOK NOW &nbsp;
+                </span></button>
+        
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}
