@@ -17,7 +17,6 @@ def home(request):
 ######### CLUBS #####################################
 #####################################################
 
-
 def create_club(request):
     form = ClubForm(request.POST or None)
 
