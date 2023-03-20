@@ -81,41 +81,65 @@ def update_film(request, pk):
 
 def delete_film(request, pk):
     if request.method == 'POST':
-        club = Club.objects.get(pk=pk)
-        club.delete()
+        film = Film.objects.get(pk=pk)
+        film.delete()
         return redirect('view_film')
     else:
         return render(request, "UWEflix/cinema_manager/films/view_film.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
 def view_film(request):
     films = Film.objects.all()
-    print(films)
     return render(request, "UWEflix/cinema_manager/films/view_film.html", {"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html", "view_film_data": films})
 
 #####################################################
 ######### SCREENS ###################################
 #####################################################
 
-def create_showing(request):
-    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
-
 def create_screen(request):
+    form = screenForm(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            screen = form.save(commit=False)
+            screen.save()
+            return redirect("view_screen")
+    else:
+            form = screenForm()
+    return render(request, "UWEflix/cinema_manager/screens/create_screen.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
+
+def update_screen(request, pk):
+    screen = Screen.objects.get(pk=pk)
+    form = screenForm(request.POST, instance=screen)
+    if request.method == "POST":
+        if form.is_valid():
+            screen = form.save(commit=False)
+            screen.save()
+            return redirect("view_screen")
+    return render(request, "UWEflix/cinema_manager/screens/update_screen.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form, "screen": screen})
+
+def delete_screen(request, pk):
+    if request.method == 'POST':
+        screen = Screen.objects.get(pk=pk)
+        screen.delete()
+        return redirect('view_screen')
+    else:
+        return render(request, "UWEflix/cinema_manager/screens/view_screens.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
+    
+def view_screen(request):
+    screen = Screen.objects.all()
+    return render(request, "UWEflix/cinema_manager/screens/view_screen.html", {"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html", "view_screen_data": screen})
+
+#####################################################
+######### SHOWINGS ##################################
+#####################################################
+
+def create_showing(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
 def update_showing(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
-def update_screen(request):
-    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
-
 def delete_showing(request):
-    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
-
-def delete_screen(request):
-    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
-
-
-def view_screen(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
 def view_showing(request):

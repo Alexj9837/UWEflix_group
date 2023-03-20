@@ -1,0 +1,40 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block content %}
+  <h2>Screen</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Screen Number</th>
+        <th>Screen Capacity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for screen in view_screen_data %}
+        <tr>
+          <td>{{ screen.screen_number }}</td>
+          <td>{{ screen.capacity }}</td>
+          <td>
+            <form method="POST" action="{% url 'update_screen' screen.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value="{{ screen.pk }}">
+            <button type="submit" class="btn btn-primary">Update Screen</button>
+            </form>
+          </td>
+          <td>
+            <form method="POST" action="{% url 'delete_screen' screen.id %}">
+              {% csrf_token %}
+              <input type="hidden" name="pk" value="{{ screen.pk }}">
+              <button type="submit" class="btn btn-danger">Delete Screen</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div>
+    <a class="btn btn-primary" href="{% url 'create_screen' %}">
+      Create a new Screen
+    </a>
+  </div>
+{% endblock %}

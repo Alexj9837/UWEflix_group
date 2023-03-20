@@ -5,14 +5,14 @@
   <table class="table">
     <thead>
       <tr>
-        <th>film_title</th>
-        <th>age_rating</th>
-        <th>duration</th>
-        <th>description</th>
+        <th>Film title</th>
+        <th>Age rating</th>
+        <th>Duration</th>
+        <th>Description</th>
       </tr>
     </thead>
     <tbody>
-      {% for films in view_film_data %}
+      {% for film in view_film_data %}
         <tr>
           <td>{{ film.film_title }}</td>
           <td>{{ film.age_rating }}</td>
@@ -31,7 +31,7 @@
               <input type="hidden" name="pk" value="{{ film.pk }}">
               <button type="submit" class="btn btn-danger">Delete Film</button>
             </form>
-          </td>
+          </td> 
         </tr>
       {% endfor %}
     </tbody>
