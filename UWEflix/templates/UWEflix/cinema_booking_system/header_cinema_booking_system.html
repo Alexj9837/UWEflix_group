@@ -32,7 +32,7 @@
                 Cinema Booking System
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="{% url 'purchase ticket' %} ">purchase tickets</a></li>
+                <li><a class="dropdown-item" href="{% url 'purchase_ticket' %} ">purchase tickets</a></li>
                 <li><a class="dropdown-item" href="{% url 'get_shows' %}">view show</a></li>
                 <li><a class="dropdown-item" href="{% url 'book_show' %}">book show</a></li>
               </ul>
@@ -50,8 +50,8 @@
     <h1>Welcome to the Cinema Booking System</h1>
 
     <p>
-      Here you can <a href="{% url 'purchase_tickets' %}">purchase tickets</a> for
-      movies, <a href="{% url 'register_club' %}">register a club</a>, and
+      Here you can <a href="{% url 'purchase_ticket' %}">purchase tickets</a> for
+      movies and
       <a href="{% url 'manage_account' %}">manage your account</a>.
     </p>
     <p>Click on the links above to get started.</p>

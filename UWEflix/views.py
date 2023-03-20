@@ -59,12 +59,16 @@ def get_shows(request):
         return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html"})
 
 def purchase_ticket(request):
-    form = TicketPurchaseForm(request.POST)
+    form = TicketPurchaseForm(request.POST or None)
 
-    if (form.is_valid()):
-        ticket = form.save(commit=False)
-        ticket.save()
-        return redirect("home")
+    if request.method == "POST":
+        if (form.is_valid()):
+            ticket = form.save(commit=False)
+            ticket.save()
+            return redirect("home")
+    else:
+        return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/purchase_ticket.html"})
+    
 
 def book_show(request):
     form = TicketPurchaseForm(request.POST)
@@ -73,3 +77,6 @@ def book_show(request):
         ticket = form.save(commit=False)
         ticket.save()
         return redirect("home")
+
+def manage_account(request):
+    return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html"})
