@@ -1,27 +1,95 @@
 {% extends 'UWEflix/base/base.html' %}
-
+{%load static%}
 {% block content %}
 
 
-<div class="d-flex justify-content-center" style="margin-bottom:15px; margin-top: 125px;font-weight: bolder;">
-    <span class="fs-1">Enter your details to continue booking your movie ticket</span>
+
+
+
+
+<div class="d-flex justify-content-center"
+    style="margin-bottom:15px; margin-top: 125px;font-weight: bolder;text-transform:uppercase">
+    <span class="fs-1">{{details.film}}</span>
 </div>
 
 
-<div style="margin: 20px 350px 20px 350px;">
 
-    <form action="/booking" method="post"> {% csrf_token %}
+{% for date , timing in details.allShowDetails.items %}
 
-
-        {{form}}
-
-        <div class="d-flex justify-content-center " style="padding-bottom: 15px;">
-        
-            <button type="submit" class="btn" style="background-color: lightblue; margin: 15px;"><span>&nbsp; Pay & BOOK NOW &nbsp;
-                </span></button>
-        
+<div class="d-flex justify-content-center align-items-center  " style="width: 100%; margin: 15px 0px 15px 0px;">
+    <div class=" time">
+        <div class="timing">
+            <span class="month">
+                {{date | slice:"0:3"}}
+            </span>
+            {{date | slice:"3:"}}
         </div>
-    </form>
+
+
+        {% for time in timing %}
+
+
+        {% if details.show.show_id == time.0 %}
+
+
+        <a href="/film_details/10/booking/{{time.0}}" class="time-slot-active" style="text-decoration: none;">
+            <span class="d-flex justify-content-center align-items-center">
+                <b style="font-size: large;">
+                    {{time.1}}
+                </b>
+            </span>
+
+        </a>
+        {% else %}
+
+        <a href="/film_details/10/booking/{{time.0}}/" class="time-slot-inactive" style="text-decoration: none;">
+            <span class="d-flex justify-content-center align-items-center">
+                <b style="font-size: large;">
+                    {{time.1}}
+                </b>
+            </span>
+
+        </a>
+
+        {% endif %}
+
+        {% endfor %}
+
+
+    </div>
+</div>
+
+{% endfor %}
+
+<div class="d-flex justify-content-center align-items-center p-5">
+    
+        <button class="button" onclick="history.back()" style="border: 0px;width: 140px; margin-right: 10px; background-color: #990f02;}">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
+            class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0
+                 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+              </svg>
+                
+                CANCEL
+            <div class="justify-content-center align-items-center">
+            </div>
+        </button>
+   
+    
+    <button class="button" style="border: 0px;" onclick="window.location.href = `${window.location.href}tickets`;">
+        NEXT
+        <div class="justify-content-center align-items-center">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
+            class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1
+                 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
+
+        </div>
+    </button>
+
 </div>
 
 

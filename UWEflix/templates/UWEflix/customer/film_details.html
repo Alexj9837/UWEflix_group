@@ -10,7 +10,7 @@
 <div style="padding: 30px 300px 30px 300px;">
 
 
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
         <tbody>
             
             
@@ -40,7 +40,7 @@
             </tr>
             <tr>
                 <th >Ticket Price</th>
-                <td>£{{d.price}}</td>
+                <td>£ {{d.price}}</td>
             </tr>
             <tr>
                 <th >Movie Trailer</th>
@@ -53,9 +53,21 @@
     
 </div>
 
-<div class="d-flex justify-content-center " style="padding-bottom: 15px;">
 
-    <button type="button" class=" btn btn-info" onclick="window.location.href = '/booking';">Book Now</button>
+<div class="d-flex justify-content-center align-items-center m-4">
+    <button class="button" style="border: 0px;" onclick="window.location.href = `${window.location.href}booking/{{s}}`;">
+        BOOK NOW
+        <div class="justify-content-center align-items-center">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-up-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z" />
+            </svg>
+
+        </div>
+    </button>
+
 </div>
 
 {% endblock content %}

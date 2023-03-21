@@ -6,16 +6,13 @@ class Booking(models.Model):
     # Fields for the booking model
     booking_id = models.AutoField(primary_key=True)
     show = models.ForeignKey(Show, on_delete=models.CASCADE)
-    seat_number = models.IntegerField()
-    ticket_type = models.CharField(max_length=50)
+    ticket_type = models.CharField(max_length=7)
     quantity = models.IntegerField()
-    card_number = models.CharField(max_length=20)
-
-    email = models.EmailField()
-    name = models.CharField(max_length=100)
-    mobile = models.IntegerField()
-    age = models.IntegerField()
-    seats = models.IntegerField()
+    card_number = models.IntegerField(null=True)
+    card_holder = models.CharField(max_length=30,null=True)
+    card_expire_year  = models.IntegerField(null=True)
+    card_expire_month  = models.IntegerField(null=True)
+    card_cvc  = models.IntegerField(null=True)
 
     class Meta:
         pass
