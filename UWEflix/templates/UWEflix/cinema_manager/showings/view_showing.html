@@ -1,0 +1,46 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block content %}
+  <h2>Shows</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Show_id</th>
+        <th>Film</th>
+        <th>Screen</th>
+        <th>Date</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for showing in showings %}
+        <tr>
+          <td>{{ show.show_id }}</td>
+          <td>{{ show.film }}</td>
+          <td>{{ show.screen }}</td>
+          <td>{{ show.date }}</td>
+          <td>{{ show.time }}</td>
+          <td>
+            <form method="POST" action="{% url 'update_club' club.clubID %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value="{{ club.pk }}">
+            <button type="submit" class="btn btn-primary">Update Show</button>
+          </form>
+          </td>
+          <td>
+            <form method="POST" action="{% url 'delete_club' club.clubID%}">
+              {% csrf_token %}
+              <input type="hidden" name="pk" value="{{ club.pk }}">
+              <button type="submit" class="btn btn-danger">Delete Show</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div>
+    <a class="btn btn-primary" href="{% url 'create_showing' %}">
+      Create a new Show
+    </a>
+  </div>
+{% endblock %}

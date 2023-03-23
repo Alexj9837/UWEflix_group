@@ -26,7 +26,7 @@ urlpatterns = [
     path("delete_screen /<str:pk>/",views.delete_screen,name="delete_screen"),
 
     path("view_film",views.view_film,name="view_film"),
-    path("view_shooing",views.view_showing,name="view_showing"),
+    path("view_showing",views.view_showing,name="view_showing"),
     path("view_screen",views.view_screen,name="view_screen"), 
     path("view_club",views.view_club,name="view_club"),
 

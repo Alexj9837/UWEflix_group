@@ -1,0 +1,38 @@
+{% extends 'UWEflix/base/base.html'%}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data" style="border: 1px solid #ccc; padding: 10px;">
+  {% csrf_token %}
+  {{form.errors}}
+
+    <label for="dropdown">Select an option of Film:</label>
+    <select id="dropdown" name="dropdown">
+        {% for films in films %}
+        <option value = "{{film}}">{{film}}</option>>
+        {% endfor %}
+    </select>
+    <label for="dropdown">Select an option of Screen:</label>
+    <select id="dropdown" name="dropdown">
+        {% for screens in screens %}
+        <option value = "{{screen}}">{{screen}}</option>>
+        {% endfor %}
+    </select>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="date">Date: </label>
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+            id="date" type="date"
+            name="date" value="{{ object.date }}">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="time">Time: </label>
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+            id="time" type="time"
+            name="time" value="{{ object.time }}">
+    </div>
+  
+    <input type="submit" value="Save" class="btn btn-primary">
+</form> 
+
+{% endblock %}
