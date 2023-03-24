@@ -10,19 +10,19 @@
       </tr>
     </thead>
     <tbody>
-      {% for screen in view_screen_data %}
+      {% for objects in objects %}
         <tr>
-          <td>{{ screen.screen_number }}</td>
-          <td>{{ screen.capacity }}</td>
+          <td>{{ objects.screen_number }}</td>
+          <td>{{ objects.capacity }}</td>
           <td>
-            <form method="POST" action="{% url 'update_screen' screen.id %}">
+            <form method="POST" action="{% url 'update_screen' objects.id %}">
             {% csrf_token %}
             <input type="hidden" name="pk" value="{{ screen.pk }}">
             <button type="submit" class="btn btn-primary">Update Screen</button>
             </form>
           </td>
           <td>
-            <form method="POST" action="{% url 'delete_screen' screen.id %}">
+            <form method="POST" action="{% url 'delete_screen' objects.id %}">
               {% csrf_token %}
               <input type="hidden" name="pk" value="{{ screen.pk }}">
               <button type="submit" class="btn btn-danger">Delete Screen</button>
