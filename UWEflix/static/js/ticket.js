@@ -7,7 +7,7 @@ const category = document.getElementById("cat")
 let count = 1;
 let adult = 10;
 let children = 8;
-let student = 7;
+let student = 7; 
 let option = null;
 
 console.log(number)
@@ -45,3 +45,6 @@ function decrement() {
     }
 }
 
+function backButton (){
+    window.history.back()
+}

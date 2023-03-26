@@ -6,11 +6,24 @@
     <span class="fs-2">MOVIE NAME : <span style="color : blue; font-weight: 500; ">{{d.name}}</span></span>
 </div>
 
+<div class=" toast-container position-absolute  top-0 end-0 p-3 toast align-items-center  fade " role="alert"
+    aria-live="assertive" aria-atomic="true" style="backdrop-filter: blur(20px)">
+    <div class="d-flex">
+        <div class="toast-body">
+            The Show is Fully Book <br>
+        <a href="{% url 'home' %}" >back to home page</a>
+        
+    </div>
+        
+    </div>
+    {% comment %} <button  class="button" style="border: 0px; width: auto; background: green;" onclick="window.location.href='{% url 'home' %}';" >
+            BACK TO HOME PAGE </button> {% endcomment %}
+</div>
 
 <div style="padding: 30px 300px 30px 300px;">
 
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered">
         <tbody>
             
             
@@ -55,7 +68,7 @@
 
 
 <div class="d-flex justify-content-center align-items-center m-4">
-    <button class="button" style="border: 0px;" onclick="window.location.href = `${window.location.href}booking/{{s}}`;">
+    <button id="house" class="button" style="border: 0px;" onclick="window.location.href = `${window.location.href}booking/{{id}}`;" data-dis="{{dis}}" >
         BOOK NOW
         <div class="justify-content-center align-items-center">
 

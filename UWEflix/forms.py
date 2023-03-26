@@ -5,18 +5,6 @@ from .models.booking import Booking
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
-class bookingForm(forms.ModelForm):
-    class Meta:
-        model = Booking
-        fields = [
-            "show",
-            "ticket_type",
-            "quantity",
-            "card_number",
-        ]
-
-
-
 
 class ClubForm(forms.ModelForm):
     class Meta:
@@ -34,6 +22,8 @@ class ClubForm(forms.ModelForm):
             "last_name",
             "dob",
         ]
+
+
 
 
 

@@ -16,7 +16,7 @@
 
 {% for date , timing in details.allShowDetails.items %}
 
-<div class="d-flex justify-content-center align-items-center  " style="width: 100%; margin: 15px 0px 15px 0px;">
+<div class="d-flex justify-content-center align-items-center" style="width: 100%; margin: 15px 0px 15px 0px;">
     <div class=" time">
         <div class="timing">
             <span class="month">
@@ -32,24 +32,51 @@
         {% if details.show.show_id == time.0 %}
 
 
-        <a href="/film_details/10/booking/{{time.0}}" class="time-slot-active" style="text-decoration: none;">
+        <button onclick="window.location.href='/film_details/10/booking/{{time.0}}'" data-dis="{{time.2}}"
+            class=" dis time-slot-active" style="text-decoration: none;">
             <span class="d-flex justify-content-center align-items-center">
                 <b style="font-size: large;">
                     {{time.1}}
                 </b>
             </span>
 
-        </a>
+
+
+        </button>
+        <!-- <a href="/film_details/10/booking/{{time.0}}" class="time-slot-active" style="text-decoration: none;">
+            <span class="d-flex justify-content-center align-items-center">
+                <b style="font-size: large;">
+                    {{time.1}}
+                </b>
+            </span>
+
+        </a> -->
         {% else %}
 
-        <a href="/film_details/10/booking/{{time.0}}/" class="time-slot-inactive" style="text-decoration: none;">
+        <button onclick="window.location.href='/film_details/10/booking/{{time.0}}'" data-dis="{{time.2}}"
+            class=" dis time-slot-inactive" style="text-decoration: none;">
+            <div class="d-flex justify-content-center align-items-center" style=" position: relative;"" >
+                <b style="font-size: large;">
+                    {{time.1}}
+                </b>
+                {% if time.2 %}
+                <span class="badge"
+                    style="color: antiquewhite; background-color: #d71e1e; position: absolute ; left: 40px; bottom: 28px; padding: 8px; font-weight: bold;font-size: 8px;">HOUSEFULL</span>
+                {% endif %}
+                <!-- <span class="badge"
+                    style="color: antiquewhite; background-color: #181818; position: absolute ; right: 54px; bottom: 124px; padding: 8px; font-weight: bold;font-size: 8px;">HOUSEFULL</span> -->
+            </div>
+
+
+        </button>
+        <!-- <a href="/film_details/10/booking/{{time.0}}/" class="time-slot-inactive" style="text-decoration: none;">
             <span class="d-flex justify-content-center align-items-center">
                 <b style="font-size: large;">
                     {{time.1}}
                 </b>
             </span>
 
-        </a>
+        </a> -->
 
         {% endif %}
 
@@ -61,30 +88,30 @@
 
 {% endfor %}
 
-<div class="d-flex justify-content-center align-items-center p-5">
-    
-        <button class="button" onclick="history.back()" style="border: 0px;width: 140px; margin-right: 10px; background-color: #990f02;}">
+{% comment %} <button class="button" onclick="backButton()" style="border: 0px;width: 140px; margin-right: 10px; background-color: #990f02;}">
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
-            class="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0
-                 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-              </svg>
-                
-                CANCEL
-            <div class="justify-content-center align-items-center">
-            </div>
-        </button>
-   
-    
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
+    class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0
+         .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+      </svg>
+        
+        CANCEL
+    <div class="justify-content-center align-items-center">
+    </div>
+</button> {% endcomment %}
+
+
+
+<div class="d-flex justify-content-center align-items-center p-5">
     <button class="button" style="border: 0px;" onclick="window.location.href = `${window.location.href}tickets`;">
         NEXT
         <div class="justify-content-center align-items-center">
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
-            class="bi bi-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1
-                 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-up-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z" />
             </svg>
 
         </div>
