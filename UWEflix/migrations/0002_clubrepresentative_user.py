@@ -9,12 +9,12 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        #('main', '0001_initial'),
+        ('UWEflix', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='clubrepresentative',
+            model_name='ClubRepresentative',
             name='user',
             field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
             preserve_default=False,

@@ -28,13 +28,13 @@
 
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Cinema Booking System
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="{% url 'purchase_ticket' %} ">purchase tickets</a></li>
-                <li><a class="dropdown-item" href="{% url 'get_shows' %}">view show</a></li>
-                <li><a class="dropdown-item" href="{% url 'book_show' %}">book show</a></li>
+                <li><a class="dropdown-item" href="#">purchase tickets</a></li>
+                <li><a class="dropdown-item" href="#">view show</a></li>
+                <li><a class="dropdown-item" href="#">book show</a></li>
               </ul>
             </li>
           </ul>
@@ -44,17 +44,9 @@
         <button type="button" class="btn btn-outline-primary me-2">Manage Account</button>
         <button type="button" class="btn btn-outline-primary me-2">Logout</button>
         {% endif %}
+        <button type="button" class="btn btn-outline-primary me-2" href="{% url 'login' %}">Login</button>
       </div>
     </header>
-
-    <h1>Welcome to the Cinema Booking System</h1>
-
-    <p>
-      Here you can <a href="{% url 'purchase_ticket' %}">purchase tickets</a> for
-      movies and
-      <a href="{% url 'manage_account' %}">manage your account</a>.
-    </p>
-    <p>Click on the links above to get started.</p>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
