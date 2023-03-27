@@ -1,0 +1,309 @@
+[
+  {
+    "model": "UWEflix.upcomings",
+    "pk": 14,
+    "fields": {
+      "name": "Bar Fight",
+      "image": "pics/bar.jpg",
+      "date": "2023-01-04",
+      "duration": "2 Hrs 10 Mins",
+      "type": "Comedy",
+      "language": "English",
+      "rating": "8.4/10 IMDB",
+      "cast": "Luka Jones, Allen, Melissa Fumero as Nina, Rachel Bloom and Chelsea",
+      "trailer": "https://www.youtube.com/watch?v=QEY1WTSfEVw",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.upcomings",
+    "pk": 15,
+    "fields": {
+      "name": "Maneater",
+      "image": "pics/maneater.jpg",
+      "date": "2023-01-23",
+      "duration": "2 Hrs 39 Mins",
+      "type": "Thriller Horror",
+      "language": "English",
+      "rating": "8.2/10 IMDB",
+      "cast": "Nicky Whelan, Trace Adkins, Harlan, Shane West, and Jeff Fahey",
+      "trailer": "https://www.youtube.com/watch?v=TxwI5Dm_qzc",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.upcomings",
+    "pk": 16,
+    "fields": {
+      "name": "The Fabelmans",
+      "image": "pics/fabe.jpg",
+      "date": "2023-01-16",
+      "duration": "2 Hrs 15 Mins",
+      "type": "Drama Comedy",
+      "language": "English",
+      "rating": "8.1/10 IMDB",
+      "cast": "Gabriel LaBelle, Michelle Williams, Paul Dano, and Seth Rogen",
+      "trailer": "https://www.youtube.com/watch?v=D1G2iLSzOe8",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.upcomings",
+    "pk": 17,
+    "fields": {
+      "name": "Top Gun: Maverick",
+      "image": "pics/top.jpg",
+      "date": "2023-01-20",
+      "duration": "2 Hrs 20 Mins",
+      "type": "Action Drama",
+      "language": "English",
+      "rating": "7.9/10 IMDB",
+      "cast": "Tom Cruise, Jennifer Connelly, Miles Teller, and Val Kilmer",
+      "trailer": "https://www.youtube.com/watch?v=giXco2jaZ_4",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.upcomings",
+    "pk": 19,
+    "fields": {
+      "name": "I Believe in Santa",
+      "image": "pics/i_believe.jpg",
+      "date": "2023-02-02",
+      "duration": "2 Hrs 40 Mins",
+      "type": "Romance Comedy",
+      "language": "English",
+      "rating": "7.6/10 IMDB",
+      "cast": "Christina Moore, John Ducey, Violet McGraw and Sachin Bhatt",
+      "trailer": "https://www.youtube.com/watch?v=vHA6tvy4_vg",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.upcomings",
+    "pk": 20,
+    "fields": {
+      "name": "The Friendship Game",
+      "image": "pics/friend.jpg",
+      "date": "2023-01-18",
+      "duration": "2 Hrs 10 Mins",
+      "type": "Science Fiction Horror",
+      "language": "English",
+      "rating": "7.9/10 IMDB",
+      "cast": "Peyton List, Miriam Smith, Brendan Meyer, and Miranda Edwards",
+      "trailer": "https://www.youtube.com/watch?v=docg91waIlg",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.upcomings",
+    "pk": 21,
+    "fields": {
+      "name": "The Lair",
+      "image": "pics/iar.jpg",
+      "date": "2023-01-14",
+      "duration": "2 Hrs 30 Mins",
+      "type": "Action Horror",
+      "language": "English",
+      "rating": "7.5/10 IMDB",
+      "cast": "Jonathan Howard, Charlotte Kirk, Jamie Bamber, and Kibong Tanji",
+      "trailer": "https://www.youtube.com/watch?v=-c17VW0ghIk",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.upcomings",
+    "pk": 22,
+    "fields": {
+      "name": "The Banshees of Inisherin",
+      "image": "pics/banshees.jpg",
+      "date": "2023-02-06",
+      "duration": "2 Hrs 23 Mins",
+      "type": "Drama Comedy",
+      "language": "English",
+      "rating": "8.1/10 IMDB",
+      "cast": "Colin Farrell, P�draic S�illeabh�in, Barry Keoghan, and Dominic Kearney",
+      "trailer": "https://www.youtube.com/watch?v=uRu3zLOJN2c",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.upcomings",
+    "pk": 23,
+    "fields": {
+      "name": "Bones and All",
+      "image": "pics/bones.jpg",
+      "date": "2023-01-03",
+      "duration": "2 Hrs 18 Mins",
+      "type": "Romance Drama Horror",
+      "language": "English",
+      "rating": "7.8/10 IMDB",
+      "cast": "Taylor Russell, Timoth�e Chalamet, and Mark Rylance",
+      "trailer": "https://www.youtube.com/watch?v=0Nu7Z9AxGNg",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.films",
+    "pk": 10,
+    "fields": {
+      "name": "Black Adam",
+      "image": "pics/Black_adam_shN1RxD.jpg",
+      "date": "2022-11-19",
+      "duration": "2 Hrs 15 Mins",
+      "type": "Action Fantasy Science Fiction",
+      "language": "English",
+      "rating": "7.6/10 IMDB",
+      "cast": "Dwayne Johnson, Bodhi Sabongui, Sarah Shahi, Pierce Brosnan, and Aldis Hodge",
+      "trailer": "https://www.youtube.com/watch?v=X0tOpBuYasI",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.films",
+    "pk": 11,
+    "fields": {
+      "name": "The Woman King",
+      "image": "pics/Woamn_king.jpg",
+      "date": "2022-10-15",
+      "duration": "2 Hrs 10 Mins",
+      "type": "Action Drama History",
+      "language": "English",
+      "rating": "8.1/10 IMDB",
+      "cast": "Viola Davis, Thuso Mbedu, Lashana Lynch, Sheila Atim, and Hero Fi",
+      "trailer": "https://www.youtube.com/watch?v=3RDaPV_rJ1Y",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.films",
+    "pk": 12,
+    "fields": {
+      "name": "Blowback",
+      "image": "pics/blowback.jpg",
+      "date": "2022-06-17",
+      "duration": "2 Hrs 30 Mins",
+      "type": "Action Thriller Crime",
+      "language": "English",
+      "rating": "7.9/10 IMDB",
+      "cast": "Randy Couture, Cam Gigandet, Chris Maher, and Louis Mandylor",
+      "trailer": "https://www.youtube.com/watch?v=SyeyYT3qCT0",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.films",
+    "pk": 13,
+    "fields": {
+      "name": "Prey for the Devil",
+      "image": "pics/prey.jpg",
+      "date": "2022-10-23",
+      "duration": "2 Hrs 13 Mins",
+      "type": "Horror Thriller",
+      "language": "English",
+      "rating": "7/10 IMDB",
+      "cast": "Jacqueline Byers, Colin Salmon, Christian Navarro, Lisa Palfrey, and Virginia Madsen.",
+      "trailer": "https://www.youtube.com/watch?v=u_jJiZ2oZgs",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.films",
+    "pk": 14,
+    "fields": {
+      "name": "Paradise City",
+      "image": "pics/paradia.jpg",
+      "date": "2022-10-11",
+      "duration": "2 Hrs 06 Mins",
+      "type": "Crime Action Thriller",
+      "language": "English",
+      "rating": "8.5/10 IMDB",
+      "cast": "John Travolta, Bruce Willis, Stephen Dorff, Blake Jenner, and Praya Lundberg",
+      "trailer": "https://www.youtube.com/watch?v=1XyZRWyl5lA",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.films",
+    "pk": 15,
+    "fields": {
+      "name": "Avatar",
+      "image": "pics/tar.jpg",
+      "date": "2022-12-19",
+      "duration": "2 Hrs 12 Mins",
+      "type": "Action Adventure Fantasy Science Fiction",
+      "language": "English",
+      "rating": "7.8/10 IMDB",
+      "cast": "Sam Worthington, Zoe Saldana, Stephen Lang, Michelle Rodriguez and Sigourney Weaver",
+      "trailer": "https://www.youtube.com/watch?v=5PSNL1qE6VY",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.films",
+    "pk": 16,
+    "fields": {
+      "name": "Detective Knight: Rogue",
+      "image": "pics/rogue.jpg",
+      "date": "2022-10-21",
+      "duration": "2 Hrs 02 Mins",
+      "type": "Action Crime",
+      "language": "English",
+      "rating": "7/10 IMDB",
+      "cast": "Bruce Willis, Jimmy Jean-Louis, Lochlyn Munro, and Beau Mirchoff",
+      "trailer": "https://www.youtube.com/watch?v=0vJXSQoysXE",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.films",
+    "pk": 17,
+    "fields": {
+      "name": "Fall",
+      "image": "pics/dall.jpg",
+      "date": "2022-08-11",
+      "duration": "2 Hrs 34 Mins",
+      "type": "Thriller",
+      "language": "English",
+      "rating": "8/10 IMDB",
+      "cast": "Jonathan Frank Scott, Grace Fulton Becky, Darrell Denis, and Evie Man",
+      "trailer": "https://www.youtube.com/watch?v=Doxuz6Ke210",
+      "up": false,
+      "price": 10
+    }
+  },
+  {
+    "model": "UWEflix.films",
+    "pk": 18,
+    "fields": {
+      "name": "Emancipation",
+      "image": "pics/emani.jpg",
+      "date": "2022-12-02",
+      "duration": "2 Hrs 10 Mins",
+      "type": "History Drama Thriller Action",
+      "language": "English",
+      "rating": "8.8/10 IMDB",
+      "cast": "Will Smith, Ben Foster, Charmaine Bingwa, Mustafa Shakir and Gilbert Owuor",
+      "trailer": "https://www.youtube.com/watch?v=wafyhTpWpUs",
+      "up": false,
+      "price": 10
+    }
+  }
+
+]

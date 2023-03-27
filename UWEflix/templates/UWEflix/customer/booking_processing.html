@@ -5,15 +5,141 @@
 
 
 
+<main class="page payment-page" style="margin-top: 50px;">
+
+    <section class="payment-form dark">
+
+        <div class="container">
+
+            <div class="block-heading">
+                <h2>Payment</h2>
+            </div>
 
 
-<!-- <div class="d-flex justify-content-center"
-    style="margin-bottom:15px; margin-top: 125px;font-weight: bolder;text-transform:uppercase">
-    <span class="fs-1"></span>
-</div> -->
+            <form action="/film_details/{{details.id}}/booking/{{details.pk}}/tickets/{{details.pi}}/booking_processing"
+                method="post"> {% csrf_token %}
 
 
-<main class="page payment-page" style="margin-bottom:15px; margin-top: 100px;">
+                <div class="products">
+                    <h3 class="title">Checkout</h3>
+                    <div class="item">
+
+
+                        <p class="item-name"
+                            style="font-size: 20px; display: flex ; justify-content: center ; align-items: center;">
+                            {{details.film}}</p>
+
+                        {% if details.total.Adult > 0 %}
+
+                        <span class="price">{{details.total.Adult}} X £10</span>
+                        <p class="item-description">Film Type :- Adult </p>
+
+                        {% endif %}
+                        {% if details.total.Student > 0 %}
+
+                        <span class="price">{{details.total.Student}} X £7</span>
+                        <!-- <p class="item-name">{{details.film}}</p> -->
+                        <p class="item-description">Film Type :- Student </p>
+
+                        {% endif %}
+
+                        {% if details.total.Children > 0 %}
+
+                        <span class="price">{{details.total.Children}} X £8</span>
+                        <!-- <p class="item-name">{{details.film}}</p> -->
+                        <p class="item-description">Film Type :- Children </p>
+
+                        {% endif %}
+
+
+                    </div>
+                    <div class="total">Total<span class="price">£ {{details.total.total}}</span></div>
+
+                </div>
+
+                <div class="card-details">
+
+
+                    <div class="row">
+
+                        <div class="mb-3 col-sm-7" style="width: 100%;">
+
+                            <label for="email">Email</label>
+                            <input id="email" name="name" type="email" class="form-control"
+                                placeholder="{{details.email}}" aria-label="Email" aria-describedby="basic-addon1" pattern=".+@ac\.uk"
+                                disabled>
+
+                                <!-- <div class="total">Email<span class="price">{{details.email}}</span></div> -->
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+                <div class="card-details">
+                    <h3 class="title">Credit Card Details</h3>
+
+                    <div class="row">
+
+                        <div class="mb-3 col-sm-7">
+
+                            <label for="card-holder">Card Holder</label>
+                            <input id="card-holder" name="name" type="text" class="form-control"
+                                placeholder="Card Holder" aria-label="Card Holder" aria-describedby="basic-addon1"
+                                required>
+
+
+                        </div>
+
+                        <div class="mb-3 col-sm-5">
+                            <label for="">Expiration Date</label>
+                            <div class="input-group expiration-date">
+                                <input type="text" name="exp_date" class="form-control" placeholder="MM" aria-label="MM"
+                                    aria-describedby="basic-addon1" min="01" max="12" minlength="2" maxlength="2"
+                                    required>
+                                <span style="margin: 5px 10px 0px 10px;">/</span>
+                                <input type="text" name="exp_year" class="form-control" placeholder="YY" aria-label="YY"
+                                    aria-describedby="basic-addon1" min="01" max="99" minlength="2" maxlength="2"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col-sm-8">
+                            <label for="card-number">Card Number</label>
+                            <input id="card-number" name="num" type="text" class="form-control"
+                                placeholder="Card Number" aria-label="Card Holder" aria-describedby="basic-addon1"
+                                minlength="16" maxlength="16" required>
+                        </div>
+                        <div class="mb-3 col-sm-4">
+                            <label for="cvc">CVC</label>
+                            <input id="cvc" name="cvc" type="text" class="form-control" placeholder="CVC"
+                                aria-label="Card Holder" aria-describedby="basic-addon1" minlength="3" maxlength="3"
+                                required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Proceed</button>
+
+
+                    </div>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- <main class="page payment-page" style="margin-bottom:15px; margin-top: 100px;">
     <section class="payment-form dark">
         <div class="container">
             <div class="block-heading">
@@ -27,11 +153,7 @@
                         <p class="item-name">Product 1</p>
                         <p class="item-description">Lorem ipsum dolor sit amet</p>
                     </div>
-                    <div class="item">
-                        <span class="price">$120</span>
-                        <p class="item-name">Product 2</p>
-                        <p class="item-description">Lorem ipsum dolor sit amet</p>
-                    </div>
+
                     <div class="total">Total<span class="price">$320</span></div>
                 </div>
                 <div class="card-details">
@@ -70,7 +192,7 @@
             </form>
         </div>
     </section>
-</main>
+</main> -->
 
 
 
