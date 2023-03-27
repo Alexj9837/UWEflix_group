@@ -1,0 +1,112 @@
+[
+  {
+    "model": "UWEflix.show",
+    "pk": 1,
+    "fields": {
+      "film": 10,
+      "screen": 1,
+      "date": "2023-03-17",
+      "time": "13:22:15"
+    }
+  },
+  {
+    "model": "UWEflix.show",
+    "pk": 2,
+    "fields": {
+      "film": 10,
+      "screen": 1,
+      "date": "2023-03-17",
+      "time": "15:28:26"
+    }
+  },
+  {
+    "model": "UWEflix.show",
+    "pk": 3,
+    "fields": {
+      "film": 11,
+      "screen": 1,
+      "date": "2023-03-17",
+      "time": "15:48:33"
+    }
+  },
+  {
+    "model": "UWEflix.show",
+    "pk": 4,
+    "fields": {
+      "film": 10,
+      "screen": 1,
+      "date": "2023-03-18",
+      "time": "06:36:34"
+    }
+  },
+  {
+    "model": "UWEflix.show",
+    "pk": 5,
+    "fields": {
+      "film": 12,
+      "screen": 1,
+      "date": "2023-03-18",
+      "time": "06:36:34"
+    }
+  },
+  {
+    "model": "UWEflix.show",
+    "pk": 6,
+    "fields": {
+      "film": 13,
+      "screen": 1,
+      "date": "2023-03-18",
+      "time": "06:36:34"
+    }
+  },
+  {
+    "model": "UWEflix.show",
+    "pk": 7,
+    "fields": {
+      "film": 14,
+      "screen": 1,
+      "date": "2023-03-18",
+      "time": "06:36:34"
+    }
+  },
+  {
+    "model": "UWEflix.show",
+    "pk": 8,
+    "fields": {
+      "film": 15,
+      "screen": 1,
+      "date": "2023-03-18",
+      "time": "06:36:34"
+    }
+  },
+  {
+    "model": "UWEflix.show",
+    "pk": 9,
+    "fields": {
+      "film": 16,
+      "screen": 1,
+      "date": "2023-03-18",
+      "time": "06:36:34"
+    }
+  },
+  {
+    "model": "UWEflix.show",
+    "pk": 10,
+    "fields": {
+      "film": 17,
+      "screen": 1,
+      "date": "2023-03-18",
+      "time": "06:36:34"
+    }
+  },
+  {
+    "model": "UWEflix.show",
+    "pk": 11,
+    "fields": {
+      "film": 18,
+      "screen": 1,
+      "date": "2023-03-18",
+      "time": "06:36:34"
+    }
+  }
+]

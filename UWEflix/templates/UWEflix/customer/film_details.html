@@ -6,8 +6,21 @@
     <span class="fs-2">MOVIE NAME : <span style="color : blue; font-weight: 500; ">{{d.name}}</span></span>
 </div>
 
+<div class=" toast-container position-absolute  top-0 end-0 p-3 toast align-items-center  fade " role="alert"
+    aria-live="assertive" aria-atomic="true" style="backdrop-filter: blur(20px)">
+    <div class="d-flex">
+        <div class="toast-body">
+            The Show is Fully Book <br>
+        <a href="{% url 'home' %}" >back to home page</a>
+        
+    </div>
+        
+    </div>
+    {% comment %} <button  class="button" style="border: 0px; width: auto; background: green;" onclick="window.location.href='{% url 'home' %}';" >
+            BACK TO HOME PAGE </button> {% endcomment %}
+</div>
 
-<div style="padding: 30px 300px 30px 300px;">
+<div style="padding: 0px 0px 0px 0px;">
 
 
     <table class="table table-bordered">
@@ -40,7 +53,7 @@
             </tr>
             <tr>
                 <th >Ticket Price</th>
-                <td>£{{d.price}}</td>
+                <td>£ {{d.price}}</td>
             </tr>
             <tr>
                 <th >Movie Trailer</th>
@@ -53,9 +66,23 @@
     
 </div>
 
-<div class="d-flex justify-content-center " style="padding-bottom: 15px;">
 
-    <button type="button" class=" btn btn-info" onclick="window.location.href = '/booking';">Book Now</button>
+<div class="d-flex justify-content-center align-items-center m-4">
+    <button id="house" class="button" style="border: 0px;" onclick="window.location.href = `${window.location.href}booking/{{id}}`;" data-dis="{{dis}}" >
+        BOOK NOW
+        <div class="justify-content-center align-items-center">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-up-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z" />
+            </svg>
+
+        </div>
+    </button>
+
 </div>
+
+
 
 {% endblock content %}
