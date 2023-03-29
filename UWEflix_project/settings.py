@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'UWEflix',
     'crispy_forms',
-    "migration_fixer"
 ]
 
 MIDDLEWARE = [
