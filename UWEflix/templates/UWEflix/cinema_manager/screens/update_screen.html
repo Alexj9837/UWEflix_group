@@ -1,9 +1,6 @@
 {%  extends 'UWEflix/base/base.html'%}
 
-
-
 {% block content %}
-
 
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
@@ -12,13 +9,13 @@
       <label class="col-sm-2 col-form-label" for="screen_number">screen_number: </label>
       <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
          id="screen_number" type="text"
-         name="screen_number" value="{{ instance.screen_number }}">
+         name="screen_number" value="{{ screen.screen_number }}">
   </div>
   <div class="form-group row">
       <label class="col-sm-2 col-form-label" for="capacity">capacity: </label>
       <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
          id="capacity" type="text"
-         name="capacity" value="{{ instance.capacity }}">
+         name="capacity" value="{{ screen.capacity }}">
   </div>
   <input type="submit" value="Save" class="btn btn-primary">
 </form>

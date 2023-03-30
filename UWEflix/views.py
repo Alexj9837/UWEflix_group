@@ -29,16 +29,16 @@ def home(request):
 #             form = ClubForm()
 #     return render(request, "UWEflix/cinema_manager/clubs/create_club.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
 
-# def update_club(request, pk):
-#     club = Club.objects.get(pk=pk)
-#     form = ClubForm(request.POST, instance=club)
-#     if request.method == "POST":
-#         if form.is_valid():
-#             club = form.save(commit=False)
-#             club.save()
-#             return redirect("view_club")
+def update_club(request, pk):
+    club = Club.objects.get(pk=pk)
+    form = ClubForm(request.POST, instance=club)
+    if request.method == "POST":
+        if form.is_valid():
+            club = form.save(commit=False)
+            club.save()
+            return redirect("view_club")
 
-#     return render(request, 'UWEflix/cinema_manager/clubs/update_club.html',{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html", "form": form, "club": club})
+    return render(request, 'UWEflix/cinema_manager/clubs/update_club.html',{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html", "form": form, "club": club})
 
 # def delete_club(request, pk):
 #     if request.method == 'POST':
@@ -69,15 +69,15 @@ def home(request):
 #             form = filmForm()
 #     return render(request, "UWEflix/cinema_manager/films/create_film.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
 
-# def update_film(request, pk):
-#     film = Film.objects.get(pk=pk)
-#     form = filmForm(request.POST, instance=film)
-#     if request.method == "POST":
-#         if form.is_valid():
-#             film = form.save(commit=False)
-#             film.save()
-#             return redirect("view_film")
-#     return render(request, "UWEflix/cinema_manager/films/update_film.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form, "film": film})
+def update_film(request, pk):
+    film = Film.objects.get(pk=pk)
+    form = filmForm(request.POST, instance=film)
+    if request.method == "POST":
+        if form.is_valid():
+            film = form.save(commit=False)
+            film.save()
+            return redirect("view_film")
+    return render(request, "UWEflix/cinema_manager/films/update_film.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form, "film": film})
 
 # def delete_film(request, pk):
 #     if request.method == 'POST':
@@ -107,15 +107,15 @@ def home(request):
 #             form = screenForm()
 #     return render(request, "UWEflix/cinema_manager/screens/create_screen.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form} )
 
-# def update_screen(request, pk):
-#     screen = Screen.objects.get(pk=pk)
-#     form = screenForm(request.POST, instance=screen)
-#     if request.method == "POST":
-#         if form.is_valid():
-#             screen = form.save(commit=False)
-#             screen.save()
-#             return redirect("view_screen")
-#     return render(request, "UWEflix/cinema_manager/screens/update_screen.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form, "screen": screen})
+def update_screen(request, pk):
+    screen = Screen.objects.get(pk=pk)
+    form = screenForm(request.POST, instance=screen)
+    if request.method == "POST":
+        if form.is_valid():
+            screen = form.save(commit=False)
+            screen.save()
+            return redirect("view_screen")
+    return render(request, "UWEflix/cinema_manager/screens/update_screen.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form, "screen": screen})
 
 # def delete_screen(request, pk):
 #     if request.method == 'POST':
@@ -146,15 +146,15 @@ def home(request):
 #             form = showForm()
 #     return render(request, "UWEflix/cinema_manager/showings/create_showing.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form":form, "films" :films, "screens":screens})
 
-# def update_showing(request,pk):
-#     show = Show.objects.get(pk=pk)
-#     form = showForm(request.POST, instance=show)
-#     if request.method == "POST":
-#         if form.is_valid():
-#             show = form.save(commit=False)
-#             show.save()
-#             return redirect("view_showing")
-#     return render(request, "UWEflix/cinema_manager/showings/update_showing.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form, "show": show})
+def update_showing(request,pk):
+    show = Show.objects.get(pk=pk)
+    form = showForm(request.POST, instance=show)
+    if request.method == "POST":
+        if form.is_valid():
+            show = form.save(commit=False)
+            show.save()
+            return redirect("view_showing")
+    return render(request, "UWEflix/cinema_manager/showings/update_showing.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html","form": form, "show": show})
 
 # def delete_showing(request,pk):
 #     if request.method == 'POST':
@@ -197,28 +197,28 @@ def CRUD_view(request, model_class, template_name):
     }
     return render(request, template_name, context)
 
-def CRUD_update(request, pk, model_class, form_class, template_name, redirect_url):
-    instance = model_class.objects.get(pk=pk)
-    form = form_class(request.POST or None, instance=instance)
+# def CRUD_update(request, pk, model_class, form_class, template_name, redirect_url):
+#     instance = model_class.objects.get(pk=pk)
+#     form = form_class(request.POST or None, instance=instance)
 
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            return redirect(redirect_url)
+#     if request.method == "POST":
+#         if form.is_valid():
+#             form.save()
+#             return redirect(redirect_url)
 
-    context = {
-        "form": form,
-        "footer_content": "UWEflix/base/footer_base.html",
-        "header_content": "UWEflix/cinema_manager/header_cinema_manager.html",
-        "instance": instance,
-    }
-    return render(request, template_name, context)
+#     context = {
+#         "form": form,
+#         "footer_content": "UWEflix/base/footer_base.html",
+#         "header_content": "UWEflix/cinema_manager/header_cinema_manager.html",
+#         "instance": instance,
+#     }
+#     return render(request, template_name, context)
 
 def CRUD_delete(request, pk, model_class, redirect_url):
     if request.method == "POST":
-        instance = model_class.objects.get(pk=pk)
-        instance.delete()
-        return redirect(redirect_url)
+            instance = model_class.objects.get(pk=pk)
+            instance.delete()
+            return redirect(redirect_url)
 
     context = {
         "footer_content": "UWEflix/base/footer_base.html",
@@ -232,8 +232,8 @@ def create_club(request):
 def view_club(request):
     return CRUD_view(request, Club, "UWEflix/cinema_manager/clubs/view_club.html")
 
-def update_club(request, pk):
-    return CRUD_update(request, pk, Club, ClubForm, "UWEflix/cinema_manager/clubs/update_club.html", "view_club")
+# def update_club(request, pk):
+#     return CRUD_update(request, pk, Club, ClubForm, "UWEflix/cinema_manager/clubs/update_club.html", "view_club")
 
 def delete_club(request, pk):
     return CRUD_delete(request, pk, Club, "view_club")
@@ -244,8 +244,8 @@ def create_film(request):
 def view_film(request):
     return CRUD_view(request, Film, "UWEflix/cinema_manager/films/view_film.html")
 
-def update_film(request, pk):
-    return CRUD_update(request, pk, Film, filmForm, "UWEflix/cinema_manager/films/update_film.html", "view_film")
+# def update_film(request, pk):
+#     return CRUD_update(request, pk, Film, filmForm, "UWEflix/cinema_manager/films/update_film.html", "view_film")
 
 def delete_film(request, pk):
     return CRUD_delete(request, pk, Film, "view_film")
@@ -256,8 +256,8 @@ def create_screen(request):
 def view_screen(request):
     return CRUD_view(request, Screen, "UWEflix/cinema_manager/screens/view_screen.html")
 
-def update_screen(request, pk):
-    return CRUD_update(request, pk, Screen,screenForm, "UWEflix/cinema_manager/update.html", "view_screen")
+# def update_screen(request, pk):
+#     return CRUD_update(request, pk, Screen,screenForm, "UWEflix/cinema_manager/update.html", "view_screen")
 
 def delete_screen(request, pk):
     return CRUD_delete(request, pk, Screen, "view_screen")
@@ -268,8 +268,8 @@ def create_showing(request):
 def view_showing(request):
     return CRUD_view(request, Show, "UWEflix/cinema_manager/showings/view_showing.html")
 
-def update_showing(request, pk):
-    return CRUD_update(request, pk, Show, showForm, "UWEflix/cinema_manager/showings/update_showing.html", "view_showing")
+# def update_showing(request, pk):
+#     return CRUD_update(request, pk, Show, showForm, "UWEflix/cinema_manager/showings/update_showing.html", "view_showing")
 
 def delete_showing(request, pk):
     return CRUD_delete(request, pk, Show, "view_showing")
