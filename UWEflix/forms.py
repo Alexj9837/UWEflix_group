@@ -74,14 +74,7 @@ class ClubForm(forms.ModelForm):
         ]
 
 
-# class filmForm(forms.ModelForm):
-#     class Meta:
-#         model = Film
-#         fields = [
-#             "film_title",
-#             "age_rating",
-#             "description",
-#         ]
+
 
 
 class screenForm(forms.ModelForm):
