@@ -1,0 +1,29 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block title %}
+Book Show
+{% endblock %}
+
+{% block content %}
+<div class="card mt-2 p-4" style="color: green">
+    <h1>{{show.film.title}}</h1>
+    <h3>Show date and time: {{show.date}} {{show.time}}</h3>
+
+    <h3>Duration: {{show.film.duration}}</h3>
+    <h3>About: </h3>
+    <h6>{{show.film.trailer_description}}</h6>
+</div>
+
+<div class="card mt-2 p-4">
+    <h2>Book Show: </h2>
+    <h5>Price per ticket: <span style="font-size: 25px;color: rgb(0, 129, 0);"> 7$</span><span class="text-sm" style="text-decoration: line-through;color: rgb(255, 112, 112);font-size: 18px;">10$</span></h5>
+    <form action="{% url 'book_tickets' %}" method="post">
+        {% csrf_token %}
+        <label for="number_of_ticket"><h6>Number of Tickets: </h6></label>
+        <input type="number" name="number_of_tickets" id="number_of_ticket" min=10>
+        <br>
+        <input type="hidden" name="show" value={{show.id}}>
+        <input type="submit" value="submit" class="btn btn-danger">
+    </form>
+</div>
+{% endblock %}

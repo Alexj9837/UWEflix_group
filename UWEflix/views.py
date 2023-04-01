@@ -12,8 +12,6 @@ from .models.booking import Booking
 # from .forms import bookingForm
 from django.template.defaultfilters import date
 from datetime import datetime
-
-
 # Create your views here.
 
 def home(request):
@@ -215,6 +213,20 @@ def delete_showing(request, pk):
 # ######### Bookings ##################################
 # #####################################################
 
+def login(request):
+    form = LoginForm(request.POST or None)
+    
+    if request.method == "POST":
+        #Logic for logging in
+        return redirect('home')
+    else:
+        return render(request, "UWEflix/cinema_booking_system/login.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html","form":form})
+    
+def book_tickets(request):
+    if request.method == "POST":
+        return render(request, "UWEflix/cinema_booking_system/booking_success.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html"})
+    else:
+        return render(request, "UWEflix/cinema_booking_system/book_show.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html"})
 def booking(request,id,pk):
 
 
@@ -323,11 +335,16 @@ def bookingProcessing(request,id,pk,pi):
 
 
 
+def manage_account(request):
+    form = ClubRegistrationForm(request.POST or None)
+    if request.method == "POST":
+        #update request for account
+        return redirect('home')
+    else:
+        return render(request, "UWEflix/cinema_booking_system/manage_account.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html","form": form})
 
 def booking_confirm(request,id,pk,pi):
     return render(request, 'UWEflix/customer/booking_confirm.html',{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html",})
-
-
 
 #############################################################
 ## dosent work / unsused ####################################
