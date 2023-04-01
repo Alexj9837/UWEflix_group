@@ -1,11 +1,11 @@
 from django.db import models
 from UWEflix.models.screen import Screen
-from UWEflix.models.film import films
+from UWEflix.models.film import Film
 
 class Show(models.Model):
     # Fields for the show model
     show_id = models.AutoField(primary_key=True)
-    film = models.ForeignKey(films, on_delete=models.CASCADE)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE)
     screen = models.ForeignKey(Screen, on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()

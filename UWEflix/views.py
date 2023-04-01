@@ -17,7 +17,7 @@ from datetime import datetime
 # Create your views here.
 
 def home(request):
-    movie = films.objects.all()
+    movie = Film.objects.all()
     return render(request, "UWEflix/customer/home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", "movie" : movie})
 
 def upcoming(request):
@@ -25,7 +25,7 @@ def upcoming(request):
     return render(request,"UWEflix/customer/upcoming.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html","movie":upcome})
 
 def film_details(request, id):
-    filmdetails = films.objects.get(id=id)
+    filmdetails = Film.objects.get(id=id)
     show = Show.objects.filter(film=filmdetails)[0].show_id
     shows = Show.objects.filter(film=filmdetails)
  
@@ -354,7 +354,7 @@ def delete_showing(request, pk):
 def booking(request,id,pk):
 
 
-    film = films.objects.get(id=id)
+    film = Film.objects.get(id=id)
     allShow = Show.objects.filter(film=film)
     show = Show.objects.get(show_id=pk)
     allShowDetails = {}
@@ -393,7 +393,7 @@ def booking(request,id,pk):
 def ticketsPurchase(request,id,pk):
 
     show = Show.objects.get(show_id=pk)
-    film = films.objects.get(id=id)
+    film = Film.objects.get(id=id)
     timing = Show.objects.filter(film=film)
     bookings = Booking.objects.filter(show=show)
 
@@ -427,7 +427,7 @@ def ticketsPurchase(request,id,pk):
 def bookingProcessing(request,id,pk,pi):
 
 
-    film = films.objects.get(id=id)
+    film = Film.objects.get(id=id)
     booking = Booking.objects.get(booking_id=pi)
 
     total = { "Adult" : booking.quantity_adult , "Children" : booking.quantity_children , "Student" : booking.quantity_student, "total" : booking.quantity_adult * 10 + booking.quantity_children * 8 + booking.quantity_student * 7 }
