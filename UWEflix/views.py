@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.template import loader
 from UWEflix.forms import *
 from UWEflix.models import *
-from .models import upcoming
+from .models.upcoming import upcomings
 from .models.booking import Booking
 # from .forms import bookingForm
 from django.template.defaultfilters import date
@@ -21,7 +21,7 @@ def home(request):
     return render(request, "UWEflix/customer/home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", "movie" : movie})
 
 def upcoming(request):
-    upcome = upcoming.upcomings.objects.all()
+    upcome = upcomings.objects.all()
     return render(request,"UWEflix/customer/upcoming.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html","movie":upcome})
 
 def film_details(request, id):
@@ -66,7 +66,7 @@ def film_details(request, id):
 
 
 def upcoming_details(request, id):
-    upcomedetails = upcoming.upcomings.objects.get(id=id)
+    upcomedetails = upcomings.objects.get(id=id)
     return render(request, "UWEflix/customer/upcoming_details.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html",'d': upcomedetails})
 
 def create_club(request):
