@@ -1,6 +1,5 @@
 from django import forms
-from UWEflix.models import Booking, Club, Screen, Show, Film
-
+from .models import *
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
@@ -74,7 +73,16 @@ class ClubForm(forms.ModelForm):
         ]
 
 
+class filmForm(forms.ModelForm):
+    class Meta:
+        model = Film
+        fields = [
+            "film_title",
+            "age_rating",
+            "description",
+            "duration",
 
+        ]
 
 
 class screenForm(forms.ModelForm):
@@ -82,6 +90,7 @@ class screenForm(forms.ModelForm):
         model = Screen
         fields = [
             "screen_number",
+            "capacity",
         ]
 
 
@@ -91,8 +100,8 @@ class showForm(forms.ModelForm):
         fields = [
             "date",
             "time",
+            "film"
         ]
-
 
 class ClubRegistrationForm(forms.Form):
     name = forms.CharField(label='Club name', max_length=255)

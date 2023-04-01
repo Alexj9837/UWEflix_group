@@ -1,0 +1,44 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block content %}
+  <h2>Films</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Film title</th>
+        <th>Age rating</th>
+        <th>Duration</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for film in view_film_data %}
+        <tr>
+          <td>{{ film.film_title }}</td>
+          <td>{{ film.age_rating }}</td>
+          <td>{{ film.duration }}</td>
+          <td>{{ film.description }}</td>
+          <td>
+            <form method="POST" action="{% url 'update_film' film.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value="{{ film.pk }}">
+            <button type="submit" class="btn btn-primary">Update Film</button>
+          </form>
+          </td>
+          <td>
+            <form method="POST" action="{% url 'delete_film' film.id%}">
+              {% csrf_token %}
+              <input type="hidden" name="pk" value="{{ film.pk }}">
+              <button type="submit" class="btn btn-danger">Delete Film</button>
+            </form>
+          </td> 
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div>
+    <a class="btn btn-primary" href="{% url 'create_film' %}">
+      Create a new Film
+    </a>
+  </div>
+{% endblock %}
