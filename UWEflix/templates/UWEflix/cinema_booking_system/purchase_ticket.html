@@ -1,0 +1,11 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block title %}Purchase Ticket{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url 'purchase_ticket' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

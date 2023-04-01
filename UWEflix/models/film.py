@@ -1,6 +1,6 @@
 from django.db import models
 
-class films(models.Model):
+class Film(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to="pics", default="default.png")
     date = models.DateField()

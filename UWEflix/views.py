@@ -5,15 +5,8 @@ from django.shortcuts import redirect
 from django.views.generic import ListView
 from django.http import HttpResponse
 from django.template import loader
-from UWEflix.forms import ClubForm
-from .models.film import  films 
-from .models.show import  Show 
-from .models.upcoming import  upcomings 
-from .models.booking import Booking
-# from .forms import bookingForm
-from django.template.defaultfilters import date
-from datetime import datetime
-
+from UWEflix.forms import ClubForm, LoginForm, ClubRegistrationForm
+from UWEflix.models import Film, upcomings
 
 # Create your views here.
 
@@ -108,6 +101,20 @@ def Club_list_view(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
 
+def login(request):
+    form = LoginForm(request.POST or None)
+    
+    if request.method == "POST":
+        #Logic for logging in
+        return redirect('home')
+    else:
+        return render(request, "UWEflix/cinema_booking_system/login.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html","form":form})
+    
+def book_tickets(request):
+    if request.method == "POST":
+        return render(request, "UWEflix/cinema_booking_system/booking_success.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html"})
+    else:
+        return render(request, "UWEflix/cinema_booking_system/book_show.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html"})
 def booking(request,id,pk):
 
 
@@ -216,6 +223,11 @@ def bookingProcessing(request,id,pk,pi):
 
 
 
+def manage_account(request):
+    form = ClubRegistrationForm(request.POST or None)
+    if request.method == "POST":
+        #update request for account
+        return redirect('home')
+    else:
+        return render(request, "UWEflix/cinema_booking_system/manage_account.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html","form": form})
 
-def booking_confirm(request,id,pk,pi):
-    return render(request, 'UWEflix/customer/booking_confirm.html',{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html",})

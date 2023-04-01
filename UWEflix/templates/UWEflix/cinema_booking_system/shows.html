@@ -1,0 +1,29 @@
+{% extends 'UWEflix/base/base.html' %} 
+{% block title %} Shows {% endblock %} 
+{% block content %}
+<div class="p-2">
+	<h2>Available Shows:</h2>
+	<form action="{% url 'get_shows' %}" method="post">
+		{% csrf_token %}
+		<label for="date">Enter date for filtering: </label>
+		<input type="date" name="date" id="date" />
+		<input type="submit" value="submit" class="btn btn-primary" />
+	</form>
+
+	<div class="mt-2 p-2 d-flex">
+		{% for s in shows %}
+		<div class="card m-2" style="width: 18rem">
+			<div class="card-body">
+				<h5 class="card-title"><a href="{% url 'select_tickets' s.id %}">{{s.film.title}}</a></h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+					Date: {{s.date}}
+				</h6>
+				<h6 class="card-subtitle mb-2 text-muted">
+					Timing: {{s.time}}
+				</h6>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
