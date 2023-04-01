@@ -1,6 +1,6 @@
 from django.db import models
 
-class films(models.Model):
+class upcomings(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to="pics", default="default.png")
     date = models.DateField()
@@ -12,9 +12,3 @@ class films(models.Model):
     trailer = models.CharField(max_length=100)
     up = models.BooleanField(default=False)
     price = models.IntegerField(default=0)
-
-
-
-
-
-

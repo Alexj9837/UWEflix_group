@@ -1,6 +1,7 @@
 from django.urls import path
 from UWEflix import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
 
@@ -29,4 +30,16 @@ urlpatterns = [
     path("view_showing",views.view_showing,name="view_showing"),
     path("view_screen",views.view_screen,name="view_screen"), 
     path("view_club",views.view_club,name="view_club"),
+    
+    path("upcoming", views.upcoming, name="upcoming"),
+    path("film_details/<int:id>/", views.film_details, name="film_details"),
+    path("film_details/<int:id>/booking/<int:pk>/", views.booking, name="booking"),
+    path("film_details/<int:id>/booking/<int:pk>/tickets", views.ticketsPurchase, name="tickets_purchase"),
+    path("film_details/<int:id>/booking/<int:pk>/tickets/<int:pi>/booking_processing", views.bookingProcessing, name="booking_processing"),
+    path("film_details/<int:id>/booking/<int:pk>/tickets/<int:pi>/booking_processing/booking_confirm", views.booking_confirm, name="booking_confirm"),
+    path("upcoming_details/<int:id>/", views.upcoming_details, name="upcoming_details"),
+
+
 ]
+urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+

@@ -1,15 +1,9 @@
 from django import forms
-from .models import Booking,Club,Film,Screen,Show
+from .models import *
+from .models.booking import Booking
 
-class bookingForm(forms.ModelForm):
-    class Meta:
-        model = Booking
-        fields = [
-            "seat_number",
-            "ticket_type",
-            "quantity",
-            "card_number",
-        ]
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit, Row, Column
 
 
 class ClubForm(forms.ModelForm):

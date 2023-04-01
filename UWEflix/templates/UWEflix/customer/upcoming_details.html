@@ -1,0 +1,71 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center" style="margin-bottom:15px; margin-top: 125px;font-weight: bolder;">
+    <span class="fs-2">MOVIE NAME : <span style="color : blue; font-weight: 500; ">{{d.name}}</span></span>
+</div>
+
+
+<div style="padding: 30px 300px 30px 300px;">
+
+
+    <table class="table table-bordered">
+
+        <!-- <thead>
+            <tr>
+                <th scope="col">Movie Type</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead> -->
+        <tbody>
+
+            <!-- <td>{{d.name}}</td> -->
+
+            <tr>
+                <th>Ṃovie Type</th>
+                <td>{{d.type}}</td>
+            </tr>
+            <tr>
+                <th>Released Date</th>
+                <td>{{d.date}}</td>
+            </tr>
+            <tr>
+                <th>Movie Language</th>
+                <td>{{d.language}}</td>
+            </tr>
+            <tr>
+                <th>Rating</th>
+                <td>{{d.rating}}</td>
+            </tr>
+            <tr>
+                <th>Movie Runtime</th>
+                <td>{{d.duration}}</td>
+            </tr>
+            <tr>
+                <th>Lead Cast</th>
+                <td>{{d.cast}}</td>
+            </tr>
+            <tr>
+                <th>Ticket Price</th>
+                <td>£{{d.price}}</td>
+            </tr>
+            <tr>
+                <th>Movie Trailer</th>
+                <td><a href="{{d.trailer}}">Click Here to Watch Trailer now</a></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+</div>
+
+<div class="d-flex justify-content-center " style="padding-bottom: 15px;">
+
+    <button type="button" class=" btn btn-info">Releasing SOON!</button>
+</div>
+
+{% endblock content %}
