@@ -12,7 +12,30 @@ from .models.booking import Booking
 # from .forms import bookingForm
 from django.template.defaultfilters import date
 from datetime import datetime
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
+
+
 # Create your views here.
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("home")
+        else:
+            return HttpResponse("User not valid")
+    else:
+        form = LoginForm()
+        return render(request, "UWEflix/base/login.html", {"form": form})
+    
+
+
+
+
 
 def home(request):
     movie = Film.objects.all()

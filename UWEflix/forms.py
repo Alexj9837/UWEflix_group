@@ -1,8 +1,13 @@
 from django import forms
 from .models import *
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Column
+from crispy_forms.layout import Layout, Submit, Row, Colum
+from .models.booking import Booking
+from django.contrib.auth.forms import AuthenticationForm
 
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(max_length=100, widget=forms.TextInput())
+    password = forms.CharField(widget=forms.PasswordInput())
 
 class ClubForm(forms.ModelForm):
     class Meta:
