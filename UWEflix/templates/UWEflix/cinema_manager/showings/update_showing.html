@@ -7,33 +7,21 @@
   {% csrf_token %}
   {{form.errors}}
   <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="show_id">show_id: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="show_id" type="text"
-         name="show_id" value="{{ show.show_id }}">
+      {{show.film}}
   </div>
   <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="film">film: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="film" type="text"
-         name="film" value="{{ show.film }}">
-  </div>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="screen">screen: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="screen" type="text"
-         name="screen" value="{{ show.screen }}">
+      {{show.screen}}
   </div>
   <div class="form-group row">
       <label class="col-sm-2 col-form-label" for="date">date: </label>
       <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="date" type="text"
+         id="date" type="date"
          name="date" value="{{ show.date }}">
   </div>
   <div class="form-group row">
       <label class="col-sm-2 col-form-label" for="time">time: </label>
       <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="time" type="text"
+         id="time" type="datetime"
          name="time" value="{{ show.time }}">
   </div>
   <input type="submit" value="Save" class="btn btn-primary">

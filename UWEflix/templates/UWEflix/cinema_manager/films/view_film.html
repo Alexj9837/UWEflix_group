@@ -5,19 +5,33 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Film title</th>
-        <th>Age rating</th>
-        <th>Duration</th>
-        <th>Description</th>
+        <th>Film name</th>
+        <th>image</th>
+        <th>date</th>
+        <th>duration</th>
+        <th>type</th>
+        <th>language</th>
+        <th>rating</th>
+        <th>cast</th>
+        <th>trailer</th>
+        <th>up</th>
+        <th>price</th>
       </tr>
     </thead>
     <tbody>
       {% for film in view_film_data %}
         <tr>
-          <td>{{ film.film_title }}</td>
-          <td>{{ film.age_rating }}</td>
+          <td>{{ film.name }}</td>
+          <td>{{ film.image }}</td>
+          <td>{{ film.date }}</td>
           <td>{{ film.duration }}</td>
-          <td>{{ film.description }}</td>
+          <td>{{ film.type }}</td>
+          <td>{{ film.language }}</td>
+          <td>{{ film.rating }}</td>
+          <td>{{ film.cast }}</td>
+          <td>{{ film.trailer }}</td>
+          <td>{{ film.up }}</td>
+          <td>{{ film.price }}</td>
           <td>
             <form method="POST" action="{% url 'update_film' film.id %}">
             {% csrf_token %}

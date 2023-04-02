@@ -26,10 +26,17 @@ class filmForm(forms.ModelForm):
     class Meta:
         model = Film
         fields = [
-            "film_title",
-            "age_rating",
-            "description",
+            "name",
+            "image",
+            "date",
             "duration",
+            "type",
+            "language",
+            "rating",
+            "cast",
+            "trailer",
+            "up",
+            "price",
 
         ]
 
@@ -47,9 +54,10 @@ class showForm(forms.ModelForm):
     class Meta:
         model = Show
         fields = [
+            "screen",
             "date",
             "time",
-            "film"
+            "film",
         ]
 
 class ClubRegistrationForm(forms.Form):
