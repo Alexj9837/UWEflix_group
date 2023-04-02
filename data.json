@@ -153,7 +153,7 @@
     }
   },
   {
-    "model": "UWEflix.films",
+    "model": "UWEflix.Film",
     "pk": 10,
     "fields": {
       "name": "Black Adam",
@@ -170,7 +170,7 @@
     }
   },
   {
-    "model": "UWEflix.films",
+    "model": "UWEflix.Film",
     "pk": 11,
     "fields": {
       "name": "The Woman King",
@@ -187,7 +187,7 @@
     }
   },
   {
-    "model": "UWEflix.films",
+    "model": "UWEflix.Film",
     "pk": 12,
     "fields": {
       "name": "Blowback",
@@ -204,7 +204,7 @@
     }
   },
   {
-    "model": "UWEflix.films",
+    "model": "UWEflix.Film",
     "pk": 13,
     "fields": {
       "name": "Prey for the Devil",
@@ -221,7 +221,7 @@
     }
   },
   {
-    "model": "UWEflix.films",
+    "model": "UWEflix.Film",
     "pk": 14,
     "fields": {
       "name": "Paradise City",
@@ -238,7 +238,7 @@
     }
   },
   {
-    "model": "UWEflix.films",
+    "model": "UWEflix.Film",
     "pk": 15,
     "fields": {
       "name": "Avatar",
@@ -255,7 +255,7 @@
     }
   },
   {
-    "model": "UWEflix.films",
+    "model": "UWEflix.Film",
     "pk": 16,
     "fields": {
       "name": "Detective Knight: Rogue",
@@ -272,7 +272,7 @@
     }
   },
   {
-    "model": "UWEflix.films",
+    "model": "UWEflix.Film",
     "pk": 17,
     "fields": {
       "name": "Fall",
@@ -289,7 +289,7 @@
     }
   },
   {
-    "model": "UWEflix.films",
+    "model": "UWEflix.Film",
     "pk": 18,
     "fields": {
       "name": "Emancipation",
