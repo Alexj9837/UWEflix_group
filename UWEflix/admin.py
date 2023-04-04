@@ -7,12 +7,10 @@ from .models.booking import Booking
 
 
 from UWEflix.models.clubs import Club
-from UWEflix.models.clubrep import ClubRepresentative
 from UWEflix.models.ticket import Ticket
 
 # Register your models here.
 admin.site.register(Club)
-admin.site.register(ClubRepresentative)
 admin.site.register(Film)
 admin.site.register(Show)
 admin.site.register(Ticket)

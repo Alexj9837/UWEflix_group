@@ -1,7 +1,7 @@
 from django import forms
 from .models import *
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Colum
+from crispy_forms.layout import Layout, Submit, Row
 from .models.booking import Booking
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -100,12 +100,3 @@ class TicketPurchaseForm(forms.Form):
         if not show and not payment_details:
             raise forms.ValidationError('You have to write something!')
 
-class  LoginForm(forms.Form):
-    rep_no = forms.CharField(label='Representative Number', max_length=255)
-    password = forms.CharField(label='Password', max_length=255, widget=forms.PasswordInput)
-    def clean(self):
-        cleaned_data = super().clean()
-        rep_no = cleaned_data.get('rep_no')
-        password = cleaned_data.get('password')
-        if not rep_no and not password:
-            raise forms.ValidationError('You have to write something!')
