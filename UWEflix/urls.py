@@ -32,7 +32,6 @@ urlpatterns = [
     path("view_showing",views.view_showing,name="view_showing"),
     path("view_screen",views.view_screen,name="view_screen"), 
     path("view_club",views.view_club,name="view_club"),
-    
     path("upcoming", views.upcoming, name="upcoming"),
     #path("booking", views.booking, name="booking"),
     #path("booking_confirm", views.booking_confirm, name="booking_confirm"),
@@ -44,9 +43,10 @@ urlpatterns = [
     path("upcoming_details/<int:id>/", views.upcoming_details, name="upcoming_details"),
 
 
-    path("login",views.login,name="login"),
+    path("login",views.login_view,name="login"),
     path("book",views.book_tickets,name="book_tickets"),
     path("manage",views.manage_account,name="manage_account"),
+    path("logout",views.logout_view,name="logout"),
 ]
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 

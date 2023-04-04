@@ -1,0 +1,38 @@
+[
+  {
+    "model": "UWEflix.Custom_user",
+    "pk": 1,
+    "fields": {
+    "username":"CM",
+     "password" :"1", 
+     "role":"Cinema manager"
+    }
+  },
+    {
+    "model": "UWEflix.Custom_user",
+    "pk": 2,
+    "fields": {
+    "username":"AM",
+     "password" :"1", 
+     "role":"account manager"
+    }
+  },
+  {
+    "model": "UWEflix.Custom_user",
+    "pk": 3,
+    "fields": {
+    "username":"CR",
+     "password" :"1", 
+     "role":"club rep"
+    }
+  },
+  {
+    "model": "UWEflix.Custom_user",
+    "pk": 4,
+    "fields": {
+    "username":"S",
+     "password" :"1", 
+     "role":"student"
+    }
+  }
+]
