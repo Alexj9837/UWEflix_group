@@ -5,18 +5,8 @@ from django.shortcuts import redirect
 from django.views.generic import ListView
 from django.http import HttpResponse
 from django.template import loader
-from UWEflix.forms import *
-from UWEflix.models import *
-from .models.upcoming import upcomings
-from .models.booking import Booking
-from .models.account import Users, Representitive, Account
-# from .forms import bookingForm
-from django.template.defaultfilters import date
-from datetime import datetime
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
-
+from UWEflix.forms import ClubForm, LoginForm, ClubRegistrationForm
+from UWEflix.models import Film, upcomings
 
 # Create your views here.
 
@@ -57,8 +47,8 @@ def logout_view(request):
 
 
 def home(request):
-    movie = Film.objects.all()
-    return render(request, "UWEflix/customer/home.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "movie": movie})
+    movie = films.objects.all()
+    return render(request, "UWEflix/customer/home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", "movie" : movie})
 
 
 def upcoming(request):
@@ -251,57 +241,15 @@ def update_screen(request, pk):
     return render(request, "UWEflix/cinema_manager/screens/update_screen.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "screen": screen})
 
 
-@login_required(login_url='/login')
-def delete_screen(request, pk):
-    return CRUD_delete(request, pk, Screen, "view_screen")
-
-# #####################################################
-# ######### SHOWINGS ##################################
-# #####################################################
-
-
-@login_required(login_url='/login')
-def create_showing(request):
-    form = showForm(request.POST or None)
-    films = Film.objects.all()
-    screens = Screen.objects.all()
+def login(request):
+    form = LoginForm(request.POST or None)
+    
     if request.method == "POST":
-        if form.is_valid():
-            show = Show.save(commit=False)
-            show.save()
-            return redirect("view_screen")
+        #Logic for logging in
+        return redirect('home')
     else:
-        form = showForm()
-    return render(request, "UWEflix/cinema_manager/showings/create_showing.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "films": films, "screens": screens})
-
-
-@login_required(login_url='/login')
-def view_showing(request):
-    return CRUD_view(request, Show, "UWEflix/cinema_manager/showings/view_showing.html")
-
-
-@login_required(login_url='/login')
-def update_showing(request, pk):
-    show = Show.objects.get(pk=pk)
-    form = showForm(request.POST, instance=show)
-    if request.method == "POST":
-        if form.is_valid():
-            show = form.save(commit=False)
-            show.save()
-            return redirect("view_showing")
-    return render(request, "UWEflix/cinema_manager/showings/update_showing.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "show": show})
-
-
-@login_required(login_url='/login')
-def delete_showing(request, pk):
-    return CRUD_delete(request, pk, Show, "view_showing")
-
-# #####################################################
-# ######### Bookings ##################################
-# #####################################################
-
-
-@login_required(login_url='/login')
+        return render(request, "UWEflix/cinema_booking_system/login.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html","form":form})
+    
 def book_tickets(request):
     if request.method == "POST":
         return render(request, "UWEflix/cinema_booking_system/booking_success.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request)})
@@ -397,6 +345,7 @@ def bookingProcessing(request, id, pk, pi):
         "email": booking.email
     }
 
+
     if request.method == "POST":
 
         booking.card_number = int(request.POST.get("num"))
@@ -412,7 +361,8 @@ def bookingProcessing(request, id, pk, pi):
     return render(request, 'UWEflix/customer/booking_processing.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), 'details': details})
 
 
-@login_required(login_url='/login')
+
+
 def manage_account(request):
     form = ClubRegistrationForm(request.POST or None)
     if request.method == "POST":

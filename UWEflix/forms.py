@@ -1,14 +1,63 @@
 from django import forms
-from .models import *
+from UWEflix.models import Booking, Club, Screen, Show, Film
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row
 from .models.booking import Booking
 from .models.account import Users, Representitive
 from django.contrib.auth.forms import AuthenticationForm
 
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(max_length=100, widget=forms.TextInput())
-    password = forms.CharField(widget=forms.PasswordInput())
+# class bookingForm(forms.ModelForm):
+#     class Meta:
+#         model = Booking
+#         fields = [
+#             "seat_number",
+#             "ticket_type",
+#             "quantity",
+#             "card_number",
+#         ]
+
+
+class bookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['email', 'name', 'mobile', 'age', 'seats']
+        labels = {
+            'email': 'Email',
+            'name': 'Name',
+            'mobile': 'Mobile Number',
+            'age': 'Age',
+            'seats': 'Number of Seats'
+        }
+        widgets = {
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'mobile': forms.NumberInput(attrs={'class': 'form-control'}),
+            'age': forms.NumberInput(attrs={'class': 'form-control'}),
+            'seats': forms.NumberInput(attrs={'class': 'form-control'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('name', css_class='form-group col-md-6 mb-0'),
+                Column('email', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('mobile', css_class='form-group col-md-6 mb-0'),
+                Column('age', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('seats', css_class='form-group col-md-12 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', 'Submit')
+        )
+
 
 class ClubForm(forms.ModelForm):
     class Meta:
@@ -28,23 +77,7 @@ class ClubForm(forms.ModelForm):
         ]
 
 
-class filmForm(forms.ModelForm):
-    class Meta:
-        model = Film
-        fields = [
-            "name",
-            "image",
-            "date",
-            "duration",
-            "type",
-            "language",
-            "rating",
-            "cast",
-            "trailer",
-            "up",
-            "price",
 
-        ]
 
 
 class screenForm(forms.ModelForm):
@@ -101,41 +134,12 @@ class TicketPurchaseForm(forms.Form):
         if not show and not payment_details:
             raise forms.ValidationError('You have to write something!')
 
-class RepForm(forms.ModelForm):
-    # Form for representitive
-    class Meta:
-        model = Representitive
-        fields = [
-            "firstName",
-            "lastName",
-            "DateOfBirth",
-            "password",
-        ]
-        widgets = {
-            'password': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter a password',
-                    'type': 'password'
-                }
-            )
-        }
-
-class UserForm(forms.ModelForm):
-    # Form for User model
-    class Meta:
-        model = Users
-        fields = '__all__'
-        widgets = {
-            'dateOfBirth': forms.DateInput(
-                format=('%Y-%m-%d'),
-                attrs={'class': 'form-control',
-                    'placeholder': 'Select a date',
-                    'type': 'date'
-                }),
-            'password': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter a password',
-                    'type': 'password'
-                }
-            )
-        }
+class  LoginForm(forms.Form):
+    rep_no = forms.CharField(label='Representative Number', max_length=255)
+    password = forms.CharField(label='Password', max_length=255, widget=forms.PasswordInput)
+    def clean(self):
+        cleaned_data = super().clean()
+        rep_no = cleaned_data.get('rep_no')
+        password = cleaned_data.get('password')
+        if not rep_no and not password:
+            raise forms.ValidationError('You have to write something!')
