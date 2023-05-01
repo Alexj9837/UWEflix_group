@@ -50,11 +50,8 @@ urlpatterns = [
     path("film_details/<int:id>/booking/<int:pk>/tickets/<int:pi>/booking_processing/booking_confirm", views.booking_confirm, name="booking_confirm"),
     path("upcoming_details/<int:id>/", views.upcoming_details, name="upcoming_details"),
 
-    path("account_home",views.account_home,name="account_home"),
-    path('account_statement', views.view_statements, name='account_statement'),
-    path('monthly_statement', views.monthly_statement, name='monthly_statement'),
-
-    path("login",views.login,name="login"),
+    path("login",views.login_view_page,name="login_page"),
+    path("club_representative", views.club_representative_home, name="club_representative_home"),
     path("book",views.book_tickets,name="book_tickets"),
     path("manage",views.manage_account,name="manage_account"),
     path("logout",views.logout_view,name="logout"),
