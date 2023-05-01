@@ -5,6 +5,7 @@ class Club(models.Model):
     # Fields for the club model
     clubID = models.AutoField(primary_key=True)
     club_name = models.CharField(max_length=100)
+    discount = models.CharField(max_length=10)
     street_number = models.CharField(max_length=10)
     street = models.CharField(max_length=100)
     city = models.CharField(max_length=100)

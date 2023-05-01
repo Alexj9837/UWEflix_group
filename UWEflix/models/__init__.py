@@ -7,3 +7,4 @@ from UWEflix.models.show import Show
 from UWEflix.models.upcoming import upcomings
 from UWEflix.models.ticket import Ticket
 from UWEflix.models.user import Custom_user
+from UWEflix.models.clubrep import ClubRepresentative

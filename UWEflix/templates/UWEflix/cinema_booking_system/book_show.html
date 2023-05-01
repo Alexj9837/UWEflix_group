@@ -16,7 +16,7 @@ Book Show
 
 <div class="card mt-2 p-4">
     <h2>Book Show: </h2>
-    <h5>Price per ticket: <span style="font-size: 25px;color: rgb(0, 129, 0);"> 7$</span><span class="text-sm" style="text-decoration: line-through;color: rgb(255, 112, 112);font-size: 18px;">10$</span></h5>
+    <h5>Price per ticket: <span style="font-size: 25px;color: rgb(0, 129, 0);"> {{show.film.price - (show.film.price * discount)}} </span><span class="text-sm" style="text-decoration: line-through;color: rgb(255, 112, 112);font-size: 18px;">{{show.film.price}}</span></h5>
     <form action="{% url 'book_tickets' %}" method="post">
         {% csrf_token %}
         <label for="number_of_ticket"><h6>Number of Tickets: </h6></label>
