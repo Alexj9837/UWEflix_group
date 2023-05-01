@@ -8,7 +8,7 @@
         
         <h1 class="text-center">Login</h1>
         <hr>
-        <form action="{% url 'login' %}" method="post" class="shadow p-5 mx-auto col-sm-12">
+        <form action="{% url 'login_page' %}" method="post" class="shadow p-5 mx-auto col-sm-12">
             {% csrf_token %}
             {% for fm in form %}
             <div class="form-group p-2">
@@ -19,6 +19,16 @@
                 <br>
             </div>
             {% endfor %}
+
+            {% if messages%}
+            <ul class="messages">
+                {% for message in messages%}
+                <li>
+                {{ message }}
+                </li>
+                {%endfor%}
+            </ul>
+            {% endif %}
             
             <div class="text-center">
                 <input type="submit" class="btn btn-success mt-4" value="Login">

@@ -21,7 +21,8 @@ urlpatterns = [
     path("delete_club",views.delete_club,name="delete_club"),
     path("view_club",views.Club_list_view,name="view_club"),
 
-    path("login",views.login,name="login"),
+    path("login",views.login_page,name="login_page"),
+    path("club_representative", views.club_representative_home, name="club_representative_home"),
     path("book",views.book_tickets,name="book_tickets"),
     path("manage",views.manage_account,name="manage_account"),
 ]

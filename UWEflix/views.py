@@ -7,11 +7,14 @@ from django.http import HttpResponse
 from django.template import loader
 from UWEflix.forms import ClubForm, LoginForm, ClubRegistrationForm
 from UWEflix.models import Film, upcomings
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 # Create your views here.
 
 def home(request):
-    movie = films.objects.all()
+    movie = Film.objects.all()
     return render(request, "UWEflix/customer/home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", "movie" : movie})
 
 def upcoming(request):
@@ -101,15 +104,28 @@ def Club_list_view(request):
     return render(request, "UWEflix/base/base.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_manager/header_cinema_manager.html"})
 
 
-def login(request):
+def login_page(request):
     form = LoginForm(request.POST or None)
     
     if request.method == "POST":
-        #Logic for logging in
-        return redirect('home')
-    else:
-        return render(request, "UWEflix/cinema_booking_system/login.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html","form":form})
+        if form.is_valid():
+            try:
+                user = User.objects.get(username=form.cleaned_data['rep_no'])
+            except:
+                messages.error(request, 'User does not exist!')
+
+            user = authenticate(request, username=form.cleaned_data['rep_no'], password=form.cleaned_data['password'])
+
+            if user is not None:
+                login(request, user)
+                return redirect('club_representative_home')
+            else:
+                messages.error(request, "Username or Password does not exist")
     
+    return render(request, "UWEflix/cinema_booking_system/login.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html","form":form})
+
+def club_representative_home(request):    
+    return render(request, "UWEflix/cinema_booking_system/home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html"})
 def book_tickets(request):
     if request.method == "POST":
         return render(request, "UWEflix/cinema_booking_system/booking_success.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/cinema_booking_system/header_cinema_booking_system.html"})
@@ -220,7 +236,8 @@ def bookingProcessing(request,id,pk,pi):
 
     return render(request,'UWEflix/customer/booking_processing.html', {"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html" , 'details' : details} )
 
-
+def booking_confirm(request,id,pk,pi):
+    return redirect(f"/film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing/booking_confirm")
 
 
 def manage_account(request):
