@@ -10,10 +10,9 @@ from .models.ticket import Ticket
 
 # Register your models here.
 admin.site.register(Club)
-admin.site.register(ClubRepresentative)
 admin.site.register(Film)
 admin.site.register(Show)
 admin.site.register(Ticket)
 admin.site.register(upcomings)
 admin.site.register(Screen) 
-admin.site.register(Booking) 
+admin.site.register(Booking)

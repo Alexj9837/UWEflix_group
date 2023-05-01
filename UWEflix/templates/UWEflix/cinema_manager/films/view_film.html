@@ -1,0 +1,58 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block content %}
+  <h2>Films</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Film name</th>
+        <th>image</th>
+        <th>date</th>
+        <th>duration</th>
+        <th>type</th>
+        <th>language</th>
+        <th>rating</th>
+        <th>cast</th>
+        <th>trailer</th>
+        <th>up</th>
+        <th>price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for film in view_film_data %}
+        <tr>
+          <td>{{ film.name }}</td>
+          <td>{{ film.image }}</td>
+          <td>{{ film.date }}</td>
+          <td>{{ film.duration }}</td>
+          <td>{{ film.type }}</td>
+          <td>{{ film.language }}</td>
+          <td>{{ film.rating }}</td>
+          <td>{{ film.cast }}</td>
+          <td>{{ film.trailer }}</td>
+          <td>{{ film.up }}</td>
+          <td>{{ film.price }}</td>
+          <td>
+            <form method="POST" action="{% url 'update_film' film.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value="{{ film.pk }}">
+            <button type="submit" class="btn btn-primary">Update Film</button>
+          </form>
+          </td>
+          <td>
+            <form method="POST" action="{% url 'delete_film' film.id%}">
+              {% csrf_token %}
+              <input type="hidden" name="pk" value="{{ film.pk }}">
+              <button type="submit" class="btn btn-danger">Delete Film</button>
+            </form>
+          </td> 
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div>
+    <a class="btn btn-primary" href="{% url 'create_film' %}">
+      Create a new Film
+    </a>
+  </div>
+{% endblock %}
