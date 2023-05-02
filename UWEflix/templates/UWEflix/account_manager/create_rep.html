@@ -1,0 +1,41 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block content %}
+
+<title>Create a Club Representitive Account</title>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.errors}}
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="firstName">First Name: </label>
+        <input class="form-control col-sm-10"'
+        id="firstName" type="text"
+        name="firstName" value="{{ object.firstName }}">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="lastName">Last Name: </label>
+        <input class="form-control col-sm-10"'
+        id="lastName" type="text"
+        name="lastName" value="{{ object.lastName }}">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="DateOfBirth">Date Of Birth: </label>
+        <input class="form-control col-sm-10"'
+        id="DateOfBirth" type="date"
+        name="DateOfBirth" value="{{ object.DateOfBirth }}">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="password">Password: </label>
+        <input class="form-control col-sm-10"'
+        id="password" type="text" name="password" value="{{ object.password }}">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="affiliatedClub">Affiliated Club: </label>
+        <input class="form-control col-sm-10"' 
+        id="affiliatedClub" type="text" name="affiliatedClub" value="{{ object.affiliatedClub }}">
+    </div>
+    <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+{% endblock %}
