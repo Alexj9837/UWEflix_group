@@ -9,7 +9,7 @@ from UWEflix.forms import *
 from UWEflix.models import *
 from .models.upcoming import upcomings
 from .models.booking import Booking
-from .models.account import User, Representitive, ClubPurchaseHistory, UserPurchaseHistory
+from .models.account import Users, Representitive, ClubPurchaseHistory, UserPurchaseHistory
 # from .forms import bookingForm
 from django.template.defaultfilters import date
 from datetime import datetime
@@ -435,7 +435,7 @@ def booking_confirm(request, id, pk, pi):
 # Index for the accounts management subsection
 def index(request):
     # This is the main page of the accounts manager
-    userList = User.objects.all()
+    userList = Users.objects.all()
     clubList = Club.objects.all()
     repList = Representitive.objects.all()
     message = request.GET.get('message')

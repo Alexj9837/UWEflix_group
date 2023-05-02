@@ -6,7 +6,7 @@ from django import forms
 import uuid, re, datetime
 from datetime import date, timedelta
     
-class User(models.Model):
+class Users(models.Model):
     # Identifiers
     username = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
@@ -34,10 +34,6 @@ class Representitive(models.Model):
     # Identifiers
     password = models.CharField(max_length=255)
 
-    # Representitive Info
-    affiliatedClub = models.ForeignKey(Club, on_delete=models.CASCADE)
-    #studentRepresentitive = models.ForeignKey(User, on_delete=models.CASCADE) # The rep must have an existing acc
-
     # Personal Info
     firstName = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)
@@ -62,7 +58,7 @@ class MonthAgoManager(models.Manager):
         return super().get_queryset().filter(date__gte=monthAgo, date__lte=today)
 
 class UserPurchaseHistory(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     totalCost = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField() # Will only ever store purcahses made on the day therefore needs to filter between month old purchases and beyond

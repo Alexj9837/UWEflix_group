@@ -3,7 +3,7 @@ from .models import *
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row
 from .models.booking import Booking
-from .models.account import User, Representitive
+from .models.account import Users, Representitive
 from django.contrib.auth.forms import AuthenticationForm
 
 class LoginForm(AuthenticationForm):
@@ -110,8 +110,6 @@ class RepForm(forms.ModelForm):
             "lastName",
             "DateOfBirth",
             "password",
-            "affiliatedClub",
-           # "studentRepresentitive",
         ]
         widgets = {
             'password': forms.TextInput(
@@ -125,7 +123,7 @@ class RepForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     # Form for User model
     class Meta:
-        model = User
+        model = Users
         fields = '__all__'
         widgets = {
             'dateOfBirth': forms.DateInput(
