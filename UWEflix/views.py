@@ -424,3 +424,64 @@ def manage_account(request):
 @login_required(login_url='/login')
 def booking_confirm(request, id, pk, pi):
     return render(request, 'UWEflix/customer/booking_confirm.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), })
+
+
+# #####################################################
+# ######### Account Manager ##################################
+# #####################################################
+
+
+# Index for the accounts management subsection
+def index(request):
+    # This is the main page of the accounts manager
+    userList = User.objects.all()
+    clubList = Club.objects.all()
+    repList = Representitive.objects.all()
+    message = request.GET.get('message')
+
+    context = {
+        'userList': userList,
+        'clubList': clubList,
+        'repList': repList,
+        'message': message
+    }
+
+    return render(request, "UWEflix/account_manager/account_home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+
+def createRep(request):
+    repForm = RepForm(request.POST or None)
+
+    context = {
+        "repForm": repForm
+    }
+
+    if request.method != 'POST':
+        return render(request, "UWEflix/account_manager/create_rep.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+
+    if repForm.is_valid():
+        rep = repForm.save(commit=False)
+        rep.encryptPassword(repForm.cleaned_data['password'])
+        repForm.save()
+        return redirect(reverse("account_home.html"))
+    else:
+        print("Form is not valid")
+        return render(request, "UWEflix/account_manager/create_rep.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+    
+def createUser(request):
+    userForm = UserForm(request.POST or None)
+
+    context = {
+        "userForm": userForm
+    }
+
+    if request.method != 'POST':
+        return render(request, "UWEflix/account_manager/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+
+    if userForm.is_valid():
+        user = userForm.save(commit=False)
+        user.encryptPassword(userForm.cleaned_data['password'])
+        user.save()
+        return redirect(reverse("account_home.html"))
+    else:
+        print("Form is not valid")
+        return render(request, "UWEflix/account_manager/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
