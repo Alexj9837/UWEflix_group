@@ -9,7 +9,7 @@ from UWEflix.forms import *
 from UWEflix.models import *
 from .models.upcoming import upcomings
 from .models.booking import Booking
-from .models.account import User, Representitive
+from .models.account import User, Representitive, ClubPurchaseHistory, UserPurchaseHistory
 # from .forms import bookingForm
 from django.template.defaultfilters import date
 from datetime import datetime
