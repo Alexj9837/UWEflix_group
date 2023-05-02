@@ -463,7 +463,7 @@ def createRep(request):
         rep = repForm.save(commit=False)
         rep.encryptPassword(repForm.cleaned_data['password'])
         repForm.save()
-        return redirect("account_home.html")
+        return redirect("UWEflix/account_manager/account_home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html"})
     else:
         print("Form is not valid")
         return render(request, "UWEflix/account_manager/create_rep.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
@@ -482,7 +482,7 @@ def createUser(request):
         user = userForm.save(commit=False)
         user.encryptPassword(userForm.cleaned_data['password'])
         user.save()
-        return redirect("account_home.html")
+        return redirect("UWEflix/account_manager/account_home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html"})
     else:
         print("Form is not valid")
         return render(request, "UWEflix/account_manager/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
@@ -490,7 +490,7 @@ def createUser(request):
 def selectStatement(request):
     # userPayments = UserPurchaseHistory.objects.all()
     # clubPayments = ClubPurchaseHistory.objects.all()
-    userList = User.objects.all()
+    userList = Users.objects.all()
     clubList = Club.objects.all()
 
     context = {
