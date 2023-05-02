@@ -44,6 +44,7 @@ urlpatterns = [
     path("film_details/<int:id>/booking/<int:pk>/tickets/<int:pi>/booking_processing/booking_confirm", views.booking_confirm, name="booking_confirm"),
     path("upcoming_details/<int:id>/", views.upcoming_details, name="upcoming_details"),
 
+    path("account_home",views.index,name="account_home"),
     path("select_statements",views.selectStatement,name="select_statements"),
     path("select_statements/user/<int:userID>/",views.viewUserStatements,name="viewUserStatements"), #For user statements
     path("select_statements/club/<int:clubID>/",views.viewClubStatments,name="viewClubStatements"), #For club statements
