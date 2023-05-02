@@ -17,6 +17,8 @@ urlpatterns = [
     path("create_film",views.create_film,name="create_film"),
     path("create_showing",views.create_showing,name="create_showing"),
     path("create_screen",views.create_screen,name="create_screen"),
+    path("create_rep",views.createRep,name="create_rep"),
+    path("create_user",views.createUser,name="create_user"),
     
     path("update_club /<str:pk>/",views.update_club,name="update_club"),
     path("update_film /<str:pk>/",views.update_film,name="update_film"),
@@ -42,6 +44,9 @@ urlpatterns = [
     path("film_details/<int:id>/booking/<int:pk>/tickets/<int:pi>/booking_processing/booking_confirm", views.booking_confirm, name="booking_confirm"),
     path("upcoming_details/<int:id>/", views.upcoming_details, name="upcoming_details"),
 
+    path("select_statements",views.selectStatement,name="select_statements"),
+    path("select_statements/user/<int:userID>/",views.viewUserStatements,name="viewUserStatements"), #For user statements
+    path("select_statements/club/<int:clubID>/",views.viewClubStatments,name="viewClubStatements"), #For club statements
 
     path("login",views.login_view,name="login"),
     path("book",views.book_tickets,name="book_tickets"),
