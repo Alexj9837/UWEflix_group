@@ -9,6 +9,7 @@ from UWEflix.forms import *
 from UWEflix.models import *
 from .models.upcoming import upcomings
 from .models.booking import Booking
+from .models.account import User, Representitive
 # from .forms import bookingForm
 from django.template.defaultfilters import date
 from datetime import datetime
@@ -462,7 +463,7 @@ def createRep(request):
         rep = repForm.save(commit=False)
         rep.encryptPassword(repForm.cleaned_data['password'])
         repForm.save()
-        return redirect(reverse("account_home.html"))
+        return redirect("account_home.html")
     else:
         print("Form is not valid")
         return render(request, "UWEflix/account_manager/create_rep.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
@@ -481,7 +482,61 @@ def createUser(request):
         user = userForm.save(commit=False)
         user.encryptPassword(userForm.cleaned_data['password'])
         user.save()
-        return redirect(reverse("account_home.html"))
+        return redirect("account_home.html")
     else:
         print("Form is not valid")
         return render(request, "UWEflix/account_manager/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+    
+def selectStatement(request):
+    # userPayments = UserPurchaseHistory.objects.all()
+    # clubPayments = ClubPurchaseHistory.objects.all()
+    userList = User.objects.all()
+    clubList = Club.objects.all()
+
+    context = {
+        # 'userPayment': userPayments,
+        # 'clubPayments': clubPayments,
+        'userList': userList,
+        'clubList': clubList
+    }
+
+    return render(request, 'UWEflix/account_manager/select_statements.html',{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+
+    
+def viewUserStatements(request, userID):
+    history = UserPurchaseHistory.objects.filter(user__id=userID)
+    name = history[0].user.firstName + " " + history[0].user.lastName
+    total = {
+        'spent': 0,
+        'bought': 0
+    }
+
+    for statement in history:
+        total['spent'] += statement.totalCost
+        total['bought'] += statement.quantity
+
+    context = {
+        'history': history,
+        'total': total,
+        'name': name
+    }
+    
+def viewClubStatments(request, clubID):
+    history = ClubPurchaseHistory.objects.filter(club__id=clubID)
+    name = "the " + history[0].club.clubName + " Club"
+    total = {
+        'spent': 0,
+        'bought': 0
+    }
+
+    for statement in history:
+        total['spent'] += statement.totalCost
+        total['bought'] += statement.quantity
+
+    context = {
+        'history': history,
+        'total': total,
+        'name': name
+    }
+
+    return render(request, 'UWEflix/account_manager/view_statements.html',{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
