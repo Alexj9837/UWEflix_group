@@ -3,6 +3,7 @@ from .models import *
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row
 from .models.booking import Booking
+from .models.account import User, Representitive
 from django.contrib.auth.forms import AuthenticationForm
 
 class LoginForm(AuthenticationForm):
@@ -100,3 +101,43 @@ class TicketPurchaseForm(forms.Form):
         if not show and not payment_details:
             raise forms.ValidationError('You have to write something!')
 
+class RepForm(forms.ModelForm):
+    # Form for representitive
+    class Meta:
+        model = Representitive
+        fields = [
+            "firstName",
+            "lastName",
+            "DateOfBirth",
+            "password",
+            "affiliatedClub",
+           # "studentRepresentitive",
+        ]
+        widgets = {
+            'password': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter a password',
+                    'type': 'password'
+                }
+            )
+        }
+
+class UserForm(forms.ModelForm):
+    # Form for User model
+    class Meta:
+        model = User
+        fields = '__all__'
+        widgets = {
+            'dateOfBirth': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={'class': 'form-control',
+                    'placeholder': 'Select a date',
+                    'type': 'date'
+                }),
+            'password': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter a password',
+                    'type': 'password'
+                }
+            )
+        }
