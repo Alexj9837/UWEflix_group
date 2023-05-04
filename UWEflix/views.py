@@ -431,6 +431,7 @@ def booking_confirm(request, id, pk, pi):
 # ######### Account Manager ##################################
 # #####################################################
 
+#Account Manager Home Page
 def account_home(request):
     users = Users.objects.all()
     reps = Representitive.objects.all()
@@ -439,6 +440,25 @@ def account_home(request):
 def create_user(request):
     return CRUD_create(request, UserForm, "UWEflix/account_manager/create.html", "view_user")
 
+#CRUD for User
+def createUser(request):
+    userForm = UserForm(request.POST or None)
+
+    context = {
+        "userForm": userForm
+    }
+
+    if request.method != 'POST':
+        return render(request, "UWEflix/account_manager/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+
+    if userForm.is_valid():
+        user = userForm.save(commit=False)
+        user.encryptPassword(userForm.cleaned_data['password'])
+        user.save()
+        return redirect("account_home")
+    else:
+        print("Form is not valid")
+        return render(request, "UWEflix/account_manager/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
 
 def view_user(request):
     user = request.user
@@ -460,8 +480,9 @@ def update_user(request, pk):
     return render(request, 'UWEflix/account_manager/update_user.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "user": user})
 
 def delete_user(request, pk):
-    return CRUD_delete(request, pk, Users, "view_user")
+    return CRUD_delete(request, pk, Users, "account_home")
 
+#CRUD for Rep
 def createRep(request):
     repForm = RepForm(request.POST or None)
 
@@ -481,24 +502,27 @@ def createRep(request):
         print("Form is not valid")
         return render(request, "UWEflix/account_manager/create_rep.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
     
-def createUser(request):
-    userForm = UserForm(request.POST or None)
-
-    context = {
-        "userForm": userForm
-    }
-
-    if request.method != 'POST':
-        return render(request, "UWEflix/account_manager/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
-
-    if userForm.is_valid():
-        user = userForm.save(commit=False)
-        user.encryptPassword(userForm.cleaned_data['password'])
-        user.save()
-        return redirect("account_home")
+def view_rep(request):
+    rep = request.rep
+    if rep.role == 'account manager':
+        return CRUD_view(request, Representitive, "UWEflix/account_manager/view_rep.html")
     else:
-        print("Form is not valid")
-        return render(request, "UWEflix/account_manager/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+        return redirect("account_home")
+
+
+def update_rep(request, pk):
+    rep = Representitive.objects.get(pk=pk)
+    form = RepForm(request.POST, instance=rep)
+    if request.method == "POST":
+        if form.is_valid():
+            rep = form.save(commit=False)
+            rep.save()
+            return redirect("account_home")
+
+    return render(request, 'UWEflix/account_manager/update_rep.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "rep": rep})
+
+def delete_rep(request, pk):
+    return CRUD_delete(request, pk, Representitive, "account_home")
     
 def selectStatement(request):
     # userPayments = UserPurchaseHistory.objects.all()

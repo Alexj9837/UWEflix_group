@@ -20,18 +20,21 @@ urlpatterns = [
     path("create_rep",views.createRep,name="create_rep"),
     path("create_user",views.createUser,name="create_user"),
     
+    path("update_rep /<str:pk>/",views.update_rep,name="update_rep"),
     path("update_user /<str:pk>/",views.update_user,name="update_user"),
     path("update_club /<str:pk>/",views.update_club,name="update_club"),
     path("update_film /<str:pk>/",views.update_film,name="update_film"),
     path("update_showing /<str:pk>/",views.update_showing,name="update_showing"),
     path("update_screen /<str:pk>/",views.update_screen,name="update_screen"),
 
+    path("delete_rep /<str:pk>",views.delete_rep,name="delete_rep"),
     path("delete_user /<str:pk>",views.delete_user,name="delete_user"),
     path("delete_club /<str:pk>",views.delete_club,name="delete_club"),
     path("delete_film /<str:pk>/",views.delete_film,name="delete_film"),
     path("delete_Showing /<str:pk>/",views.delete_showing,name="delete_Showing"),
     path("delete_screen /<str:pk>/",views.delete_screen,name="delete_screen"),
 
+    path("view_rep",views.view_rep,name="view_rep"),
     path("view_user",views.view_user,name="view_user"),
     path("view_film",views.view_film,name="view_film"),
     path("view_showing",views.view_showing,name="view_showing"),
