@@ -132,7 +132,7 @@ def CRUD_create(request, form_class, template_name, redirect_url):
 @login_required(login_url='/login')
 def CRUD_view(request, model_class, template_name):
     user = request.user
-    if user.role == 'Cinema manager':
+    if user.role == 'Cinema manager' or user == 'account manager':
         objects = model_class.objects.all()
         context = {
             "objects": objects,
@@ -431,23 +431,36 @@ def booking_confirm(request, id, pk, pi):
 # ######### Account Manager ##################################
 # #####################################################
 
+def account_home(request):
+    users = Users.objects.all()
+    reps = Representitive.objects.all()
+    return render(request, "UWEflix/account_manager/account_home.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "users": users, "reps": reps})
 
-# Index for the accounts management subsection
-def index(request):
-    # This is the main page of the accounts manager
-    userList = Users.objects.all()
-    clubList = Club.objects.all()
-    repList = Representitive.objects.all()
-    message = request.GET.get('message')
+def create_user(request):
+    return CRUD_create(request, UserForm, "UWEflix/account_manager/create.html", "view_user")
 
-    context = {
-        'userList': userList,
-        'clubList': clubList,
-        'repList': repList,
-        'message': message
-    }
 
-    return render(request, "UWEflix/account_manager/account_home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+def view_user(request):
+    user = request.user
+    if user.role == 'account manager':
+        return CRUD_view(request, Users, "UWEflix/account_manager/view_user.html")
+    else:
+        return redirect("account_home")
+
+
+def update_user(request, pk):
+    user = Users.objects.get(pk=pk)
+    form = UserForm(request.POST, instance=user)
+    if request.method == "POST":
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            return redirect("account_home")
+
+    return render(request, 'UWEflix/account_manager/update_user.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "user": user})
+
+def delete_user(request, pk):
+    return CRUD_delete(request, pk, Users, "view_user")
 
 def createRep(request):
     repForm = RepForm(request.POST or None)

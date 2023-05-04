@@ -8,43 +8,66 @@
 <div class="alert">{{ message }}</div>
 {% endif %}
 
-{% if userList %}
-
+{% if users %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <h3><strong>All Users</strong></h3>
 
-    <ul>
-        <li class="create"><a href="{% url 'create_user' %}">Create new User</a></li>
-
-        {% for user in userList %}
-            <li>
-                <a href="{% url 'accounts:manageUser' user.id %}">
-                    {{ user.username }} ({{ user.firstName }} {{ user.lastName }})
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Username</th>
+                <th>Actions</th> <!-- New column for the update button -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.dateOfBirth }}</td>
+                    <td>{{ user.username }}</td>
+                    <td><a href="{% url 'update_user' pk=user.pk %}">Update</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% else %}
     <p>There are no users</p>
 {% endif %}
 
-{% if clubList %}
-    <h3><strong>All Clubs</strong></h3>
+{% if reps %}
+    <br>
+    <h3><strong>All Representitives</strong></h3>
 
-    <ul>
-        <li class="create"><a href="{% url 'accounts:createClub'%}">Create new Club</a></li>
-
-        {% for club in clubList %}
-            <li>
-                <a href="{% url 'accounts:manageClub' club.id %}">
-                    {{ club.clubName }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rep in reps %}
+                <tr>
+                    <td>{{ rep.firstName }}</td>
+                    <td>{{ rep.lastName }}</td>
+                    <td>{{ rep.DateOfBirth }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% else %}
-    <p>There are no clubs</p>
+    <p>There are no users</p>
 {% endif %}
 
 {% if repList %}

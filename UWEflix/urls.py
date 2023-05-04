@@ -12,7 +12,7 @@ urlpatterns = [
 #####################################################
 ######### FILMS/SHOWINGS/SCREENS/CLUBS ##############
 #####################################################
-
+    
     path("create_club",views.create_club,name="create_club"),
     path("create_film",views.create_film,name="create_film"),
     path("create_showing",views.create_showing,name="create_showing"),
@@ -20,16 +20,19 @@ urlpatterns = [
     path("create_rep",views.createRep,name="create_rep"),
     path("create_user",views.createUser,name="create_user"),
     
+    path("update_user /<str:pk>/",views.update_user,name="update_user"),
     path("update_club /<str:pk>/",views.update_club,name="update_club"),
     path("update_film /<str:pk>/",views.update_film,name="update_film"),
     path("update_showing /<str:pk>/",views.update_showing,name="update_showing"),
     path("update_screen /<str:pk>/",views.update_screen,name="update_screen"),
 
+    path("delete_user /<str:pk>",views.delete_user,name="delete_user"),
     path("delete_club /<str:pk>",views.delete_club,name="delete_club"),
     path("delete_film /<str:pk>/",views.delete_film,name="delete_film"),
     path("delete_Showing /<str:pk>/",views.delete_showing,name="delete_Showing"),
     path("delete_screen /<str:pk>/",views.delete_screen,name="delete_screen"),
 
+    path("view_user",views.view_user,name="view_user"),
     path("view_film",views.view_film,name="view_film"),
     path("view_showing",views.view_showing,name="view_showing"),
     path("view_screen",views.view_screen,name="view_screen"), 
@@ -44,7 +47,7 @@ urlpatterns = [
     path("film_details/<int:id>/booking/<int:pk>/tickets/<int:pi>/booking_processing/booking_confirm", views.booking_confirm, name="booking_confirm"),
     path("upcoming_details/<int:id>/", views.upcoming_details, name="upcoming_details"),
 
-    path("account_home",views.index,name="account_home"),
+    path("account_home",views.account_home,name="account_home"),
     path("select_statements",views.selectStatement,name="select_statements"),
     path("select_statements/user/<int:userID>/",views.viewUserStatements,name="viewUserStatements"), #For user statements
     path("select_statements/club/<int:clubID>/",views.viewClubStatments,name="viewClubStatements"), #For club statements
