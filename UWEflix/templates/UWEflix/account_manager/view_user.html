@@ -1,0 +1,48 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block content %}
+  <h2>Users</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date Of Birth</th>
+        <th>Username</th>
+        <th>Password</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in objects %}
+        <tr>
+          <td>{{ objects.id }}</td>
+          <td>{{ objects.firstName }}</td>
+          <td>{{ objects.lastName }}</td>
+          <td>{{ objects.dateOfBirth }}</td>
+          <td>{{ objects.username }}</td>
+          <td>{{ objects.password }}</td>
+          <td>
+            <form method="POST" action="{% url 'update_user' objects.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value="{{ objects.pk }}">
+            <button type="submit" class="btn btn-primary">Update User</button>
+          </form>
+          </td>
+          <td>
+            <form method="POST" action="{% url 'delete_user' objects.id%}">
+              {% csrf_token %}
+              <input type="hidden" name="pk" value="{{ objects.pk }}">
+              <button type="submit" class="btn btn-danger">Delete User</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div>
+    <a class="btn btn-primary" href="{% url 'create_user' %}">
+      Create a new User
+    </a>
+  </div>
+{% endblock %}
