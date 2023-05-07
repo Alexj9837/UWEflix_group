@@ -1,7 +1,10 @@
 {% extends 'UWEflix/base/base.html' %}
 
 {% block content %}
-
+<br>
+<br>
+<br>
+<br>
 <title>Account Manager Home Page</title>
 
 {% if message %}
@@ -33,8 +36,8 @@
                     <td>{{ user.lastName }}</td>
                     <td>{{ user.dateOfBirth }}</td>
                     <td>{{ user.username }}</td>
-                    <td><a href="{% url 'update_user' pk=user.pk %}">Update</a></td>
-                    <td><a href="{% url 'delete_user' pk=user.pk %}">Delete</a></td>
+                    <td><a href="{% url 'update_user' pk=user.pk %}" class="btn btn-primary">Update</a></td>
+                    <td><a href="{% url 'delete_user' pk=user.pk %}" class="btn btn-primary">Delete</a></td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -68,8 +71,8 @@
                     <td>{{ rep.firstName }}</td>
                     <td>{{ rep.lastName }}</td>
                     <td>{{ rep.DateOfBirth }}</td>
-                    <td><a href="{% url 'update_rep' pk=user.pk %}">Update</a></td>
-                    <td><a href="{% url 'delete_rep' pk=user.pk %}">Delete</a></td>
+                    <td><a href="{% url 'update_rep' pk=user.pk %}" class="btn btn-primary">Update</a></td>
+                    <td><a href="{% url 'delete_rep' pk=user.pk %}" class="btn btn-primary">Delete</a></td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -82,13 +85,10 @@
 <br>
 <!-- Create User button -->
 <a href="{% url 'create_rep' %}" class="btn btn-primary">Create Representitive</a>
+<br>
+<br>
+<a href="{% url 'account_statement' %}" class="btn btn-primary">See Accounts Statements</a>
 
-{% comment %} <a href="{% url 'accounts:manageAccounts' 0 %}">
-    <h3>See All Accounts</h3>
-</a>
-
-<a href="{% url 'accounts:selectStatement' %}">
-    <h3>Select Account Statement</h3>
-</a> {% endcomment %}
+<a href="{% url 'monthly_statement' %}" class="btn btn-primary">Select Monthly Statements</a>
 
 {% endblock content %}

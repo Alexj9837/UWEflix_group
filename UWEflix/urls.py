@@ -51,9 +51,8 @@ urlpatterns = [
     path("upcoming_details/<int:id>/", views.upcoming_details, name="upcoming_details"),
 
     path("account_home",views.account_home,name="account_home"),
-    path("select_statements",views.selectStatement,name="select_statements"),
-    path("select_statements/user/<int:userID>/",views.viewUserStatements,name="viewUserStatements"), #For user statements
-    path("select_statements/club/<int:clubID>/",views.viewClubStatments,name="viewClubStatements"), #For club statements
+    path('account_statement', views.view_statements, name='account_statement'),
+    path('monthly_statement', views.monthly_statement, name='monthly_statement'),
 
     path("login",views.login_view,name="login"),
     path("book",views.book_tickets,name="book_tickets"),

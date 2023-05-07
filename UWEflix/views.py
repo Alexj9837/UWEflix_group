@@ -9,7 +9,7 @@ from UWEflix.forms import *
 from UWEflix.models import *
 from .models.upcoming import upcomings
 from .models.booking import Booking
-from .models.account import Users, Representitive, ClubPurchaseHistory, UserPurchaseHistory
+from .models.account import Users, Representitive, Account
 # from .forms import bookingForm
 from django.template.defaultfilters import date
 from datetime import datetime
@@ -523,57 +523,67 @@ def update_rep(request, pk):
 
 def delete_rep(request, pk):
     return CRUD_delete(request, pk, Representitive, "account_home")
+
+# # ACCOUNT MANAGER - View all transactions and select a month to create statement
+def view_statements(request):
+
+    # Check if the user is logged in
+    if not request.user.is_authenticated:
+        return redirect('/login')
+
+    # Check if the user has the correct permissions
+    if not request.user.has_perm('contenttypes.account_manager'):
+        return redirect('/')
+
+    # Get account ID
+    account = request.GET['account']
+    # Get account record
+    account_details = Account.objects.get(id=account)
     
-def selectStatement(request):
-    # userPayments = UserPurchaseHistory.objects.all()
-    # clubPayments = ClubPurchaseHistory.objects.all()
-    userList = Users.objects.all()
-    clubList = Club.objects.all()
+    # Get all transactions for account
+    if account:
+        club_representative = account_details.club.representative
+        payments = Booking.objects.filter(user=club_representative).order_by('showing__date')
+    else:
+        club_rep_ids = Club.objects.values_list('representative', flat=True)
+        payments = Booking.objects.filter(user__in=club_rep_ids).order_by('showing__date')
 
-    context = {
-        # 'userPayment': userPayments,
-        # 'clubPayments': clubPayments,
-        'userList': userList,
-        'clubList': clubList
-    }
+    # If viewing by month then go to month view with the required data
+    if request.method == 'POST':
+        if request.POST.get('account'):
+            account = request.POST['account']
+        else:
+            print('No Account Retrieved')
+            return redirect('account_home')
+        
+        if request.POST.get('month'):
+            month = request.POST['month']
+        else:
+            print('No Month Selected')
+            return redirect('account_home')
+        
+        return redirect('/monthly_statement?account=' + str(account) + '&month=' + str(month))
+        
 
-    return render(request, 'UWEflix/account_manager/select_statements.html',{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+    return render(request, 'account_statements.html', {'payments': payments, 'account_details': account_details, 'selected_club': account_details.club})
 
+# Create statement for month
+def monthly_statement(request):
+    # Check if the user is logged in
+    if not request.user.is_authenticated:
+        return redirect('/login')
+
+    # Check if the user has the correct permissions
+    if not request.user.has_perm('contenttypes.account_manager'):
+        return redirect('/')
     
-def viewUserStatements(request, userID):
-    history = UserPurchaseHistory.objects.filter(user__id=userID)
-    name = history[0].user.firstName + " " + history[0].user.lastName
-    total = {
-        'spent': 0,
-        'bought': 0
-    }
-
-    for statement in history:
-        total['spent'] += statement.totalCost
-        total['bought'] += statement.quantity
-
-    context = {
-        'history': history,
-        'total': total,
-        'name': name
-    }
+    # Get account and month to view transactions for
+    account = request.GET['account']
+    month = request.GET['month']
     
-def viewClubStatments(request, clubID):
-    history = ClubPurchaseHistory.objects.filter(club__id=clubID)
-    name = "the " + history[0].club.clubName + " Club"
-    total = {
-        'spent': 0,
-        'bought': 0
-    }
-
-    for statement in history:
-        total['spent'] += statement.totalCost
-        total['bought'] += statement.quantity
-
-    context = {
-        'history': history,
-        'total': total,
-        'name': name
-    }
-
-    return render(request, 'UWEflix/account_manager/view_statements.html',{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+    # Get all transactions for the specified month and account
+    account_details = Account.objects.get(id=account)
+    club_representative = account_details.club.representative
+    payments = Booking.objects.filter(user=club_representative).filter(showing__date__month=int(month)).order_by('showing__date')
+    
+    return render(request, 'monthly_statement.html', {'payments': payments, 'account_details': account_details, 'selected_club': account_details.club})
