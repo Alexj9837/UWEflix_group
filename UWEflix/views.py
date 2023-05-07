@@ -39,18 +39,49 @@ def get_header(request):
 
 
 def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect("home")
-        else:
-            return HttpResponse("User not valid")
-    else:
+     if request.method == 'POST':
+        try:
+            
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("home")
+            else:
+                return HttpResponse("User not valid")
+                # Handle guest user
+                #request.session['guest'] = True
+                #return redirect('home')
+        except:
+        
+            request.session['guest'] = True
+            return redirect('home')
+    
+     else:
         form = LoginForm()
         return render(request, "UWEflix/base/login.html", {"form": form})
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            password = form.cleaned_data.get('password1')
+            role = 'student'
+
+            user = Custom_user.objects.create_user(username=username, email=email, password=password,
+                                            first_name=first_name, last_name=last_name, role=role)
+            user.save()
+            # Log the user in.
+            #login(request, user)
+            return redirect('home')
+    else:
+        form = SignupForm()
+    return render(request, 'UWEflix/base/signup.html', {'form': form})
 
 
 def logout_view(request):
@@ -429,6 +460,8 @@ def bookingProcessing(request, id, pk, pi):
     if not request.user.is_authenticated and not request.session.get('guest'):
         return redirect('login')
     
+        
+    
     film = Film.objects.get(id=id)
     booking = Booking.objects.get(booking_id=pi)
 
@@ -443,6 +476,19 @@ def bookingProcessing(request, id, pk, pi):
         "total": total,
         "email": booking.email
     }
+
+    # if request.method == "POST":
+
+        # booking.card_number = int(request.POST.get("num"))
+        # booking.card_holder = request.POST.get("name")
+        # booking.card_expire_year = int(request.POST.get("exp_year"))
+        # booking.card_expire_month = int(request.POST.get("exp_date"))
+        # booking.card_cvc = int(request.POST.get("cvc"))
+
+        # booking.save()
+
+        # return redirect(f"/film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing/booking_payment/")
+        # return redirect(f"/film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing/booking_confirm")
 
     value = {'sessionId': ""}
 
@@ -470,6 +516,7 @@ def bookingProcessing(request, id, pk, pi):
                     'quantity': 1,
                 }],
             )
+            # return JsonResponse({'sessionId': checkout_session['id']})
             value = {'sessionId': checkout_session['id']}
         except Exception as e:
             return JsonResponse({'error': str(e)})
@@ -479,6 +526,7 @@ def bookingProcessing(request, id, pk, pi):
 
 def booking_confirm(request, id, pk, pi):
     return redirect(f"/film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing/booking_confirm")
+
 
 
 
@@ -492,7 +540,7 @@ def manage_account(request):
         return render(request, "UWEflix/cinema_booking_system/manage_account.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form})
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def booking_confirm(request, id, pk, pi):
     return render(request, 'UWEflix/customer/booking_confirm.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), })
 

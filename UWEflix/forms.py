@@ -4,11 +4,20 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row
 from .models.booking import Booking
 from .models.account import Users, Representitive
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(max_length=100, widget=forms.TextInput())
     password = forms.CharField(widget=forms.PasswordInput())
+
+class SignupForm(UserCreationForm):
+    email = forms.EmailField(max_length=254, required=True)
+    first_name = forms.CharField(max_length=30, required=True)
+    last_name = forms.CharField(max_length=30, required=True)
+
+    class Meta:
+        model = Custom_user
+        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
 
 class ClubForm(forms.ModelForm):
     class Meta:

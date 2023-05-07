@@ -55,7 +55,7 @@ urlpatterns = [
     path('monthly_statement', views.monthly_statement, name='monthly_statement'),    
     path("login",views.login_view,name="login"),
     path("book/<int:pk>",views.book_tickets,name="book_tickets"),
-    
+    path('signup/', views.signup, name='signup'),
     path("manage",views.manage_account,name="manage_account"),
     path("logout",views.logout_view,name="logout"),
 ]
