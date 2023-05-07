@@ -31,7 +31,7 @@ urlpatterns = [
     path("delete_user /<str:pk>",views.delete_user,name="delete_user"),
     path("delete_club /<str:pk>",views.delete_club,name="delete_club"),
     path("delete_film /<str:pk>/",views.delete_film,name="delete_film"),
-    path("delete_Showing /<str:pk>/",views.delete_showing,name="delete_Showing"),
+    path("delete_showing /<str:pk>/",views.delete_showing,name="delete_showing"),
     path("delete_screen /<str:pk>/",views.delete_screen,name="delete_screen"),
 
     path("view_rep",views.view_rep,name="view_rep"),
