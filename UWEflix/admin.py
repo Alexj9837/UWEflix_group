@@ -7,6 +7,7 @@ from .models.booking import Booking
 from .models.clubs import Club
 from .models.clubrep import ClubRepresentative
 from .models.ticket import Ticket
+from .models.user import Custom_user
 
 # Register your models here.
 admin.site.register(Club)
@@ -17,3 +18,4 @@ admin.site.register(upcomings)
 admin.site.register(Screen) 
 admin.site.register(Booking)
 admin.site.register(ClubRepresentative)
+admin.site.register(Custom_user)

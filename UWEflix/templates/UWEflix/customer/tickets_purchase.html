@@ -51,61 +51,10 @@
                     <th>Seat Number</th>
                     <td>Not Allocated</td>
                 </tr>
-                <!-- <tr>
-                    <th>Ticket Type</th>
-                    <td>
-                        <select id="cat" name="cat" class="form-select" aria-label="Default select example"
-                            style="width: 33%;" required>
-                            <option value="">Select Ticket Type</option>
-                            <option value="Adult">Adult</option>
-                            <option value="Children">Children</option>
-                            <option value="Student">Student</option>
-                        </select>
-
-                    </td>
-                </tr> -->
+                
                 <tr>
                     <th>Quantity</th>
-                    <!-- <td class="d-flex justify-content-start align-items-center gap-2 ">
-                        
-                        <button type="button" class="btn btn-link" onclick="increment()">
-                            <svg id="plus" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                <path
-                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                            </svg>
-                        </button>
-
-                        <div class="form-outline">
-                            <label class="form-label" for="formControlReadonly">Readonly</label>
-                            <input class="form-control" id="formControlReadonly" type="text" value="Readonly input here..."
-                                aria-label="readonly input example" readonly />
-                                <input   name="adult_num" value="1" style="width: 2%; border: 0px; background: white;" disabled />
-                        </div>
-
-                        <div>
-                            <label for="">Adult</label>
-                            <input  name="adult_num" value="1" style="width: 2%; border: 0px; background: white;" disabled />
-                        </div>
-                        
-                        <input type="hidden" name="num" id="quantity" value="1" >
-                        <div> Adult
-
-                            <span id="num" style="font-weight: 600; font-size: medium;"
-                            data-capacity="{{d.screen.capacity}}">
-                            1
-                        </span>
-                    </div>
-                        <button type="button" class="btn btn-link" onclick="decrement()">
-                            <svg id="minus" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-                            </svg>
-                        </button>
-                    
-                    </td> -->
+                   
 
                     <td>
 
@@ -171,6 +120,8 @@
 
                                 </div>
                             </div>
+
+                            {% if role == 'student' %}
                             <div style="display: inline-block;" >
                                 <label for="number-input" style="margin-left: 34px;" >Student</label>
                                 <div class="input-group" style="width: 40%;">
@@ -201,7 +152,38 @@
 
                                 </div>
                             </div>
+                            {% else %}
+                            <div style="display: none;" >
+                                <label for="number-input" style="margin-left: 34px;" >Student</label>
+                                <div class="input-group" style="width: 40%;">
 
+
+                                    <button type="button" id="student_plus" class="btn btn-link" onclick="increment()">
+                                        <svg id="plus" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                            <path
+                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                        </svg>
+                                    </button>
+
+                                    <input name="student_num" class="form-control" id="student_num" aria-label="Number input" value="0"
+                                        aria-describedby="negative-symbol positive-symbol" type="text"
+                                        style="border: 0px; background: white;">
+
+                                    <button type="button" id="student_minus"  class="btn btn-link" onclick="decrement()">
+                                        <svg id="minus" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                                        </svg>
+                                    </button>
+
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
 
 
@@ -230,15 +212,6 @@
             </tbody>
         </table>
 
-        <!-- <div class="form-group">
-            <label for="number-input">Adult</label>
-            <div class="input-group">
-                <span class="input-group-text" id="negative-symbol">-</span>
-                <input type="number" class="form-control" id="number-input" aria-label="Number input"
-                    aria-describedby="negative-symbol positive-symbol">
-                <span class="input-group-text" id="positive-symbol">+</span>
-            </div>
-        </div> -->
 
         <div class="d-flex justify-content-center align-items-center p-3 gap-3">
 
