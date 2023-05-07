@@ -21,7 +21,6 @@ from django.http.response import JsonResponse
 
 # Create your views here.
 
-
 def get_header(request):
     user = request.user
     if not request.user.is_anonymous:
@@ -36,7 +35,6 @@ def get_header(request):
     else:
         header_content = "UWEflix/base/header_base.html"
     return header_content
-
 
 def login_view(request):
      if request.method == 'POST':
@@ -203,7 +201,7 @@ def create_club(request):
 @login_required(login_url='/login')
 def view_club(request):
     user = request.user
-    if user.role == 'account manager':
+    if user.role == 'Cinema manager':
         return CRUD_view(request, Club, "UWEflix/cinema_manager/clubs/view_club.html")
     else:
         return redirect("home")
@@ -238,8 +236,11 @@ def create_film(request):
 
 @login_required(login_url='/login')
 def view_film(request):
-    return CRUD_view(request, Film, "UWEflix/cinema_manager/films/view_film.html")
-
+    user = request.user
+    if user.role == 'Cinema manager':
+        return CRUD_view(request, Film, "UWEflix/cinema_manager/films/view_film.html")
+    else:
+        return redirect("home")
 
 @login_required(login_url='/login')
 def update_film(request, pk):
@@ -269,7 +270,11 @@ def create_screen(request):
 
 @login_required(login_url='/login')
 def view_screen(request):
-    return CRUD_view(request, Screen, "UWEflix/cinema_manager/screens/view_screen.html")
+    user = request.user
+    if user.role == 'Cinema manager':
+        return CRUD_view(request, Screen, "UWEflix/cinema_manager/screens/view_screen.html")
+    else:
+        return redirect("home")
 
 
 @login_required(login_url='/login')
@@ -292,25 +297,31 @@ def delete_screen(request, pk):
 # ######### SHOWINGS ##################################
 # #####################################################
 
+# @login_required(login_url='/login')
+# def create_showing(request):
+#     form = showForm(request.POST or None)
+#     films = Film.objects.all()
+#     screens = Screen.objects.all()
+#     if request.method == "POST":
+#         if form.is_valid():
+#             show = Show.save(commit=False)
+#             show.save()
+#             return redirect("view_screen")
+#     else:
+#         form = showForm()
+#     return render(request, "UWEflix/cinema_manager/showings/create_showing.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "films": films, "screens": screens})
 
 @login_required(login_url='/login')
 def create_showing(request):
-    form = showForm(request.POST or None)
-    films = Film.objects.all()
-    screens = Screen.objects.all()
-    if request.method == "POST":
-        if form.is_valid():
-            show = Show.save(commit=False)
-            show.save()
-            return redirect("view_screen")
-    else:
-        form = showForm()
-    return render(request, "UWEflix/cinema_manager/showings/create_showing.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "films": films, "screens": screens})
-
+    return CRUD_create(request, showForm, "UWEflix/cinema_manager/create.html", "view_showing")
 
 @login_required(login_url='/login')
 def view_showing(request):
-    return CRUD_view(request, Show, "UWEflix/cinema_manager/showings/view_showing.html")
+    user = request.user
+    if user.role == 'Cinema manager':
+        return CRUD_view(request, Show, "UWEflix/cinema_manager/showings/view_showing.html")
+    else:
+        return redirect("home")
 
 
 @login_required(login_url='/login')
