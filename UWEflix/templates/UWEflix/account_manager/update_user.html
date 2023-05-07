@@ -1,0 +1,53 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data" style="border: 1px solid #ccc; padding: 10px;">
+  {% csrf_token %}
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="id">User ID: </label>
+      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+         id="id" type="text"
+         name="id" value="{{ users.id}}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="firstName">First Name: </label>
+      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+         id="firstName" type="text"
+         name="firstName" value="{{ users.firstName }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="lastName">Last Name: </label>
+      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+         id="lastName" type="text"
+         name="lastName" value="{{ users.lastName }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="dateOfBirth">Date Of Birth: </label>
+      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+         id="dateOfBirth" type="date"
+         name="dateOfBirth" value="{{ users.dateOfBirth }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="username">Username: </label>
+      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+         id="username" type="text"
+         name="username" value="{{ users.username }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="password">Password: </label>
+      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+         id="password" type="text"
+         name="password" value="{{ users.password }}">
+  </div>
+  <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+
+{% endblock %}
+
