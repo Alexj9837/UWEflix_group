@@ -532,7 +532,7 @@ def view_statements(request):
         return redirect('/login')
 
     # Check if the user has the correct permissions
-    if not request.user.has_perm('contenttypes.account_manager'):
+    if not request.user.has_perm('account manager'):
         return redirect('/')
 
     # Get account ID
@@ -574,7 +574,7 @@ def monthly_statement(request):
         return redirect('/login')
 
     # Check if the user has the correct permissions
-    if not request.user.has_perm('contenttypes.account_manager'):
+    if not request.user.has_perm('account manager'):
         return redirect('/')
     
     # Get account and month to view transactions for
