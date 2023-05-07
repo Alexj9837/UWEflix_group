@@ -1,91 +1,86 @@
-{%  extends 'UWEflix/base/base.html'%}
+{% extends 'UWEflix/base/base.html' %}
 
 {% block content %}
 
 <form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="name">name: </label>
+    {% csrf_token %}
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="name">name: </label>
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+          id="name" type="text"
+          name="name" value="{{ film.name }}">
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="current_image">Current image: </label>
+      {% if film.image %}
+          <img id="current_image" src="{{ film.image.url }}" alt="{{ film.name }}" width="100" height="150">
+      {% else %}
+          <p>No image</p>
+      {% endif %}
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="image">Update image: </label>
       <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="name" type="text"
-         name="name" value="{{ film.name }}">
-  </div>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="image">image: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="image" type="image"
-         name="image" value="{{ film.image }}">
-  </div>
-  <div class="form-group row">
+            id="image" type="file"
+            name="image">
+    </div>
+    <div class="form-group row">
       <label class="col-sm-2 col-form-label" for="date">date: </label>
       <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
          id="date" type="date"
-         name="date" value="{{ film.date }}">
-  </div>
-  <div class="form-group row">
+         name="date" value="{{ film.date|date:'Y-m-d' }}">
+    </div>
+    <div class="form-group row">
       <label class="col-sm-2 col-form-label" for="duration">duration: </label>
       <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
          id="duration" type="number"
          name="duration" value="{{ film.duration }}">
-  </div>
-  <input type="submit" value="Save" class="btn btn-primary">
-</form>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="type">type: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="type" type="text"
-         name="type" value="{{ film.type }}">
-  </div>
-  <input type="submit" value="Save" class="btn btn-primary">
-</form>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="language">language: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="language" type="text"
-         name="language" value="{{ film.language }}">
-  </div>
-  <input type="submit" value="Save" class="btn btn-primary">
-</form>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="rating">rating: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="rating" type="number"
-         name="rating" value="{{ film.rating }}">
-  </div>
-  <input type="submit" value="Save" class="btn btn-primary">
-</form>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="cast">cast: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="cast" type="text"
-         name="cast" value="{{ film.cast }}">
-  </div>
-  <input type="submit" value="Save" class="btn btn-primary">
-</form>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="trailer">trailer: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="trailer" type="text"
-         name="trailer" value="{{ film.trailer }}">
-  </div>
-  <input type="submit" value="Save" class="btn btn-primary">
-</form>
-  <div class="form-group row">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="type">type: </label>
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+               id="type" type="text"
+               name="type" value="{{ film.type }}">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="language">language: </label>
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+               id="language" type="text"
+               name="language" value="{{ film.language }}">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="rating">rating: </label>
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+               id="rating" type="number"
+               name="rating" value="{{ film.rating }}">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="cast">cast: </label>
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+               id="cast" type="text"
+               name="cast" value="{{ film.cast }}">
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="trailer">trailer: </label>
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+              id="trailer" type="text"
+              name="trailer" value="{{ film.trailer }}">
+    </div>
+    <div class="form-group row">
       <label class="col-sm-2 col-form-label" for="up">up: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+      <input class="form-check-input" style="margin-left: 15px;"
          id="up" type="checkbox"
-         name="up" value="{{ film.up }}">
-  </div>
-  <input type="submit" value="Save" class="btn btn-primary">
-</form>
-  <div class="form-group row">
-      <label class="col-sm-2 col-form-label" for="price">price: </label>
-      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
-         id="price" type="number"
-         name="price" value="{{ film.price }}">
-  </div>
-  <input type="submit" value="Save" class="btn btn-primary">
+         name="up" {% if film.up %}checked{% endif %}>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="price">price: </label>
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+              id="price" type="number"
+              name="price" value="{{ film.price }}">
+    </div>
+    <input type="submit" value="Save" class="btn btn-primary">
 </form>
 
 {% endblock %}
+
 

@@ -54,3 +54,10 @@ li
     list-style-type: none;
 }
 
+.content {
+  margin-top: 500px;
+}
+
+body {
+  padding-top: 150px; 
+}
