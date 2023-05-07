@@ -10,6 +10,9 @@ from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+import stripe
+from django.conf import settings
+from django.http.response import JsonResponse
 
 # Create your views here.
 
@@ -24,7 +27,7 @@ def get_header(request):
         elif user.role == 'club rep':
             header_content = "UWEflix/cinema_booking_system/header_cinema_booking_system.html"
         elif user.role == 'student':
-            "UWEflix/base/header_base.html"
+            header_content = "UWEflix/base/header_base.html"
     else:
         header_content = "UWEflix/base/header_base.html"
     return header_content
@@ -331,9 +334,16 @@ def book_tickets(request, pk):
         return render(request, "UWEflix/cinema_booking_system/book_show.html", context)
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def booking(request, id, pk):
 
+    # Check if user is logged in as a guest
+    #is_guest = request.session.get('guest', False)
+    #if not request.session.get('guest'):
+    if not request.user.is_authenticated and not request.session.get('guest'):
+        return redirect('login')
+    
+ 
     film = Film.objects.get(id=id)
     allShow = Show.objects.filter(film=film)
     show = Show.objects.get(show_id=pk)
@@ -367,9 +377,17 @@ def booking(request, id, pk):
     return render(request, 'UWEflix/customer/booking.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), 'details': details})
 
 
-@login_required(login_url='/login')
-def ticketsPurchase(request, id, pk):
 
+#@login_required(login_url='/login')
+def ticketsPurchase(request, id, pk):
+    
+    role = ''
+    if not request.user.is_authenticated and not request.session.get('guest'):
+        return redirect('login')
+
+    if request.user.is_authenticated:
+        role = request.user.role
+ 
     show = Show.objects.get(show_id=pk)
     film = Film.objects.get(id=id)
     timing = Show.objects.filter(film=film)
@@ -378,8 +396,7 @@ def ticketsPurchase(request, id, pk):
     bookedSeat = 0
 
     for seat in bookings:
-        bookedSeat = bookedSeat + seat.quantity_adult + \
-            seat.quantity_children + seat.quantity_student
+        bookedSeat = bookedSeat + seat.quantity_adult + seat.quantity_children + seat.quantity_student
 
     availableSeat = show.screen.capacity - bookedSeat
 
@@ -398,12 +415,15 @@ def ticketsPurchase(request, id, pk):
 
         return redirect(f"/film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing")
 
-    return render(request, 'UWEflix/customer/tickets_purchase.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "d": show, "f": film, "s": allShowDetails, "time": allShowDetails[pk], 'pk': pk, 'id': id, 'a': availableSeat})
+    return render(request, 'UWEflix/customer/tickets_purchase.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "d": show, "f": film, "s": allShowDetails, "time": allShowDetails[pk], 'pk': pk, 'id': id, 'a': availableSeat, 'role':role})
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def bookingProcessing(request, id, pk, pi):
 
+    if not request.user.is_authenticated and not request.session.get('guest'):
+        return redirect('login')
+    
     film = Film.objects.get(id=id)
     booking = Booking.objects.get(booking_id=pi)
 
@@ -419,23 +439,42 @@ def bookingProcessing(request, id, pk, pi):
         "email": booking.email
     }
 
-    if request.method == "POST":
+    value = {'sessionId': ""}
 
-        booking.card_number = int(request.POST.get("num"))
-        booking.card_holder = request.POST.get("name")
-        booking.card_expire_year = int(request.POST.get("exp_year"))
-        booking.card_expire_month = int(request.POST.get("exp_date"))
-        booking.card_cvc = int(request.POST.get("cvc"))
+    if request.method == 'POST':
+        domain_url = 'http://localhost:8000/'
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        print(f'{domain_url}media/{film.image}')
+        try:
+            checkout_session = stripe.checkout.Session.create(
+                # client_reference_id=request.user.id if request.user.is_authenticated else None,
+                success_url=domain_url + f"film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing/booking_confirm",
+                cancel_url=domain_url,
+                payment_method_types=['card'],
+                mode='payment',
+                line_items=[{
+                    'price_data': {
+                    'currency': 'gbp',
+                    'unit_amount': total['total'] * 100,
+                    'product_data': {
+                        'name': film.name,
+                        'description': film.type,
+                    },
+                    },
+                    #'quantity': total['Adult'] + total['Children'] + total['Student'],
+                    'quantity': 1,
+                }],
+            )
+            value = {'sessionId': checkout_session['id']}
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
 
-        booking.save()
-
-        return redirect(f"/film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing/booking_confirm")
-
-    return render(request, 'UWEflix/customer/booking_processing.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), 'details': details})
+    return render(request, 'UWEflix/customer/booking_processing.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), 'details': details , 'value' : value})
 
 
 def booking_confirm(request, id, pk, pi):
     return redirect(f"/film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing/booking_confirm")
+
 
 
 @login_required(login_url='/login')

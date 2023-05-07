@@ -99,7 +99,7 @@ try {
         price.innerHTML = total
     }
 } catch (e) {
-    console.log(e)
+    // console.log(e)
 }
 
 
@@ -116,7 +116,7 @@ try {
 
 
 } catch (error) {
-    console.log(error)
+    // console.log(error)
 }
 
 try {
@@ -131,5 +131,5 @@ try {
     }
 
 } catch (error) {
-    console.log(error)
+    // console.log(error)
 }
