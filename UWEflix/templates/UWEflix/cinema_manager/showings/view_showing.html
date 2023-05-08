@@ -19,7 +19,7 @@
           <td>{{ show.film }}</td>
           <td>{{ show.screen }}</td>
           <td>{{ show.date }}</td>
-          <td>{{ show.time }}</td>
+          <td>{{ show.time|time:'H:i' }}</td>
           <td>
             <form method="POST" action="{% url 'update_showing' show.show_id %}">
             {% csrf_token %}

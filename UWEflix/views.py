@@ -263,20 +263,6 @@ def delete_screen(request, pk):
 # ######### SHOWINGS ##################################
 # #####################################################
 
-# @login_required(login_url='/login')
-# def create_showing(request):
-#     form = showForm(request.POST or None)
-#     films = Film.objects.all()
-#     screens = Screen.objects.all()
-#     if request.method == "POST":
-#         if form.is_valid():
-#             show = Show.save(commit=False)
-#             show.save()
-#             return redirect("view_screen")
-#     else:
-#         form = showForm()
-#     return render(request, "UWEflix/cinema_manager/showings/create_showing.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "films": films, "screens": screens})
-
 @login_required(login_url='/login')
 def create_showing(request):
     return CRUD_create(request, showForm, "UWEflix/cinema_manager/create.html", "view_showing")
