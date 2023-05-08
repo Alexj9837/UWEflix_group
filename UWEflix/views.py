@@ -18,6 +18,7 @@ from django.contrib.auth.decorators import login_required
 import stripe
 from django.conf import settings
 from django.http.response import JsonResponse
+from django.contrib import messages
 
 # Create your views here.
 
@@ -179,6 +180,13 @@ def CRUD_view(request, model_class, template_name):
 def CRUD_delete(request, pk, model_class, redirect_url):
     if request.method == "POST":
         instance = model_class.objects.get(pk=pk)
+        if isinstance(instance, Screen) or isinstance(instance, Film):
+            has_showing = Show.objects.filter(screen=instance).exists() if isinstance(instance, Screen) else Show.objects.filter(film=instance).exists()
+            
+            if has_showing:
+                messages.error(request, "Cannot delete the screen or film as it is associated with a showing.")
+                return redirect(redirect_url)
+
         instance.delete()
         return redirect(redirect_url)
 
