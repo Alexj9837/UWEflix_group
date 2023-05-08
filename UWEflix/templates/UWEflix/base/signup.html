@@ -1,9 +1,44 @@
-
-{% block content %}
-<h2>Sign up</h2>
+{% load static %}
+<!-- <h2>Sign up</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Sign up</button>
-</form>
-{% endblock %}
+</form> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'UWEflix/login.css' %}" />
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+
+                <form method="POST" class="login100-form  p-l-55 p-r-55 p-t-178">
+                    <span class="login100-form-title">
+                        Sign Up
+                    </span>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="container-login100-form-btn" style="margin: 20px 0px 20px 0px;">
+                        <button style="backgroud-color: #218cc9" type="submit" class="login100-form-btn">Sign Up</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
