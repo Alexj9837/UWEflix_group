@@ -1,0 +1,47 @@
+{% extends 'UWEflix/base/base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="container mt-1">
+    <div class="row col-sm-6 mx-auto p-2">
+        
+        <h1 class="text-center">Login</h1>
+        <hr>
+        <form action="{% url 'login_page' %}" method="post" class="shadow p-5 mx-auto col-sm-12">
+            {% csrf_token %}
+            {% for fm in form %}
+            <div class="form-group p-2">
+                {{fm.label_tag}} {{fm}}
+                <small class="text-danger">
+                    {{fm.errors|striptags}}
+                </small>
+                <br>
+            </div>
+            {% endfor %}
+
+            {% if messages%}
+            <ul class="messages">
+                {% for message in messages%}
+                <li>
+                {{ message }}
+                </li>
+                {%endfor%}
+            </ul>
+            {% endif %}
+            
+            <div class="text-center">
+                <input type="submit" class="btn btn-success mt-4" value="Login">
+            </div>
+            <br>
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            <p class="alert alert-danger my-3">{{error}}</p>
+            {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

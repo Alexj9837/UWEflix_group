@@ -1,7 +1,8 @@
 from django import forms
-from .models import *
+from UWEflix.models import Booking, Club, Screen, Show, Film
+
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row
+from crispy_forms.layout import Layout, Submit, Row, Column
 from .models.booking import Booking
 from .models.account import Users, Representitive
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -70,7 +71,6 @@ class ClubForm(forms.ModelForm):
             "dob",
         ]
 
-
 class filmForm(forms.ModelForm):
     class Meta:
         model = Film
@@ -88,6 +88,33 @@ class filmForm(forms.ModelForm):
             "price",
 
         ]
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = Users
+        fields = [
+            "first_name",
+            "last_name",
+            "DateOfBirth",
+            "username",
+            "password",
+            "role",
+            "id",
+        ]
+
+class RepForm(forms.ModelForm):
+    class Meta:
+        model = Representitive
+        fields = [
+            "first_name",
+            "last_name",
+            "DateOfBirth",
+            "username",
+            "password",
+            "role",
+            "id",
+        ]
+
 
 
 class screenForm(forms.ModelForm):
@@ -144,41 +171,12 @@ class TicketPurchaseForm(forms.Form):
         if not show and not payment_details:
             raise forms.ValidationError('You have to write something!')
 
-class RepForm(forms.ModelForm):
-    # Form for representitive
-    class Meta:
-        model = Representitive
-        fields = [
-            "firstName",
-            "lastName",
-            "DateOfBirth",
-            "password",
-        ]
-        widgets = {
-            'password': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter a password',
-                    'type': 'password'
-                }
-            )
-        }
-
-class UserForm(forms.ModelForm):
-    # Form for User model
-    class Meta:
-        model = Users
-        fields = '__all__'
-        widgets = {
-            'dateOfBirth': forms.DateInput(
-                format=('%Y-%m-%d'),
-                attrs={'class': 'form-control',
-                    'placeholder': 'Select a date',
-                    'type': 'date'
-                }),
-            'password': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter a password',
-                    'type': 'password'
-                }
-            )
-        }
+class  LoginForm(forms.Form):
+    rep_no = forms.CharField(label='Representative Number', max_length=255)
+    password = forms.CharField(label='Password', max_length=255, widget=forms.PasswordInput)
+    def clean(self):
+        cleaned_data = super().clean()
+        rep_no = cleaned_data.get('rep_no')
+        password = cleaned_data.get('password')
+        if not rep_no and not password:
+            raise forms.ValidationError('You have to write something!')
