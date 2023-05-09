@@ -8,34 +8,42 @@
     {% csrf_token %}
     {{form.errors}}
     <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="id">User ID: </label>
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+           id="id" type="text"
+           name="id" value="{{ Custom_user.id}}">
+    </div>
+    <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="firstName">First Name: </label>
-        <input class="form-control col-sm-10"'
-        id="firstName" type="text"
-        name="firstName" value="{{ object.firstName }}">
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+           id="firstName" type="text"
+           name="firstName" value="{{ Custom_user.firstName }}">
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="lastName">Last Name: </label>
-        <input class="form-control col-sm-10"'
-        id="lastName" type="text"
-        name="lastName" value="{{ object.lastName }}">
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="dateOfBirth">Date Of Birth: </label>
-        <input class="form-control col-sm-10"'
-        id="dateOfBirth" type="date"
-        name="dateOfBirth" value="{{ object.dateOfBirth }}">
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+           id="lastName" type="text"
+           name="lastName" value="{{ Custom_user.lastName }}">
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="username">Username: </label>
-        <input class="form-control col-sm-10"'
-        id="username" type="text" name="username" value="{{ object.username }}">
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+           id="username" type="text"
+           name="username" value="{{ Custom_user.username }}">
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="password">Password: </label>
-        <input class="form-control col-sm-10"'
-        id="password" type="text" name="password" value="{{ object.password }}">
+        <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+           id="password" type="text"
+           name="password" value="{{ Custom_user.password }}">
     </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="Role">Role: </label>
+      <input class="form-control rounded-pill" style="border-radius: 20px; width: 50%;"
+         id="role" type="text"
+         name="role" value="{{ Custom_user.role }}">
+  </div>
     <input type="submit" value="Save" class="btn btn-primary">
-</form>
+  </form>
 
 {% endblock %}

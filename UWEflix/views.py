@@ -439,7 +439,7 @@ def booking_confirm(request, id, pk, pi):
 #Account Manager Home Page
 @login_required(login_url='/login')
 def account_home(request):
-    users = Users.objects.all()
+    users = Custom_user.objects.all()
     reps = Representitive.objects.all()
     return render(request, "UWEflix/account_manager/account_home.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "users": users, "reps": reps})
 
@@ -472,25 +472,24 @@ def createUser(request):
 def view_user(request):
     user = request.user
     if user.role == 'account manager':
-        return CRUD_view(request, Users, "UWEflix/account_manager/user/view_user.html")
+        return CRUD_view(request, Custom_user, "UWEflix/account_manager/user/view_user.html")
     else:
         return redirect("account_home")
 
 @login_required(login_url='/login')
 def update_user(request, pk):
-    user = Users.objects.get(pk=pk)
+    user = Custom_user.objects.get(pk=pk)
     form = UserForm(request.POST, instance=user)
     if request.method == "POST":
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
             return redirect("account_home")
-
     return render(request, 'UWEflix/account_manager/user/update_user.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "user": user})
 
 @login_required(login_url='/login')
 def delete_user(request, pk):
-    return CRUD_delete(request, pk, Users, "account_home")
+    return CRUD_delete(request, pk, Custom_user, "account_home")
 
 #CRUD for Rep
 @login_required(login_url='/login')

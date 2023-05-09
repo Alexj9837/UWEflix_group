@@ -98,22 +98,26 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = Users
         fields = [
-            "firstName",
-            "lastName",
-            "dateOfBirth",
+            "first_name",
+            "last_name",
+            "DateOfBirth",
             "username",
             "password",
+            "role",
+            "id",
         ]
 
 class RepForm(forms.ModelForm):
     class Meta:
         model = Representitive
         fields = [
-            "firstName",
-            "lastName",
+            "first_name",
+            "last_name",
             "DateOfBirth",
             "username",
             "password",
+            "role",
+            "id",
         ]
 
 

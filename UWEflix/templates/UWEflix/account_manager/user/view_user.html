@@ -8,20 +8,20 @@
         <th>User ID</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Date Of Birth</th>
         <th>Username</th>
         <th>Password</th>
+        <th>role</th>
       </tr>
     </thead>
     <tbody>
       {% for object in objects %}
         <tr>
           <td>{{ object.id }}</td>
-          <td>{{ object.firstName }}</td>
-          <td>{{ object.lastName }}</td>
-          <td>{{ object.dateOfBirth }}</td>
+          <td>{{ object.first_name }}</td>
+          <td>{{ object.last_name }}</td>
           <td>{{ object.username }}</td>
           <td>{{ object.password }}</td>
+          <td>{{ object.role }}</td>
           <td>
             <form method="POST" action="{% url 'update_user' object.id %}">
             {% csrf_token %}
