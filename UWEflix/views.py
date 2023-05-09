@@ -8,15 +8,13 @@ from UWEflix.models import *
 from .models.upcoming import upcomings
 from .models.booking import Booking
 # from .forms import bookingForm
+
 from django.template.defaultfilters import date
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 
 # Create your views here.
 
@@ -252,16 +250,6 @@ def update_screen(request, pk):
     return render(request, "UWEflix/cinema_manager/screens/update_screen.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "screen": screen})
 
 
-def login(request):
-    form = LoginForm(request.POST or None)
-    
-    if request.method == "POST":
-        #Logic for logging in
-        return redirect('home')
-    else:
-        form = showForm()
-    return render(request, "UWEflix/cinema_manager/showings/create_showing.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "films": films, "screens": screens})
-
 
 @login_required(login_url='/login')
 def view_showing(request):
@@ -289,8 +277,11 @@ def delete_showing(request, pk):
 # #####################################################
 
 
-@login_required(login_url='/login')
-def book_tickets(request):
+def book_tickets(request, pk):
+    show = Show.objects.get(show_id=pk)
+    current_user = request.user
+    club_rep = ClubRepresentative.objects.get(user=current_user.id)
+
     if request.method == "POST":
 
         bookings = Booking.objects.filter(show=show)
@@ -425,8 +416,7 @@ def bookingProcessing(request, id, pk, pi):
 
     return render(request, 'UWEflix/customer/booking_processing.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), 'details': details})
 
-def booking_confirm(request,id,pk,pi):
-    return redirect(f"/film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing/booking_confirm")
+
 @login_required(login_url='/login')
 def manage_account(request):
     form = ClubRegistrationForm(request.POST or None)

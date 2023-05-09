@@ -11,6 +11,9 @@ from UWEflix.models.clubrep import ClubRepresentative
 from UWEflix.models.film import Film
 from UWEflix.models.show import Show
 from UWEflix.models.ticket import Ticket
+from .models.clubs import Club
+from .models.clubrep import ClubRepresentative
+from .models.ticket import Ticket
 
 # Register your models here.
 admin.site.register(Club)
