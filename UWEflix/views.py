@@ -408,6 +408,7 @@ def booking(request, id, pk):
             details.time), '%H:%M:%S').strftime('%I:%M %p'), not details.screen.capacity > sum_dict[details.show_id]])
 
     details = {
+        'id' : id,
         'show': show,
         'film': film.name,
         'currentWeekName': date(show.date, "D"),

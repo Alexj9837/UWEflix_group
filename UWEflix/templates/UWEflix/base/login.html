@@ -1,13 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-<form method="POST" class="log-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <div class="text-center">
-    <button type="submit" class="btn btn-outline-secondary">Submit</button>
-</div>
-</form>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'UWEflix/login.css' %}" />
+  <title>Login</title>
+</head>
 
-<form method="post">
-    {% csrf_token %}
-    <input type="submit" value="Continue as guest">
-</form>
+<body>
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+
+        <form method="POST" class="login100-form  p-l-55 p-r-55 p-t-178">
+          <span class="login100-form-title">
+            Sign In
+          </span>
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="container-login100-form-btn">
+            <button type="submit" class="login100-form-btn">Submit</button> 
+          </div> 
+        </form>
+
+        <form method="post">{% csrf_token %}
+          <div class="flex-col-c p-t-170 p-b-40 ">
+            <div style="display: inline-block;">
+              <a style="color:black;" href="{% url 'signup' %}" class="txt2">Sign up</a> 
+              <a style="color:black;" href="{% url 'home' %}" class="txt2">Home</a>
+              {% comment %} <a style="color:black;" href="javascript:history.back()" class="txt2">Go back</a> {% endcomment %}
+            </div><br>
+            <button type="submit" class="txt3 ">
+              Sign In As Guest
+            </button>
+          
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
