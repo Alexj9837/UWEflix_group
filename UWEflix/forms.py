@@ -8,7 +8,7 @@ from .models.account import Users, Representitive
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.html import format_html
 from django.forms.widgets import TextInput, PasswordInput
-
+from .models.user import Custom_user
 
     
 class LoginForm(AuthenticationForm):
@@ -91,11 +91,10 @@ class filmForm(forms.ModelForm):
 
 class UserForm(forms.ModelForm):
     class Meta:
-        model = Users
+        model = Custom_user
         fields = [
             "first_name",
             "last_name",
-            "DateOfBirth",
             "username",
             "password",
             "role",
@@ -108,7 +107,6 @@ class RepForm(forms.ModelForm):
         fields = [
             "first_name",
             "last_name",
-            "DateOfBirth",
             "username",
             "password",
             "role",
