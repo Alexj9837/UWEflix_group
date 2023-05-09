@@ -38,7 +38,6 @@ class Representitive(models.Model):
     firstName = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)
     DateOfBirth = models.DateField()
-    clubID = models.ForeignKey(Club, on_delete=models.CASCADE)
 
     def encryptPassword(self, plainPassword):
         self.password = make_password(plainPassword)
