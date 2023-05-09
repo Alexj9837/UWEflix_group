@@ -58,7 +58,7 @@ def logout_view(request):
 
 
 def home(request):
-    movie = films.objects.all()
+    movie = Film.objects.all()
     return render(request, "UWEflix/customer/home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", "movie" : movie})
 
 

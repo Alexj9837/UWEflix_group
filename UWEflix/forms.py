@@ -2,7 +2,7 @@ from django import forms
 from UWEflix.models import Booking, Club, Screen, Show, Film
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row
+from crispy_forms.layout import Layout, Submit, Row, Column
 from .models.booking import Booking
 from .models.account import Users, Representitive
 from django.contrib.auth.forms import AuthenticationForm
@@ -76,7 +76,45 @@ class ClubForm(forms.ModelForm):
             "dob",
         ]
 
+class filmForm(forms.ModelForm):
+    class Meta:
+        model = Film
+        fields = [
+            "name",
+            "image",
+            "date",
+            "duration",
+            "type",
+            "language",
+            "rating",
+            "cast",
+            "trailer",
+            "up",
+            "price",
 
+        ]
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = Users
+        fields = [
+            "firstName",
+            "lastName",
+            "dateOfBirth",
+            "username",
+            "password",
+        ]
+
+class RepForm(forms.ModelForm):
+    class Meta:
+        model = Representitive
+        fields = [
+            "firstName",
+            "lastName",
+            "DateOfBirth",
+            "username",
+            "password",
+        ]
 
 
 
