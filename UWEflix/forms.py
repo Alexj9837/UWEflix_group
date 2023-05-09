@@ -58,6 +58,7 @@ class ClubForm(forms.ModelForm):
         model = Club
         fields = [
             "club_name",
+            "discount",
             "street_number",
             "street",
             "city",
@@ -153,6 +154,7 @@ class RepForm(forms.ModelForm):
             "lastName",
             "DateOfBirth",
             "password",
+            "clubID",
         ]
         widgets = {
             'password': forms.TextInput(

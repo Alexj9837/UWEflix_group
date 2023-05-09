@@ -41,10 +41,11 @@
       </ul>
       <div class="col-md-3 text-end">
         {% if user.is_authenticated %}
-        <button type="button" class="btn btn-outline-primary me-2">Manage Account</button>
-        <button type="button" class="btn btn-outline-primary me-2">Logout</button>
+        <a class="btn btn-outline-primary me-2" href="{% url 'manage_account' %}">Manage Account</a>
+        <a class="btn btn-outline-primary me-2" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a class="btn btn-outline-primary me-2" href="{% url 'login' %}">Login</a>
         {% endif %}
-        <button type="button" class="btn btn-outline-primary me-2" href="{% url 'login_page' %}">Login</button>
       </div>
     </header>
     

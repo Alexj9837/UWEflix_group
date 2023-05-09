@@ -16,11 +16,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 import stripe
+import random
+import string
 from django.conf import settings
 from django.http.response import JsonResponse
-from django.contrib import messages
 
 # Create your views here.
+
 
 def get_header(request):
     user = request.user
@@ -36,6 +38,7 @@ def get_header(request):
     else:
         header_content = "UWEflix/base/header_base.html"
     return header_content
+
 
 def login_view(request):
      if request.method == 'POST':
@@ -85,6 +88,7 @@ def signup(request):
 
 def logout_view(request):
     logout(request)
+    print(logout)
     return redirect("home")
 
 
@@ -144,7 +148,7 @@ def upcoming_details(request, id):
 # #####################################################
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def CRUD_create(request, form_class, template_name, redirect_url):
     form = form_class(request.POST or None)
 
@@ -161,32 +165,25 @@ def CRUD_create(request, form_class, template_name, redirect_url):
     return render(request, template_name, context)
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def CRUD_view(request, model_class, template_name):
     user = request.user
-    if user.role == 'Cinema manager' or user == 'account manager':
-        objects = model_class.objects.all()
-        context = {
-            "objects": objects,
-            "footer_content": "UWEflix/base/footer_base.html",
-            "header_content": get_header(request),
-        }
-        return render(request, template_name, context)
-    else:
-        return redirect("home")
+    #if user.role == 'Cinema manager' or user == 'account manager':
+    objects = model_class.objects.all()
+    context = {
+        "objects": objects,
+        "footer_content": "UWEflix/base/footer_base.html",
+        "header_content": get_header(request),
+    }
+    return render(request, template_name, context)
+    #else:
+    return redirect("home")
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def CRUD_delete(request, pk, model_class, redirect_url):
     if request.method == "POST":
         instance = model_class.objects.get(pk=pk)
-        if isinstance(instance, Screen) or isinstance(instance, Film):
-            has_showing = Show.objects.filter(screen=instance).exists() if isinstance(instance, Screen) else Show.objects.filter(film=instance).exists()
-            
-            if has_showing:
-                messages.error(request, "Cannot delete the screen or film as it is associated with a showing.")
-                return redirect(redirect_url)
-
         instance.delete()
         return redirect(redirect_url)
 
@@ -201,21 +198,21 @@ def CRUD_delete(request, pk, model_class, redirect_url):
 # #####################################################
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def create_club(request):
     return CRUD_create(request, ClubForm, "UWEflix/cinema_manager/create.html", "view_club")
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def view_club(request):
     user = request.user
-    if user.role == 'Cinema manager':
-        return CRUD_view(request, Club, "UWEflix/cinema_manager/clubs/view_club.html")
-    else:
-        return redirect("home")
+    #if user.role == 'account manager':
+    return CRUD_view(request, Club, "UWEflix/cinema_manager/clubs/view_club.html")
+    #else:
+    return redirect("home")
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def update_club(request, pk):
     club = Club.objects.get(pk=pk)
     form = ClubForm(request.POST, instance=club)
@@ -228,7 +225,7 @@ def update_club(request, pk):
     return render(request, 'UWEflix/cinema_manager/clubs/update_club.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "club": club})
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def delete_club(request, pk):
     return CRUD_delete(request, pk, Club, "view_club")
 
@@ -237,20 +234,17 @@ def delete_club(request, pk):
 # #####################################################
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def create_film(request):
     return CRUD_create(request, filmForm, "UWEflix/cinema_manager/create.html", "view_film")
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def view_film(request):
-    user = request.user
-    if user.role == 'Cinema manager':
-        return CRUD_view(request, Film, "UWEflix/cinema_manager/films/view_film.html")
-    else:
-        return redirect("home")
+    return CRUD_view(request, Film, "UWEflix/cinema_manager/films/view_film.html")
 
-@login_required(login_url='/login')
+
+#@login_required(login_url='/login')
 def update_film(request, pk):
     film = Film.objects.get(pk=pk)
     form = filmForm(request.POST, instance=film)
@@ -262,7 +256,7 @@ def update_film(request, pk):
     return render(request, "UWEflix/cinema_manager/films/update_film.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "film": film})
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def delete_film(request, pk):
     return CRUD_delete(request, pk, Film, "view_film")
 
@@ -271,21 +265,17 @@ def delete_film(request, pk):
 # #####################################################
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def create_screen(request):
     return CRUD_create(request, screenForm, "UWEflix/cinema_manager/create.html", "view_screen")
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def view_screen(request):
-    user = request.user
-    if user.role == 'Cinema manager':
-        return CRUD_view(request, Screen, "UWEflix/cinema_manager/screens/view_screen.html")
-    else:
-        return redirect("home")
+    return CRUD_view(request, Screen, "UWEflix/cinema_manager/screens/view_screen.html")
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def update_screen(request, pk):
     screen = Screen.objects.get(pk=pk)
     form = screenForm(request.POST, instance=screen)
@@ -297,7 +287,7 @@ def update_screen(request, pk):
     return render(request, "UWEflix/cinema_manager/screens/update_screen.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "screen": screen})
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
 def delete_screen(request, pk):
     return CRUD_delete(request, pk, Screen, "view_screen")
 
@@ -305,20 +295,28 @@ def delete_screen(request, pk):
 # ######### SHOWINGS ##################################
 # #####################################################
 
-@login_required(login_url='/login')
+
+#@login_required(login_url='/login')
 def create_showing(request):
-    return CRUD_create(request, showForm, "UWEflix/cinema_manager/create.html", "view_showing")
-
-@login_required(login_url='/login')
-def view_showing(request):
-    user = request.user
-    if user.role == 'Cinema manager':
-        return CRUD_view(request, Show, "UWEflix/cinema_manager/showings/view_showing.html")
+    form = showForm(request.POST or None)
+    films = Film.objects.all()
+    screens = Screen.objects.all()
+    if request.method == "POST":
+        if form.is_valid():
+            show = Show.save(commit=False)
+            show.save()
+            return redirect("view_screen")
     else:
-        return redirect("home")
+        form = showForm()
+    return render(request, "UWEflix/cinema_manager/showings/create_showing.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "films": films, "screens": screens})
 
 
-@login_required(login_url='/login')
+#@login_required(login_url='/login')
+def view_showing(request):
+    return CRUD_view(request, Show, "UWEflix/cinema_manager/showings/view_showing.html")
+
+
+#@login_required(login_url='/login')
 def update_showing(request, pk):
     show = Show.objects.get(pk=pk)
     form = showForm(request.POST, instance=show)
@@ -330,7 +328,7 @@ def update_showing(request, pk):
     return render(request, "UWEflix/cinema_manager/showings/update_showing.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "show": show})
 
 
-@login_required(login_url='/login')
+##@login_required(login_url='/login')
 def delete_showing(request, pk):
     return CRUD_delete(request, pk, Show, "view_showing")
 
@@ -342,7 +340,7 @@ def delete_showing(request, pk):
 def book_tickets(request, pk):
     show = Show.objects.get(show_id=pk)
     current_user = request.user
-    club_rep = ClubRepresentative.objects.get(user=current_user.id)
+    club_rep = Representitive.objects.get(user=current_user.id)
 
     if request.method == "POST":
 
@@ -375,7 +373,7 @@ def book_tickets(request, pk):
         return render(request, "UWEflix/cinema_booking_system/book_show.html", context)
 
 
-#@login_required(login_url='/login')
+##@login_required(login_url='/login')
 def booking(request, id, pk):
 
     # Check if user is logged in as a guest
@@ -408,7 +406,6 @@ def booking(request, id, pk):
             details.time), '%H:%M:%S').strftime('%I:%M %p'), not details.screen.capacity > sum_dict[details.show_id]])
 
     details = {
-        'id' : id,
         'show': show,
         'film': film.name,
         'currentWeekName': date(show.date, "D"),
@@ -534,16 +531,17 @@ def booking_confirm(request, id, pk, pi):
     return redirect(f"/film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing/booking_confirm")
 
 
-
-
-@login_required(login_url='/login')
 def manage_account(request):
-    form = ClubRegistrationForm(request.POST or None)
+    pk = request.user.pk
+    rep = Representitive.objects.get(pk=pk)
+    form = RepForm(request.POST, instance=rep)
     if request.method == "POST":
-        # update request for account
-        return redirect('home')
-    else:
-        return render(request, "UWEflix/cinema_booking_system/manage_account.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form})
+        if form.is_valid():
+            rep = form.save(commit=False)
+            rep.save()
+            return redirect("account_home")
+
+    return render(request, 'UWEflix/account_manager/update_rep.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "rep": rep})
 
 
 #@login_required(login_url='/login')
@@ -621,17 +619,28 @@ def createRep(request):
         rep = repForm.save(commit=False)
         rep.encryptPassword(repForm.cleaned_data['password'])
         repForm.save()
+
+        rep_no = random.randint(100000, 999999)
+        letters = string.ascii_lowercase
+        password = ''.join(random.choice(letters) for i in range(6))
+
+        print(rep_no)
+        print(password)
+
+        rep = Custom_user.objects.create_user(username=rep_no, password=password, role='club rep')
+        rep.save()
+
         return redirect("account_home")
     else:
         print("Form is not valid")
         return render(request, "UWEflix/account_manager/create_rep.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
     
 def view_rep(request):
-    rep = request.rep
-    if rep.role == 'account manager':
-        return CRUD_view(request, Representitive, "UWEflix/account_manager/view_rep.html")
-    else:
-        return redirect("account_home")
+    #rep = request.rep
+    #if rep.role == 'account manager':
+    return CRUD_view(request, Representitive, "UWEflix/account_manager/view_rep.html")
+    #else:
+    return redirect("account_home")
 
 
 def update_rep(request, pk):
