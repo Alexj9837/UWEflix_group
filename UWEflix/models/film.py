@@ -13,6 +13,8 @@ class Film(models.Model):
     up = models.BooleanField(default=False)#input = checkbox
     price = models.IntegerField(default=0)#input = nuber
 
+    def __str__(self):
+        return f'Film: "{self.name}"'
 
 
 

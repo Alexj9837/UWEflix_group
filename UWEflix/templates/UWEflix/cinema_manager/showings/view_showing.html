@@ -13,24 +13,24 @@
       </tr>
     </thead>
     <tbody>
-      {% for showing in showings %}
+      {% for show in objects %}
         <tr>
           <td>{{ show.show_id }}</td>
           <td>{{ show.film }}</td>
           <td>{{ show.screen }}</td>
           <td>{{ show.date }}</td>
-          <td>{{ show.time }}</td>
+          <td>{{ show.time|time:'H:i' }}</td>
           <td>
-            <form method="POST" action="{% url 'update_club' club.clubID %}">
+            <form method="POST" action="{% url 'update_showing' show.show_id %}">
             {% csrf_token %}
-            <input type="hidden" name="pk" value="{{ club.pk }}">
+            <input type="hidden" name="pk" value="{{ show.pk }}">
             <button type="submit" class="btn btn-primary">Update Show</button>
           </form>
           </td>
           <td>
-            <form method="POST" action="{% url 'delete_club' club.clubID%}">
+            <form method="POST" action="{% url 'delete_showing' show.show_id%}">
               {% csrf_token %}
-              <input type="hidden" name="pk" value="{{ club.pk }}">
+              <input type="hidden" name="pk" value="{{ show.pk }}">
               <button type="submit" class="btn btn-danger">Delete Show</button>
             </form>
           </td>
