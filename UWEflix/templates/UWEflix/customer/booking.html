@@ -32,7 +32,7 @@
         {% if details.show.show_id == time.0 %}
 
 
-        <button onclick="window.location.href='/film_details/10/booking/{{time.0}}'" data-dis="{{time.2}}"
+        <button onclick="window.location.href='/film_details/1/booking/{{time.0}}'" data-dis="{{time.2}}"
             class=" dis time-slot-active" style="text-decoration: none;">
             <span class="d-flex justify-content-center align-items-center">
                 <b style="font-size: large;">
@@ -53,7 +53,7 @@
         </a> -->
         {% else %}
 
-        <button onclick="window.location.href='/film_details/10/booking/{{time.0}}'" data-dis="{{time.2}}"
+        <button onclick="window.location.href='/film_details/1/booking/{{time.0}}'" data-dis="{{time.2}}"
             class=" dis time-slot-inactive" style="text-decoration: none;">
             <div class="d-flex justify-content-center align-items-center" style=" position: relative;"" >
                 <b style="font-size: large;">
@@ -88,7 +88,7 @@
 
 {% endfor %}
 
-<div class="d-flex justify-content-center align-items-center p-5">
+<div class="d-flex justify-content-center align-items-center p-5 gap-3">
 
     <button class="button"  style="border: 0px; background-color: #990f02;"  onclick="window.history.go(-1); return false;">
     

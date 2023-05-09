@@ -5,15 +5,49 @@ from crispy_forms.layout import Layout, Submit, Row
 from .models.booking import Booking
 from .models.account import Users, Representitive
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.utils.html import format_html
+from django.forms.widgets import TextInput, PasswordInput
 
+
+    
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(max_length=100, widget=forms.TextInput())
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
+        'class' : 'input100',
+        'placeholder' : "Username"
+    }))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class' : 'input100',
+        'placeholder' : "Password"
+    }))
 
 class SignupForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, required=True)
-    first_name = forms.CharField(max_length=30, required=True)
-    last_name = forms.CharField(max_length=30, required=True)
+    email = forms.EmailField(max_length=254, required=True , widget=forms.TextInput(attrs={
+        'class' : 'input100',
+        'placeholder' : "Email"
+    }))
+    first_name = forms.CharField(max_length=30, required=True ,widget=forms.TextInput(attrs={
+        'class' : 'input100',
+        'placeholder' : "First Name"
+    }))
+    last_name = forms.CharField(max_length=30, required=True,widget=forms.TextInput(attrs={
+        'class' : 'input100',
+        'placeholder' : "Last Name"
+    }))
+
+    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
+        'class' : 'input100',
+        'placeholder' : "Username"
+    }))
+
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class' : 'input100',
+        'placeholder' : "Password"
+    }))
+
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class' : 'input100',
+        'placeholder' : "Confirm Password"
+    }))
 
     class Meta:
         model = Custom_user
