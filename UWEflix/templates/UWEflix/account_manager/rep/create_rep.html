@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<title>Create new user</title>
+<title>Create a Club Representitive Account</title>
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -20,15 +20,10 @@
         name="lastName" value="{{ object.lastName }}">
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="dateOfBirth">Date Of Birth: </label>
+        <label class="col-sm-2 col-form-label" for="DateOfBirth">Date Of Birth: </label>
         <input class="form-control col-sm-10"'
-        id="dateOfBirth" type="date"
-        name="dateOfBirth" value="{{ object.dateOfBirth }}">
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="username">Username: </label>
-        <input class="form-control col-sm-10"'
-        id="username" type="text" name="username" value="{{ object.username }}">
+        id="DateOfBirth" type="date"
+        name="DateOfBirth" value="{{ object.DateOfBirth }}">
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="password">Password: </label>

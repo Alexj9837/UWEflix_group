@@ -1,92 +1,23 @@
 {% extends 'UWEflix/base/base.html' %}
+{% load static %}
 
 {% block content %}
-<br>
-<br>
-<br>
-<br>
-<title>Account Manager Home Page</title>
+
+<link rel="stylesheet" type="text/css" href="{% static 'account.css' %}">
+
 
 {% if message %}
 <div class="alert">{{ message }}</div>
 {% endif %}
 
-{% if users %}
-    <br>
-    <br>
+<h3>Welcome Account Manager</h3>
 
-    <h3><strong>All Users</strong></h3>
-
-    <table>
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Date of Birth</th>
-                <th>Username</th>
-                <th>Actions</th> <!-- New column for the update button -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-                <tr>
-                    <td>{{ user.firstName }}</td>
-                    <td>{{ user.lastName }}</td>
-                    <td>{{ user.dateOfBirth }}</td>
-                    <td>{{ user.username }}</td>
-                    <td><a href="{% url 'update_user' pk=user.pk %}" class="btn btn-primary">Update</a></td>
-                    <td><a href="{% url 'delete_user' pk=user.pk %}" class="btn btn-primary">Delete</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-{% else %}
-    <p>There are no users</p>
-{% endif %}
+<p>Please click on the buttons if wish to view a user, representative or club:</p>
 
 <br>
-<!-- Create User button -->
-<a href="{% url 'create_user' %}" class="btn btn-primary">Create User</a>
+<a href="{% url 'view_user' %}" class="btn btn-primary">View User</a>
 
-{% if reps %}
-    <br>
-    <br>
-    <h3><strong>All Representitives</strong></h3>
+<a href="{% url 'view_rep' %}" class="btn btn-primary">View Representative</a>
 
-    <table>
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Date of Birth</th>
-                <th>Actions</th> <!-- New column for the update button -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for rep in reps %}
-                <tr>
-                    <td>{{ rep.firstName }}</td>
-                    <td>{{ rep.lastName }}</td>
-                    <td>{{ rep.DateOfBirth }}</td>
-                    <td><a href="{% url 'update_rep' pk=user.pk %}" class="btn btn-primary">Update</a></td>
-                    <td><a href="{% url 'delete_rep' pk=user.pk %}" class="btn btn-primary">Delete</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-{% else %}
-    <p>There are no Representitives</p>
-{% endif %}
-
-<br>
-<!-- Create User button -->
-<a href="{% url 'create_rep' %}" class="btn btn-primary">Create Representitive</a>
-<br>
-<br>
-<a href="{% url 'account_statement' %}" class="btn btn-primary">See Accounts Statements</a>
-
-<a href="{% url 'monthly_statement' %}" class="btn btn-primary">Select Monthly Statements</a>
-
+<a href="{% url 'view_club' %}" class="btn btn-primary">View Club</a>
 {% endblock content %}

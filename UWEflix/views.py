@@ -7,7 +7,6 @@ from UWEflix.forms import *
 from UWEflix.models import *
 from .models.upcoming import upcomings
 from .models.booking import Booking
-from .models.account import Users, Representitive, Account
 # from .forms import bookingForm
 
 from django.template.defaultfilters import date
@@ -20,6 +19,7 @@ from django.conf import settings
 from django.http.response import JsonResponse
 from django.contrib import messages
 
+
 # Create your views here.
 
 def get_header(request):
@@ -28,7 +28,7 @@ def get_header(request):
         if user.role == 'Cinema manager':
             header_content = "UWEflix/cinema_manager/header_cinema_manager.html"
         elif user.role == 'account manager':
-            header_content = "UWEflix/base/header_base.html"
+            header_content = "UWEflix/account_manager/header_account_manager.html"
         elif user.role == 'club rep':
             header_content = "UWEflix/cinema_booking_system/header_cinema_booking_system.html"
         elif user.role == 'student':
@@ -90,7 +90,7 @@ def logout_view(request):
 
 def home(request):
     movie = Film.objects.all()
-    return render(request, "UWEflix/customer/home.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "movie": movie})
+    return render(request, "UWEflix/customer/home.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/base/header_base.html", "movie" : movie})
 
 
 def upcoming(request):
@@ -164,7 +164,7 @@ def CRUD_create(request, form_class, template_name, redirect_url):
 @login_required(login_url='/login')
 def CRUD_view(request, model_class, template_name):
     user = request.user
-    if user.role == 'Cinema manager' or user == 'account manager':
+    if user.role == 'Cinema manager' or user.role == 'account manager':
         objects = model_class.objects.all()
         context = {
             "objects": objects,
@@ -305,9 +305,21 @@ def delete_screen(request, pk):
 # ######### SHOWINGS ##################################
 # #####################################################
 
+
 @login_required(login_url='/login')
 def create_showing(request):
-    return CRUD_create(request, showForm, "UWEflix/cinema_manager/create.html", "view_showing")
+    form = showForm(request.POST or None)
+    films = Film.objects.all()
+    screens = Screen.objects.all()
+    if request.method == "POST":
+        if form.is_valid():
+            show = Show.save(commit=False)
+            show.save()
+            return redirect("view_screen")
+    else:
+        form = showForm()
+    return render(request, "UWEflix/cinema_manager/showings/create_showing.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "films": films, "screens": screens})
+
 
 @login_required(login_url='/login')
 def view_showing(request):
@@ -377,7 +389,6 @@ def book_tickets(request, pk):
 
 #@login_required(login_url='/login')
 def booking(request, id, pk):
-
     # Check if user is logged in as a guest
     #is_guest = request.session.get('guest', False)
     #if not request.session.get('guest'):
@@ -462,7 +473,6 @@ def ticketsPurchase(request, id, pk):
 
 #@login_required(login_url='/login')
 def bookingProcessing(request, id, pk, pi):
-
     if not request.user.is_authenticated and not request.session.get('guest'):
         return redirect('login')
     
@@ -483,7 +493,7 @@ def bookingProcessing(request, id, pk, pi):
         "email": booking.email
     }
 
-    # if request.method == "POST":
+    if request.method == "POST":
 
         # booking.card_number = int(request.POST.get("num"))
         # booking.card_holder = request.POST.get("name")
@@ -534,8 +544,6 @@ def booking_confirm(request, id, pk, pi):
     return redirect(f"/film_details/{id}/booking/{pk}/tickets/{booking.pk}/booking_processing/booking_confirm")
 
 
-
-
 @login_required(login_url='/login')
 def manage_account(request):
     form = ClubRegistrationForm(request.POST or None)
@@ -556,15 +564,18 @@ def booking_confirm(request, id, pk, pi):
 # #####################################################
 
 #Account Manager Home Page
+@login_required(login_url='/login')
 def account_home(request):
-    users = Users.objects.all()
+    users = Custom_user.objects.all()
     reps = Representitive.objects.all()
     return render(request, "UWEflix/account_manager/account_home.html", {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "users": users, "reps": reps})
 
+@login_required(login_url='/login')
 def create_user(request):
     return CRUD_create(request, UserForm, "UWEflix/account_manager/create.html", "view_user")
 
 #CRUD for User
+@login_required(login_url='/login')
 def createUser(request):
     userForm = UserForm(request.POST or None)
 
@@ -573,7 +584,7 @@ def createUser(request):
     }
 
     if request.method != 'POST':
-        return render(request, "UWEflix/account_manager/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+        return render(request, "UWEflix/account_manager/user/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
 
     if userForm.is_valid():
         user = userForm.save(commit=False)
@@ -582,31 +593,33 @@ def createUser(request):
         return redirect("account_home")
     else:
         print("Form is not valid")
-        return render(request, "UWEflix/account_manager/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+        return render(request, "UWEflix/account_manager/user/create_user.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
 
+@login_required(login_url='/login')
 def view_user(request):
     user = request.user
     if user.role == 'account manager':
-        return CRUD_view(request, Users, "UWEflix/account_manager/view_user.html")
+        return CRUD_view(request, Custom_user, "UWEflix/account_manager/user/view_user.html")
     else:
         return redirect("account_home")
 
-
+@login_required(login_url='/login')
 def update_user(request, pk):
-    user = Users.objects.get(pk=pk)
+    user = Custom_user.objects.get(pk=pk)
     form = UserForm(request.POST, instance=user)
     if request.method == "POST":
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
             return redirect("account_home")
+    return render(request, 'UWEflix/account_manager/user/update_user.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "user": user})
 
-    return render(request, 'UWEflix/account_manager/update_user.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "user": user})
-
+@login_required(login_url='/login')
 def delete_user(request, pk):
-    return CRUD_delete(request, pk, Users, "account_home")
+    return CRUD_delete(request, pk, Custom_user, "account_home")
 
 #CRUD for Rep
+@login_required(login_url='/login')
 def createRep(request):
     repForm = RepForm(request.POST or None)
 
@@ -615,7 +628,7 @@ def createRep(request):
     }
 
     if request.method != 'POST':
-        return render(request, "UWEflix/account_manager/create_rep.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+        return render(request, "UWEflix/account_manager/rep/create_rep.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
 
     if repForm.is_valid():
         rep = repForm.save(commit=False)
@@ -624,16 +637,13 @@ def createRep(request):
         return redirect("account_home")
     else:
         print("Form is not valid")
-        return render(request, "UWEflix/account_manager/create_rep.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
-    
+        return render(request, "UWEflix/account_manager/rep/create_rep.html",{"footer_content":"UWEflix/base/footer_base.html","header_content":"UWEflix/account_manager/header_account_manager.html","form": context} )
+
+@login_required(login_url='/login')    
 def view_rep(request):
-    rep = request.rep
-    if rep.role == 'account manager':
-        return CRUD_view(request, Representitive, "UWEflix/account_manager/view_rep.html")
-    else:
-        return redirect("account_home")
+    return CRUD_view(request, Representitive, "UWEflix/account_manager/rep/view_rep.html")
 
-
+@login_required(login_url='/login')
 def update_rep(request, pk):
     rep = Representitive.objects.get(pk=pk)
     form = RepForm(request.POST, instance=rep)
@@ -643,71 +653,8 @@ def update_rep(request, pk):
             rep.save()
             return redirect("account_home")
 
-    return render(request, 'UWEflix/account_manager/update_rep.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "rep": rep})
+    return render(request, 'UWEflix/account_manager/rep/update_rep.html', {"footer_content": "UWEflix/base/footer_base.html", "header_content": get_header(request), "form": form, "rep": rep})
 
+@login_required(login_url='/login')
 def delete_rep(request, pk):
     return CRUD_delete(request, pk, Representitive, "account_home")
-
-# # ACCOUNT MANAGER - View all transactions and select a month to create statement
-def view_statements(request):
-
-    # Check if the user is logged in
-    if not request.user.is_authenticated:
-        return redirect('/login')
-
-    # Check if the user has the correct permissions
-    if not request.user.has_perm('account manager'):
-        return redirect('/')
-
-    # Get account ID
-    account = request.GET['account']
-    # Get account record
-    account_details = Account.objects.get(id=account)
-    
-    # Get all transactions for account
-    if account:
-        club_representative = account_details.club.representative
-        payments = Booking.objects.filter(user=club_representative).order_by('showing__date')
-    else:
-        club_rep_ids = Club.objects.values_list('representative', flat=True)
-        payments = Booking.objects.filter(user__in=club_rep_ids).order_by('showing__date')
-
-    # If viewing by month then go to month view with the required data
-    if request.method == 'POST':
-        if request.POST.get('account'):
-            account = request.POST['account']
-        else:
-            print('No Account Retrieved')
-            return redirect('account_home')
-        
-        if request.POST.get('month'):
-            month = request.POST['month']
-        else:
-            print('No Month Selected')
-            return redirect('account_home')
-        
-        return redirect('/monthly_statement?account=' + str(account) + '&month=' + str(month))
-        
-
-    return render(request, 'account_statements.html', {'payments': payments, 'account_details': account_details, 'selected_club': account_details.club})
-
-# Create statement for month
-def monthly_statement(request):
-    # Check if the user is logged in
-    if not request.user.is_authenticated:
-        return redirect('/login')
-
-    # Check if the user has the correct permissions
-    if not request.user.has_perm('account manager'):
-        return redirect('/')
-    
-    # Get account and month to view transactions for
-    account = request.GET['account']
-    month = request.GET['month']
-    
-    # Get all transactions for the specified month and account
-    account_details = Account.objects.get(id=account)
-    club_representative = account_details.club.representative
-    payments = Booking.objects.filter(user=club_representative).filter(showing__date__month=int(month)).order_by('showing__date')
-    
-    return render(request, 'monthly_statement.html', {'payments': payments, 'account_details': account_details, 'selected_club': account_details.club})

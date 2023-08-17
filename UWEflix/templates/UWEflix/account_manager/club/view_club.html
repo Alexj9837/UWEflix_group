@@ -1,0 +1,60 @@
+{% extends 'UWEflix/base/base.html' %}
+
+{% block content %}
+  <h2>Clubs</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Club ID</th>
+        <th>Club Name</th>
+        <th>Street Number</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>Post Code</th>
+        <th>Landline Number</th>
+        <th>Mobile Number</th>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date of Birth</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for objects in objects %}
+        <tr>
+          <td>{{ objects.clubID }}</td>
+          <td>{{ objects.club_name }}</td>
+          <td>{{ objects.street_number }}</td>
+          <td>{{ objects.street }}</td>
+          <td>{{ objects.city }}</td>
+          <td>{{ objects.post_code }}</td>
+          <td>{{ objects.landline_number }}</td>
+          <td>{{ objects.mobile_number }}</td>
+          <td>{{ objects.email }}</td>
+          <td>{{ objects.first_name }}</td>
+          <td>{{ objects.last_name }}</td>
+          <td>{{ objects.dob }}</td>
+          <td>
+            <form method="POST" action="{% url 'update_club' objects.clubID %}">
+            {% csrf_token %}
+            <input type="hidden" name="pk" value="{{ objects.pk }}">
+            <button type="submit" class="btn btn-primary">Update Club</button>
+          </form>
+          </td>
+          <td>
+            <form method="POST" action="{% url 'delete_club' objects.clubID%}">
+              {% csrf_token %}
+              <input type="hidden" name="pk" value="{{ objects.pk }}">
+              <button type="submit" class="btn btn-danger">Delete Club</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div>
+    <a class="btn btn-primary" href="{% url 'create_club' %}">
+      Create a new Club
+    </a>
+  </div>
+{% endblock %}
